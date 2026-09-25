@@ -1,0 +1,17 @@
+# Card metadata consumed by https://designmolecule.com
+name: BreatheBox
+slug: breathebox
+area: Sustainable Housing
+status: concept          # concept | design | prototype | tested | released
+shortlisted: false
+pitch: >-
+  A window-mounted heat recovery ventilator for single rooms: two small fans and a counterflow core bring in fresh air while recovering most of the heat or cool from the outgoing air.
+problem: >-
+  Sealed, efficient homes need ventilation, but opening windows wastes energy and whole-house heat recovery systems are expensive to retrofit.
+budget_usd: 220
+difficulty: 3  # 1 easiest, 5 hardest
+hero_image: media/hero.png
+licenses:
+  hardware: CERN-OHL-S-2.0
+  software: MIT
+tags: [sustainable-housing, open-hardware, cern-ohl-s]
