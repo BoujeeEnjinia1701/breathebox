@@ -3,9 +3,9 @@ doc_id: BBX-CAL-001
 title: BreatheBox sizing calculations
 project: BreatheBox
 doc_type: Calculation note
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-26'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,11 +17,15 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002); budget $250, quiet night mode at 32 m³/h and firmware rules added
+- version: "0.3"
+  date: '2026-09-26'
+  author: Amish Chadha
+  change: Budget approved by Amish; budget $255 covers the priced BOM, so R15 is met (BBX-DDR-002 v0.2)
 ---
 
 # BreatheBox sizing calculations
 
-On paper, BreatheBox meets ten of its fifteen requirements. **Two are not met.** R6 (noise): the estimate is about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A), and 30 dB(A) is reached only at about 32 m³/h. A quiet night mode at 32 m³/h (BBX-DDR-002) brings the estimate to about 30 dB(A) with clean filters and 32 dB(A) with loaded filters, but R6 is written for 50 m³/h. R15 (cost): the priced BOM is $255, $5 over the $250 budget that Amish set on 2026-09-25 (BBX-DDR-002; it was $220). Three requirements (R9 install time, R13 filter change time and R14 firmware behavior) cannot be verified at TRL 3.
+On paper, BreatheBox meets eleven of its fifteen requirements. **One is not met.** R6 (noise): the estimate is about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A), and 30 dB(A) is reached only at about 32 m³/h. A quiet night mode at 32 m³/h (BBX-DDR-002) brings the estimate to about 30 dB(A) with clean filters and 32 dB(A) with loaded filters, but R6 is written for 50 m³/h. R15 (cost) is met: the priced BOM is $255, equal to the $255 budget that Amish approved on 2026-09-26 (BBX-DDR-002; it was $250). Three requirements (R9 install time, R13 filter change time and R14 firmware behavior) cannot be verified at TRL 3.
 
 The calculations changed four TRL 2 figures. The TRL 2 fans (about 60 m³/h free air) could not reach 70 m³/h against any pressure, so the fan specification rises to about 100 m³/h free air and 400 Pa shut-off. Frost starts at about -2 °C outdoors, not -5 °C, because the plate at the cold corner is colder than the leaving exhaust air. The worst condensate flow is about 0.21 L/h, not 0.14 L/h. Fan and control power at 50 m³/h is about 5.6 W, not 9.5 W, because the system pressure is lower than the 80 Pa assumed.
 
@@ -166,7 +170,7 @@ The mass part of R9 is met on paper (10.5 kg against 12 kg). The 30 min install 
 
 ## 9. Cost (R15)
 
-The priced BOM totals **$255.00** over 13 lines. `budget_usd` is now $250 (Amish's decision of 2026-09-25, BBX-DDR-002; it was $220), so the BOM is $5 over. **R15 is not met.** Whether to accept about $255 or find $5 is still awaiting Amish. The increase from $243 comes from the larger fans (+$8), the collars through the panel (+$2) and the input fuse and holder (+$2).
+The priced BOM totals **$255.00** over 13 lines. `budget_usd` is now $255 (budget approved by Amish on 2026-09-26, BBX-DDR-002; it was $250, and $220 before 2026-09-25), which covers the priced BOM. **R15 is met.** The increase from $243 comes from the larger fans (+$8), the collars through the panel (+$2) and the input fuse and holder (+$2).
 
 ## 10. Results
 
@@ -188,9 +192,9 @@ The priced BOM totals **$255.00** over 13 lines. `budget_usd` is now $250 (Amish
 | R12 | Largest opening 2.35 mm; sash locks onto panel | No opening over 100 mm | Met by design, unverified |
 | R13 | Lift-off lid; filters and core slide out | Tool-free filter change in 2 min or less | Not verifiable at TRL 3 |
 | R14 | No firmware yet; checked at firmware review | Local data only | Not verifiable at TRL 3 |
-| R15 | $255.00 | $250 or less | **Not met** |
+| R15 | $255.00 | $255 or less | Met |
 
-Summary: met 10, not met 2 (R6, R15), not verifiable at TRL 3 3 (R9, R13, R14).
+Summary: met 11, not met 1 (R6), not verifiable at TRL 3 3 (R9, R13, R14).
 
 ## 11. Limits of this note
 

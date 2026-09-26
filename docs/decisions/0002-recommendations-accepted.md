@@ -3,9 +3,9 @@ doc_id: BBX-DDR-002
 title: BreatheBox recommendations accepted
 project: BreatheBox
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-26'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,12 +13,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Record the recommendations accepted by Amish on 2026-09-25, what changed in the repo and the items still open
+- version: "0.2"
+  date: '2026-09-26'
+  author: Amish Chadha
+  change: "Budget set to $255 to cover the priced BOM: decided by Amish, 2026-09-26 (O3 closed)"
 ---
 
 # 0002: Recommendations accepted
 
 - **Date:** 2026-09-25
-- **Status:** accepted. Amish accepted every recommendation in `docs/REVIEW.md` and BBX-DDR-001. Items without a recommendation stay proposed, awaiting Amish.
+- **Status:** accepted. Amish accepted every recommendation in `docs/REVIEW.md` and BBX-DDR-001. Items without a recommendation stay proposed, awaiting Amish, except the budget gap (O3), decided by Amish on 2026-09-26.
 
 ## Context
 
@@ -51,12 +55,18 @@ No recommendation changed the pitch or problem wording, so `project.yaml` and `R
 | # | Item | Status |
 | --- | --- | --- |
 | O1 | First co-design partner and region (for example a tenants' group or social landlord in the UK or Canada) | Proposed, awaiting Amish |
-| O3 | Budget gap: priced BOM $255 against the new $250 (accept about $255, drop to smaller blowers and lose the 70 m³/h boost, or find $5 elsewhere) | Proposed, awaiting Amish |
+| O3 | Budget gap: priced BOM $255 against the new $250 (accept about $255, drop to smaller blowers and lose the 70 m³/h boost, or find $5 elsewhere) | Decided by Amish, 2026-09-26: budget set to $255 (see below) |
 | O4 | Fan position: both fans in the room-end plenum (exhaust side of the core at higher pressure, so any core leakage reaches the supply) versus the exhaust fan at the outdoor end | Proposed, awaiting Amish. No change made |
+
+### Budget approved, 2026-09-26
+
+On 2026-09-26 Amish wrote: "i approve all the budget items."
+
+- Budget set to $255 to cover the priced BOM: decided by Amish, 2026-09-26. This closes O3. `project.yaml` `budget_usd` 250 to 255; BBX-REQ-001 R15 target $255, status Not met to Met; BBX-CAL-001 v0.3 (`sizing.py` and `results.csv` rerun); BBX-PRB-001, BBX-PRC-001, README, `bom/bom-notes.md` and the blueprint key figures updated. The BOM and geometry are unchanged.
 
 ## Consequences
 
-- Requirement status (BBX-CAL-001 v0.2): met 10, not met 2 (R6 at 50 m³/h, R15 by $5), not verifiable at TRL 3 3 (R9, R13, R14). The count is unchanged; the night mode narrows the R6 gap in use but not as R6 is written.
+- Requirement status (BBX-CAL-001 v0.3): met 11, not met 1 (R6 at 50 m³/h), not verifiable at TRL 3 3 (R9, R13, R14). The night mode narrows the R6 gap in use but not as R6 is written. R15 is met since the 2026-09-26 budget approval.
 - The geometry and BOM are unchanged. The GA drawing moves to Rev P2 for the night mode note only; STEP and STL were re-exported from the unchanged model.
 - Cross-repo: the SCD41 class sensor check on CalRig is decided and on hold with TRL 4. No other repo is affected, and none was edited.
 - `trl: 3` and `trl_target: 3` are unchanged.

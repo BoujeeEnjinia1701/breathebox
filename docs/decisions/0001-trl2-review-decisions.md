@@ -3,9 +3,9 @@ doc_id: BBX-DDR-001
 title: BreatheBox TRL 2 review decisions
 project: BreatheBox
 doc_type: Design decision record
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-26'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,12 +17,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002)
+- version: "0.3"
+  date: '2026-09-26'
+  author: Amish Chadha
+  change: "O3 decided by Amish, 2026-09-26: budget $255 (BBX-DDR-002)"
 ---
 
 # 0001: TRL 2 review decisions
 
 - **Date:** 2026-09-25
-- **Status:** items A1 to A6 and O2 decided by Amish, 2026-09-25: go with recommendation (see BBX-DDR-002); items O1 and O3 remain proposed, awaiting Amish.
+- **Status:** items A1 to A6 and O2 decided by Amish, 2026-09-25: go with recommendation (see BBX-DDR-002); item O1 remains proposed, awaiting Amish; O3 was decided by Amish on 2026-09-26 (budget $255, BBX-DDR-002).
 
 ## Context
 
@@ -55,7 +59,7 @@ The TRL 2 review made no recommendation to change the pitch or problem wording, 
 | --- | --- | --- |
 | O1 | First co-design partner and region (for example a tenants' group or social landlord in the UK or Canada) | Proposed, awaiting Amish. No recommendation was made at TRL 2 |
 | O2 | R6 noise shortfall found at TRL 3 (about 39 dB(A) at 50 m³/h against 30 dB(A)) | Decided by Amish, 2026-09-25: go with recommendation (quiet night mode, plus larger fans or a silencer checked against a real fan datasheet before any change to R6). See BBX-DDR-002 |
-| O3 | Budget figure: $255 priced against $250 in `project.yaml` (was $220) | Proposed, awaiting Amish. No recommendation beyond A1's $250 |
+| O3 | Budget figure: $255 priced against $250 in `project.yaml` (was $220) | Decided by Amish, 2026-09-26: budget set to $255 to cover the priced BOM (BBX-DDR-002) |
 
 ## Consequences
 

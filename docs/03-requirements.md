@@ -3,9 +3,9 @@ doc_id: BBX-REQ-001
 title: BreatheBox requirements
 project: BreatheBox
 doc_type: Requirements
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-26'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,11 +25,15 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002)
+- version: "0.5"
+  date: '2026-09-26'
+  author: Amish Chadha
+  change: Budget approved by Amish; R15 target $255, status Not met to Met
 ---
 
 # BreatheBox requirements
 
-These requirements are proposals for review, not yet validated with users, and will be revised after co-design (see BBX-PRB-001). Status is judged against the TRL 3 calculations in BBX-CAL-001 and the parametric model in `cad/src/model.py`; nothing has been built or measured. No target was relaxed at TRL 3. On 2026-09-25 Amish accepted the review recommendations (BBX-DDR-002): R15 now reads against a $250 budget (it was $220), and R4 and R6 show the quiet night mode; R6 itself is unchanged until a real fan datasheet has been checked. The R7 condensate figure was corrected from 0.15 to 0.21 L/h because the calculation showed a higher worst case.
+These requirements are proposals for review, not yet validated with users, and will be revised after co-design (see BBX-PRB-001). Status is judged against the TRL 3 calculations in BBX-CAL-001 and the parametric model in `cad/src/model.py`; nothing has been built or measured. No target was relaxed at TRL 3. On 2026-09-25 Amish accepted the review recommendations (BBX-DDR-002): R15 read against a $250 budget (it was $220), and R4 and R6 show the quiet night mode; R6 itself is unchanged until a real fan datasheet has been checked. The R7 condensate figure was corrected from 0.15 to 0.21 L/h because the calculation showed a higher worst case. On 2026-09-26 Amish approved a $255 budget, which covers the priced BOM, so R15 is met.
 
 The **design case** is a 30 m³ bedroom with two sleeping adults, 20 °C and 50 % relative humidity indoors, 0 °C outdoors, and a vertical sliding sash window with a 900 mm clear width.
 
@@ -51,12 +55,12 @@ Table 1. Requirements and status at TRL 3.
 | R12 | Security and child safety | Raised sash lockable onto the insert panel; no opening wider than 100 mm through the installed unit | Met by design, unverified: largest opening 2.35 mm | Design review with a locking bar |
 | R13 | Serviceable | Filters changed without tools in 2 min or less; core removable for washing; all parts replaceable with a screwdriver | Not verifiable at TRL 3: lift-off lid and slide-out filters and core in the model | Timed trials |
 | R14 | Local data only | CO2, humidity and temperature shown on the unit; works with no network or cloud account; optional local logging | Not verifiable at TRL 3: no firmware yet | Firmware review |
-| R15 | Affordable | Prototype parts $250 or less (was $220; BBX-DDR-002) | **Not met:** $255 (priced BOM), $5 over | Priced BOM (`bom/bom.csv`) |
+| R15 | Affordable | Prototype parts $255 or less (was $250, and $220 before that; BBX-DDR-002) | Met: $255 (priced BOM) | Priced BOM (`bom/bom.csv`) |
 
 ## Requirements not met
 
 - **R6 (noise) not met:** about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A). The accepted night mode (32 m³/h) gives about 30 dB(A) with clean filters and 32 dB(A) with loaded filters; larger, slower fans or a silencer are to be checked against a real fan datasheet (on hold with TRL 4) before any change to R6.
-- **R15 (cost) not met:** $255 against the $250 budget in `project.yaml`. Whether to accept about $255 or find $5 is awaiting Amish.
+- **R15 (cost) met:** $255 against the $255 budget in `project.yaml`, approved by Amish on 2026-09-26 (BBX-DDR-002).
 - **Not verifiable at TRL 3:** R9 (install time), R13 (filter change time) and R14 (firmware).
 
 ## Assumptions

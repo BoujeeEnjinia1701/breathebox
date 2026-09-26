@@ -95,7 +95,7 @@ Each adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open
 
 ### Still awaiting Amish (status updated 2026-09-25)
 
-1. **Budget figure (O3).** $220 in `project.yaml`; $250 recommended; design now $255. Options: accept about $255; save about $8 with smaller blowers, which would drop the 70 m³/h boost (R1); or find $5 elsewhere. No recommendation beyond noting that the fan change is what made R1 feasible. Still proposed, awaiting Amish; `budget_usd` is now $250 under A1.
+1. **Budget figure (O3).** $220 in `project.yaml`; $250 recommended; design now $255. Options: accept about $255; save about $8 with smaller blowers, which would drop the 70 m³/h boost (R1); or find $5 elsewhere. No recommendation beyond noting that the fan change is what made R1 feasible. Still proposed, awaiting Amish; `budget_usd` is now $250 under A1. **Decided by Amish, 2026-09-26: budget set to $255** (BBX-DDR-002).
 2. **Noise, R6 (O2).** Options: (a) a quiet night mode near 30 to 32 m³/h, which still meets R4 as written (24 h mean about 730 ppm) but lets the room run near 1,350 ppm overnight; (b) larger, slower fans or a lined silencer section, at extra cost and size; (c) relax R6 to about 35 dB(A). Recommendation: (a) plus (b) checked against a real fan datasheet before any change to R6. **Decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002). Night mode added; the datasheet check is on hold with TRL 4.
 3. **First co-design partner and region (O1).** No recommendation. Still proposed, awaiting Amish.
 4. **Engineering proposals made in this session**, awaiting confirmation: the larger blowers (about 100 m³/h free air, 400 Pa), the 2 A time-delay input fuse, a firmware fan speed cap at the 80 m³/h need (the worst case of 35.4 W sits just under the 36 W adapter), and the install restriction for rooms whose door seals airtight. **Decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002).
@@ -151,7 +151,7 @@ Met 10, not met 2, not verifiable at TRL 3 3.
 ### Still awaiting Amish
 
 1. **First co-design partner and region (O1).** No recommendation.
-2. **Budget gap (O3).** $255 against $250: accept, drop the boost with smaller blowers, or find $5. No recommendation.
+2. **Budget gap (O3).** $255 against $250: accept, drop the boost with smaller blowers, or find $5. No recommendation. **Decided by Amish, 2026-09-26: budget set to $255** (BBX-DDR-002).
 3. **Fan position (O4).** Both fans in the room-end plenum or exhaust fan at the outdoor end. No recommendation.
 
 ### Cross-repo actions
@@ -165,3 +165,12 @@ Met 10, not met 2, not verifiable at TRL 3 3.
 ### TRL
 
 `trl: 3` and `trl_target: 3` are unchanged. TRL 4 remains on hold by Amish's instruction: no build, test, purchase, PCB or firmware was started. The decided items that need TRL 4 work (CalRig sensor check, fan datasheet and silencer check for R6) are on hold.
+
+## Session 2026-09-26: budget approved
+
+Amish wrote on 2026-09-26: "i approve all the budget items." Budget set to $255 to cover the priced BOM: decided by Amish, 2026-09-26. This closes O3.
+
+- `project.yaml` `budget_usd` $250 to **$255**. The priced BOM is unchanged at $255.00 (13 lines).
+- R15 (cost): target $250 to $255; status **Not met to Met**. Requirement status is now met 11, not met 1 (R6 noise), not verifiable at TRL 3 3 (R9, R13, R14).
+- Files changed: `project.yaml`, `README.md`, BBX-PRB-001 v0.5, BBX-PRC-001 v0.5, BBX-REQ-001 v0.5, BBX-CAL-001 v0.3 (`sizing.py` and `results.csv` rerun), BBX-DDR-001 v0.3 (O3 row), BBX-DDR-002 v0.2, `bom/bom-notes.md`, `cad/src/concept_media.py` (blueprint key figure); media and PDFs regenerated, temporary `media/_views*` folders deleted.
+- Still awaiting Amish: O1 (co-design partner) and O4 (fan position). `trl: 3` and `trl_target: 3` are unchanged; TRL 4 remains on hold.

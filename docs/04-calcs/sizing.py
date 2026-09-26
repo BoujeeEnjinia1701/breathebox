@@ -398,7 +398,7 @@ def main():
     tot, rows = bom_total()
     b = budget()
     pr(f"  BOM total ${tot:.2f} ({len(rows)} lines); budget_usd ${b:.0f}: {'within' if tot <= b else 'over'} by ${abs(tot-b):.2f} "
-       f"(budget set to $250 by BBX-DDR-002, was $220)")
+       f"(budget set to $255 by Amish on 2026-09-26, BBX-DDR-002; was $250, and $220 before that)")
 
     # --------------------------------------------------------------- requirements table
     o50, o50l, o70l = op(Q_NOM), op(Q_NOM, True), op(Q_MAX, True)
