@@ -1,14 +1,14 @@
 # BreatheBox
 
-![TRL 2](https://img.shields.io/badge/TRL-2%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
+![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
-**Area:** Sustainable Housing · **TRL:** 2 of 9 (concept formulated) · **Prototype budget:** about $220 USD · **Difficulty:** 3 of 5
+**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** $220 USD ($250 proposed) · **Difficulty:** 3 of 5
 
 A window-mounted heat recovery ventilator for single rooms: two small fans and a counterflow core bring in fresh air while recovering most of the heat or cool from the outgoing air.
 
 ![BreatheBox concept](media/hero.png)
 
-[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Review note](docs/REVIEW.md)
+[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement BBX-DWG-001 (PDF)](cad/drawings/BBX-DWG-001.pdf) · [Sizing calculations](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 
@@ -64,16 +64,16 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
 1. Insulated housing that sits on the window sill
 2. Counterflow plate core, about 80 % sensible recovery (estimate)
-3. Two 24 V brushless blowers, 30 to 70 m³/h balanced (proposed)
+3. Two 24 V brushless blowers, 30 to 70 m³/h balanced, 50 m³/h nominal
 4. ePM1 supply filter and coarse exhaust filter
 5. Controller with CO2, humidity and temperature sensing and a frost mode
 6. Condensate tray draining outdoors
 7. Insulated window insert panel with seals, under the raised and locked sash
 8. Two outdoor hoods with insect mesh, a clamped sill bracket and a certified 24 V plug-in adapter
 
-First-order estimates (to be checked at TRL 3): about 270 W of heat kept at 0 °C outdoors for about 9.5 W of fan power, about 10 kg, and about $243 in parts against a $220 budget. See the [design precis](docs/02-concept.md) and [requirements](docs/03-requirements.md), including the requirements not yet met.
+TRL 3 calculations ([BBX-CAL-001](docs/04-calcs/01-sizing.md)): about 267 W of heat kept at 0 °C outdoors and 50 m³/h for about 5.6 W of fan and control power, about 10.5 kg installed, and $255 in parts. Two requirements are not met: noise (about 39 dB(A) at 1 m against 30 dB(A)) and cost ($255 against the $220 budget; $250 is proposed and awaiting Amish). See the [design precis](docs/02-concept.md) and [requirements](docs/03-requirements.md).
 
-The working bill of materials is in [bom/bom.csv](bom/bom.csv).
+The priced bill of materials is in [bom/bom.csv](bom/bom.csv). The parametric model is `cad/src/model.py`, with STEP and STL exports in `cad/step/` and `cad/stl/`.
 
 ## Safety
 

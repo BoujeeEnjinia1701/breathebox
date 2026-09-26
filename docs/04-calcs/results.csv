@@ -1,0 +1,16 @@
+id,value,target,status
+R1,30 to 70 m3/h each stream; full-speed limit 80 m3/h with loaded filters; balance by tach,"30 to 70 m3/h, within 10 %",Met on paper
+R2,79.8 % at 50 m3/h (73.8 % at 70),75 % or more at 50 m3/h,Met on paper
+R3,"5.6 W clean, 7.4 W loaded filters",12 W or less at 50 m3/h,Met on paper
+R4,24 h mean 607 ppm at 50 m3/h; night 980 ppm,"1,000 ppm or less, 24 h mean",Met on paper
+R5,"ePM1 50 % supply, coarse exhaust",ePM1 50 % or better,Met by specification
+R6,39 dB(A) at 50 m3/h; 30 dB(A) reached at 32 m3/h,30 dB(A) or less at 50 m3/h,Not met
+R7,worst condensate 0.21 L/h drains; frost onset -2.2 °C; at -10 °C supply ratio 0.33,Drain all condensate; no blockage to -10 °C,Met on paper
+R8,"hoods need 686 mm clear width; panel trims to 700 to 1,000 mm","Sash 700 to 1,000 mm; slider adapter",Met on paper (sash)
+R9,10.5 kg; no drilling; install time not calculable,12 kg or less; 30 min or less,Not verifiable at TRL 3 (mass met on paper)
+R10,"24 V SELV adapter 36 W; 14.5 W at 70 m3/h loaded, 35.4 W worst case at full speed; 2 A input fuse",24 V SELV only,Met by design
+R11,420 mm between mouths; 1 mm mesh; mouths face down,400 mm or more; mesh 1.5 mm or finer,Met on paper
+R12,largest through opening 2.35 mm; sash locks onto panel,No opening over 100 mm,"Met by design, unverified"
+R13,lift-off lid; filters and core slide out,Tool-free filter change in 2 min or less,Not verifiable at TRL 3
+R14,no firmware yet; checked at firmware review,Local data only,Not verifiable at TRL 3
+R15,$255.00,"$220 or less ($250 proposed, awaiting Amish)",Not met

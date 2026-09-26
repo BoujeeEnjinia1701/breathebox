@@ -63,3 +63,63 @@ No change to `project.yaml` pitch or problem: the numbers found support "recover
 ### Recommended next step
 
 Review this note and the media, then decide items 1 to 3. If approved, run `/advance-trl3` to check the fan operating point, pressure drop, noise, frost and condensate estimates by calculation and produce the parametric model and drawing sheet.
+
+## Session 2026-09-25: TRL 3
+
+Amish's instruction for this batch (2026-09-25): "you know the drill, nothing gets past TRL 3". He did not review this repo's TRL 2 items one by one, so the recommendations were adopted for TRL 3 work, open for his review. Nothing here is recorded as decided or approved by him.
+
+### What was done
+
+- `docs/decisions/0001-trl2-review-decisions.md` (BBX-DDR-001 v0.1): items A1 to A6 adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open for his review; O1 (co-design partner) stays "Proposed, awaiting Amish"; O2 (noise) and O3 (budget figure) added as open.
+- `docs/04-calcs/01-sizing.md` (BBX-CAL-001 v0.1), `docs/04-calcs/sizing.py` and `docs/04-calcs/results.csv`: core effectiveness from plate geometry, pressure drop per stream, fan operating points, power, noise, heat recovery, condensate, frost onset and frost mode, room depressurization, CO2, geometry, bracket load, mass and cost, with a results table for R1 to R15. The script imports `cad/src/model.py` and reads `bom/bom.csv` and `project.yaml`.
+- `cad/src/model.py`: parametric build123d model (massing plus: housing with dividers, ports and grilles; core; blowers; filters; controller; tray and drain; insert panel; hoods with offset mouths and collars; sill bracket; adapter). Exports `cad/step/` and `cad/stl/` for `breathebox-assembly`, `-housing`, `-core`, `-insert-panel`, `-hoods` and `-sill-bracket`. The built-in clash check finds no overlaps (the TRL 2 massing had ducts running through the panel).
+- `cad/src/sheets.py` and `cad/drawings/BBX-DWG-001.svg`, `.pdf`, `.png`: general arrangement, Rev P1, marked "CONCEPT, NOT FOR FABRICATION" and "PRELIMINARY, NOT FOR FABRICATION". The concept blueprint keeps BBX-DWG-010. `cad/drawings/.gitkeep` removed.
+- `bom/bom.csv` (13 lines, all priced with a supplier or supplier type; $255.00) and `bom/bom-notes.md`.
+- `cad/src/concept_media.py` now builds from `model.py`; all media refreshed and checked by eye (`hero`, `cutaway`, `exploded`, `flow`, `concept-blueprint` PNG, PDF and SVG, `model.glb`, `viewer.html`). The exploded callout for the supply filter was moved so it is no longer hidden behind the housing. Temporary `media/_views*` folders deleted.
+- BBX-PRB-001, BBX-PRC-001 and BBX-REQ-001 bumped to v0.3 (numbers from BBX-CAL-001; design choices shown as adopted for TRL 3, open for review; R7 condensate figure corrected to 0.21 L/h; no target relaxed). `README.md`: TRL badge and line, links to the drawing and calculations, key components and performance paragraph; the required sections are unchanged in wording and order, as none of their numbers changed. `project.yaml`: `trl: 3`, `trl_target: 3`, evidence listed; pitch, problem and `budget_usd` unchanged.
+
+### Requirement status (BBX-CAL-001, Table 8)
+
+Met 10, not met 2, at risk 0, not verifiable at TRL 3 3.
+
+- **Not met: R6 (noise).** About 39 dB(A) at 1 m at 50 m³/h against 30 dB(A); 30 dB(A) is reached only near 32 m³/h. The figure rests on an assumed fan noise class value and is uncertain by several decibels, but not by 9.
+- **Not met: R15 (cost).** $255 against $220 in `project.yaml`, and $5 over the $250 recommended at TRL 2.
+- **Not verifiable at TRL 3:** R9 (install time; mass 10.5 kg met on paper), R13 (filter change time), R14 (firmware).
+- **Met:** R1 (80 m³/h per stream at full speed with loaded filters), R2 (79.8 %), R3 (5.6 W clean, 7.4 W loaded), R4 (607 ppm 24 h mean, 980 ppm overnight), R5, R7 (frost mode holds to -10 °C with the supply at 33 % of exhaust), R8 (sash; hoods need 686 mm), R10, R11 (420 mm), R12.
+
+TRL 2 numbers corrected by the calculations: fan specification raised from about 60 to about 100 m³/h free air (the TRL 2 fan could not reach 70 m³/h at all); frost onset about -2.2 °C, not -5 °C; worst condensate 0.21 L/h, not 0.14 L/h; power 5.6 W, not 9.5 W; season fan energy 28 kWh, not 50 kWh; mass 10.5 kg installed, not 10 kg; cost $255, not $243. Heat recovered (267 W) and CO2 (980 ppm, 820 ppm) confirm the TRL 2 estimates.
+
+### Decisions recorded (BBX-DDR-001)
+
+Each adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open for his review: A1 budget rise to $250 (recorded only; `budget_usd` stays $220), A2 sash windows first, A3 bought polymer counterflow core, A4 frost by slowing the supply fan, A5 50 m³/h nominal with boost to 70 m³/h, A6 ESP32-C3 class controller with an SCD41 class sensor checked on CalRig.
+
+### Still awaiting Amish
+
+1. **Budget figure (O3).** $220 in `project.yaml`; $250 recommended; design now $255. Options: accept about $255; save about $8 with smaller blowers, which would drop the 70 m³/h boost (R1); or find $5 elsewhere. No recommendation beyond noting that the fan change is what made R1 feasible.
+2. **Noise, R6 (O2).** Options: (a) a quiet night mode near 30 to 32 m³/h, which still meets R4 as written (24 h mean about 730 ppm) but lets the room run near 1,350 ppm overnight; (b) larger, slower fans or a lined silencer section, at extra cost and size; (c) relax R6 to about 35 dB(A). Recommendation: (a) plus (b) checked against a real fan datasheet before any change to R6.
+3. **First co-design partner and region (O1).** No recommendation.
+4. **Engineering proposals made in this session**, awaiting confirmation: the larger blowers (about 100 m³/h free air, 400 Pa), the 2 A time-delay input fuse, a firmware fan speed cap at the 80 m³/h need (the worst case of 35.4 W sits just under the 36 W adapter), and the install restriction for rooms whose door seals airtight.
+5. **Fan position (review point).** Both fans sit in the room-end plenum, so the exhaust side of the core runs at higher pressure than the supply side and any core leakage would reach the supply. Options: keep it (warm, dry, serviceable fans) or move the exhaust fan to the outdoor end (cold, wet air). No change made.
+
+### Cross-repo notes
+
+- BreatheBox depends on CalRig for the CO2 sensor check. CalRig's R9 (CO2 span 400 to 2,000 ppm against a ±(30 ppm + 3 %) reference) covers the 1,000 ppm range needed, and an SCD41 class breakout fits CalRig's 90 x 70 x 50 mm bay (R10). No conflict found; CalRig was not edited.
+- No other shared component (FieldNode, CellGuard, MotionCore, ThermaCart, TwinKit) is used.
+
+### Safety concerns
+
+- Frost mode depressurizes the room: about 2.2 Pa at 50 m³/h and 4.4 Pa at 70 m³/h through an 800 x 10 mm door undercut, under a 5 Pa screening limit (an assumption to check against local code), but much more in a room whose door seals. The combustion-appliance restriction stays and an airtight-room restriction is added.
+- Window security and falling parts from upper floors, as at TRL 2.
+- 24 V SELV only; the worst-case load is close to the 36 W adapter rating, so the speed cap and the 2 A fuse matter.
+- The drain tube can freeze outdoors; combustible foam and plastics; fan impellers; mould in a neglected tray or filter.
+
+### Gaps and notes
+
+- Citations: the LUNOS page was fetched with WebFetch on 2026-09-25. It confirms the e² as one of the smallest decentralized fans but not its installation method, so BBX-PRB-001 now says so instead of claiming cored wall holes. The US DOE and EU ecodesign sources flagged at TRL 2 were not cited in the documents, so nothing further was checked. WebSearch was not available. The claim that no open-source window HRV exists still rests on a limited search.
+- Fan curves, fan noise, filter resistance and core data are class values, not datasheet values; BBX-CAL-001 section 11 lists the limits.
+- The kit's cutaway cuts at the mean Y of the parts and keeps the +Y (supply) half; this shows the hood, panel, supply filter, core, tray, supply fan and controller, so it was kept as is.
+- No TRL 4 material exists in the repo (`firmware/` and `electronics/` are empty; `build-log/README.md` is the stock header only).
+
+### Recommended next step
+
+Review BBX-DDR-001 and the items above, especially the budget figure and the R6 noise options. TRL 4 is on hold by Amish's instruction; nothing further should be done until he lifts it. For the record, TRL 4 would need a built unit, chosen fan and core datasheets, a lab test report (TST, `environment: lab`) covering flow and balance, pressure drop, power, noise at 1 m, effectiveness, condensate and a cold-chamber frost run, and build log entries.
