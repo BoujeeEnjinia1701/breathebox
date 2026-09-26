@@ -1,4 +1,4 @@
-"""BreatheBox sizing calculations (BBX-CAL-001).
+"""BreatheBox sizing calculations (BBX-CAL-001 v0.2).
 
 Run from the repo root:  python docs/04-calcs/sizing.py
 Prints every number quoted in docs/04-calcs/01-sizing.md and writes
@@ -25,6 +25,7 @@ P_ATM = 101325.0
 T_IN, RH_IN = 20.0, 0.50                             # design case indoors
 T_OUT = 0.0                                          # design case outdoors
 Q_NOM, Q_MIN, Q_MAX = 50.0, 30.0, 70.0               # m3/h per stream (R1, decision A5)
+Q_NIGHT = 32.0                                       # quiet night mode, m3/h per stream (BBX-DDR-002, R6 option a)
 CO2_OUT, G_SLEEP, N_SLEEP, V_ROOM, H_SLEEP = 420.0, 0.014, 2, 30.0, 8.0
 HDD, SEASON_D = 3500.0, 212                          # K·d, days (cold-temperate assumption)
 NU_PLATE, K_PLATE = 7.54, 0.19                       # laminar parallel plates; polymer plate W/(m K)
@@ -284,8 +285,6 @@ def budget():
     return float("nan")
 
 
-BUDGET_PROPOSED = 250.0
-
 
 # ---------------------------------------------------------------- report
 def main():
@@ -314,7 +313,10 @@ def main():
             pr(f"  {q:.0f} m3/h {'loaded' if loaded else 'clean '}: speed supply {o['supply']['n']:.2f}, exhaust {o['exhaust']['n']:.2f}; "
                f"fan W {o['supply']['w']:.2f} + {o['exhaust']['w']:.2f}; total {o['w_total']:.1f} W; room {o['room_dba']:.1f} dB(A) at 1 m")
     pr(f"  max flow at full speed: clean {max_q_full_speed(False):.0f} m3/h, loaded {max_q_full_speed(True):.0f} m3/h")
-    pr(f"  flow meeting 30 dB(A) at 1 m, clean filters: {q_for_dba(30.0):.0f} m3/h")
+    pr(f"  flow meeting 30 dB(A) at 1 m, clean filters: {q_for_dba(30.0):.0f} m3/h; loaded filters: {q_for_dba(30.0, True):.0f} m3/h")
+    on, onl = op(Q_NIGHT), op(Q_NIGHT, True)
+    pr(f"  night mode {Q_NIGHT:.0f} m3/h (BBX-DDR-002): {on['room_dba']:.1f} dB(A) clean, {onl['room_dba']:.1f} dB(A) loaded; "
+       f"{on['w_total']:.1f} W clean, {onl['w_total']:.1f} W loaded")
     old_qf = 60.0
     pr(f"  TRL 2 fan (about {old_qf:.0f} m3/h free air) cannot reach 70 m3/h against any pressure")
     o70l = op(Q_MAX, True)
@@ -362,6 +364,8 @@ def main():
     pr("\n== CO2 (two sleepers, 30 m3 room, no infiltration) ==")
     for q in (Q_MIN, Q_NOM, Q_MAX):
         pr(f"  {q:.0f} m3/h: steady state {co2_ss(q):.0f} ppm, 24 h mean {co2_24h(q):.0f} ppm, time constant {V_ROOM/q*60:.0f} min")
+    pr(f"  night mode {Q_NIGHT:.0f} m3/h all day (bounding case): steady state {co2_ss(Q_NIGHT):.0f} ppm, "
+       f"24 h mean {co2_24h(Q_NIGHT):.0f} ppm, time constant {V_ROOM/Q_NIGHT*60:.0f} min")
     r10 = frost_supply_ratio(Q_NOM, -10.0)
     pr(f"  frost mode at -10 °C: room still gets {Q_NOM:.0f} m3/h of extract; {r10*Q_NOM:.0f} m3/h through the core and "
        f"{Q_NOM*(1-r10):.0f} m3/h from the rest of the home")
@@ -393,8 +397,8 @@ def main():
     pr("\n== Cost ==")
     tot, rows = bom_total()
     b = budget()
-    pr(f"  BOM total ${tot:.2f} ({len(rows)} lines); budget_usd ${b:.0f}: {'within' if tot <= b else 'over'} by ${abs(tot-b):.2f}; "
-       f"proposed ${BUDGET_PROPOSED:.0f} (awaiting Amish): {'within' if tot <= BUDGET_PROPOSED else 'over'} by ${abs(tot-BUDGET_PROPOSED):.2f}")
+    pr(f"  BOM total ${tot:.2f} ({len(rows)} lines); budget_usd ${b:.0f}: {'within' if tot <= b else 'over'} by ${abs(tot-b):.2f} "
+       f"(budget set to $250 by BBX-DDR-002, was $220)")
 
     # --------------------------------------------------------------- requirements table
     o50, o50l, o70l = op(Q_NOM), op(Q_NOM, True), op(Q_MAX, True)
@@ -406,9 +410,11 @@ def main():
         ("R2", f"{eff(Q_NOM)*100:.1f} % at 50 m3/h ({eff(Q_MAX)*100:.1f} % at 70)", "75 % or more at 50 m3/h", "Met on paper"),
         ("R3", f"{o50['w_total']:.1f} W clean, {o50l['w_total']:.1f} W loaded filters", "12 W or less at 50 m3/h",
          "Met on paper" if o50l["w_total"] <= 12 else ("At risk" if o50["w_total"] <= 12 else "Not met")),
-        ("R4", f"24 h mean {co2_24h(Q_NOM):.0f} ppm at 50 m3/h; night {co2_ss(Q_NOM):.0f} ppm", "1,000 ppm or less, 24 h mean", "Met on paper"),
+        ("R4", f"24 h mean {co2_24h(Q_NOM):.0f} ppm at 50 m3/h, {co2_24h(Q_NIGHT):.0f} ppm in night mode; night {co2_ss(Q_NOM):.0f} ppm, "
+               f"{co2_ss(Q_NIGHT):.0f} ppm in night mode", "1,000 ppm or less, 24 h mean", "Met on paper"),
         ("R5", "ePM1 50 % supply, coarse exhaust", "ePM1 50 % or better", "Met by specification"),
-        ("R6", f"{o50['room_dba']:.0f} dB(A) at 50 m3/h; 30 dB(A) reached at {q_for_dba(30.0):.0f} m3/h", "30 dB(A) or less at 50 m3/h",
+        ("R6", f"{o50['room_dba']:.0f} dB(A) at 50 m3/h; night mode {Q_NIGHT:.0f} m3/h {op(Q_NIGHT)['room_dba']:.0f} dB(A) clean, "
+               f"{op(Q_NIGHT, True)['room_dba']:.0f} dB(A) loaded", "30 dB(A) or less at 50 m3/h",
          "Not met" if o50["room_dba"] > 30 else "Met on paper"),
         ("R7", f"worst condensate {worst[0]/1000:.2f} L/h drains; frost onset {frost_onset(Q_NOM):.1f} °C; at -10 °C supply ratio {r7_ratio:.2f}",
          "Drain all condensate; no blockage to -10 °C", "Met on paper"),
@@ -420,7 +426,7 @@ def main():
         ("R12", f"largest through opening {P['plate_pitch']-P['plate_t']:.2f} mm; sash locks onto panel", "No opening over 100 mm", "Met by design, unverified"),
         ("R13", "lift-off lid; filters and core slide out", "Tool-free filter change in 2 min or less", "Not verifiable at TRL 3"),
         ("R14", "no firmware yet; checked at firmware review", "Local data only", "Not verifiable at TRL 3"),
-        ("R15", f"${tot:.2f}", f"${b:.0f} or less (${BUDGET_PROPOSED:.0f} proposed, awaiting Amish)",
+        ("R15", f"${tot:.2f}", f"${b:.0f} or less",
          "Not met" if tot > b else "Met"),
     ]
     pr("\n== Requirement status ==")

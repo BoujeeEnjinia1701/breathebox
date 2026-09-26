@@ -3,7 +3,7 @@ doc_id: BBX-CAL-001
 title: BreatheBox sizing calculations
 project: BreatheBox
 doc_type: Calculation note
-version: "0.1"
+version: "0.2"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -13,11 +13,15 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: First TRL 3 sizing note (core, pressure drop, fans, power, noise, heat recovery, condensate, frost, CO2, geometry, mass, cost) against BBX-REQ-001 v0.3
+- version: "0.2"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002); budget $250, quiet night mode at 32 m³/h and firmware rules added
 ---
 
 # BreatheBox sizing calculations
 
-On paper, BreatheBox meets ten of its fifteen requirements. **Two are not met.** R6 (noise): the estimate is about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A), and 30 dB(A) is reached only at about 32 m³/h. R15 (cost): the priced BOM is $255, over the $220 budget in `project.yaml` and $5 over the $250 proposed at TRL 2 (awaiting Amish). Three requirements (R9 install time, R13 filter change time and R14 firmware behavior) cannot be verified at TRL 3.
+On paper, BreatheBox meets ten of its fifteen requirements. **Two are not met.** R6 (noise): the estimate is about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A), and 30 dB(A) is reached only at about 32 m³/h. A quiet night mode at 32 m³/h (BBX-DDR-002) brings the estimate to about 30 dB(A) with clean filters and 32 dB(A) with loaded filters, but R6 is written for 50 m³/h. R15 (cost): the priced BOM is $255, $5 over the $250 budget that Amish set on 2026-09-25 (BBX-DDR-002; it was $220). Three requirements (R9 install time, R13 filter change time and R14 firmware behavior) cannot be verified at TRL 3.
 
 The calculations changed four TRL 2 figures. The TRL 2 fans (about 60 m³/h free air) could not reach 70 m³/h against any pressure, so the fan specification rises to about 100 m³/h free air and 400 Pa shut-off. Frost starts at about -2 °C outdoors, not -5 °C, because the plate at the cold corner is colder than the leaving exhaust air. The worst condensate flow is about 0.21 L/h, not 0.14 L/h. Fan and control power at 50 m³/h is about 5.6 W, not 9.5 W, because the system pressure is lower than the 80 Pa assumed.
 
@@ -31,7 +35,7 @@ Every number here is printed by `docs/04-calcs/sizing.py` (run from the repo roo
 | --- | --- | --- |
 | Design case | 30 m³ bedroom, two sleeping adults, 20 °C and 50 % RH indoors, 0 °C outdoors | BBX-REQ-001 |
 | Air | 1.2 kg/m³, 1,005 J/(kg·K), 1.5 x 10⁻⁵ m²/s, 0.0257 W/(m·K) | Near 20 °C |
-| Airflow per stream | 30 to 70 m³/h, 50 m³/h nominal | BBX-REQ-001 R1; BBX-DDR-001 item A5 |
+| Airflow per stream | 30 to 70 m³/h, 50 m³/h nominal; 32 m³/h in night mode | BBX-REQ-001 R1; BBX-DDR-001 item A5; BBX-DDR-002 |
 | Core | 180 x 180 x 300 mm, 2.5 mm plate pitch, 0.15 mm polymer plates (0.19 W/(m·K)); 85 % of the plate area acts in counterflow | Typical small polymer plate core; no datasheet yet |
 | Core heat transfer | Fully developed laminar flow between plates, Nu = 7.54; headers add 2.0 dynamic heads | Textbook laminar values |
 | Supply filter | ISO 16890 ePM1 50 %, 25 mm pleated, 150 x 170 mm face; 50 Pa at 1.0 m/s clean, linear with velocity; replaced at twice the clean pressure drop ("loaded") | Typical for this filter class; to be replaced by the chosen filter's data |
@@ -91,9 +95,11 @@ At 50 m³/h the clean supply stream splits into filter 27.2 Pa, core 11.7 Pa, fa
 
 **Power (R3).** 5.6 W at 50 m³/h with clean filters and 7.4 W with loaded filters, against 12 W. **R3 is met on paper.** Over the heating season the fans and controls use about 28 kWh.
 
-**Noise (R6).** At 50 m³/h the estimate is about **39 dB(A) at 1 m, so R6 is not met.** With clean filters the unit reaches 30 dB(A) only at about 32 m³/h. The noise figure rests on an assumed catalog value and a fan law, so it may be several decibels out in either direction, but even a 5 dB error leaves R6 unmet. Options (a quiet night mode, slower and larger fans, or a lined silencer section) are listed in `docs/REVIEW.md` for Amish.
+**Noise (R6).** At 50 m³/h the estimate is about **39 dB(A) at 1 m, so R6 is not met.** With clean filters the unit reaches 30 dB(A) only at about 32 m³/h. The noise figure rests on an assumed catalog value and a fan law, so it may be several decibels out in either direction, but even a 5 dB error leaves R6 unmet at 50 m³/h.
 
-**Adapter and fuse (R10).** The 70 m³/h loaded case needs 14.5 W (0.60 A at 24 V). The worst case, both fans at full speed at their peak air power (58 m³/h each on the assumed curve), is about 35.4 W (1.48 A), just under the 36 W adapter rating. The firmware should cap fan speed at what 80 m³/h needs, and the 24 V input carries a 2 A time-delay fuse. **R10 is met by design** (24 V SELV only).
+**Night mode (BBX-DDR-002).** Amish accepted the recommendation of a quiet night mode, with larger, slower fans or a lined silencer to be checked against a real fan datasheet before any change to R6. The firmware rule is: in night mode both streams run at 32 m³/h (balanced by tach), the CO2 boost is suppressed, and frost mode and the speed cap still apply. At 32 m³/h the estimate is **30.1 dB(A) with clean filters and 32.0 dB(A) with loaded filters**, for 2.8 W and 3.5 W. With loaded filters, 30 dB(A) would need about 29 m³/h, below the 30 m³/h floor of R1, so the night mode stays at 32 m³/h and relies on filter changes. The datasheet check is on hold with TRL 4.
+
+**Adapter and fuse (R10).** The 70 m³/h loaded case needs 14.5 W (0.60 A at 24 V). The worst case, both fans at full speed at their peak air power (58 m³/h each on the assumed curve), is about 35.4 W (1.48 A), just under the 36 W adapter rating. The firmware caps fan speed at what 80 m³/h needs (a firmware rule accepted in BBX-DDR-002), and the 24 V input carries a 2 A time-delay fuse. **R10 is met by design** (24 V SELV only).
 
 ## 5. Heat recovery
 
@@ -127,8 +133,9 @@ A preheater that kept the flows balanced at -10 °C would need about 130 W, more
 | 30 m³/h | 1,353 ppm | 731 ppm | 60 min |
 | 50 m³/h | 980 ppm | 607 ppm | 36 min |
 | 70 m³/h | 820 ppm | 553 ppm | 26 min |
+| 32 m³/h, night mode all day (bounding case) | 1,295 ppm | 712 ppm | 56 min |
 
-**R4 is met on paper**: the 24 h mean is 607 ppm at 50 m³/h against 1,000 ppm, and even the night steady state (980 ppm) stays under 1,000 ppm. At 30 m³/h the 24 h mean still meets R4, although the night level reaches about 1,350 ppm. This matters for R6, because a quiet night mode near 32 m³/h would meet R4 as written while the room air runs above 1,000 ppm for part of the night.
+**R4 is met on paper**: the 24 h mean is 607 ppm at 50 m³/h against 1,000 ppm, and even the night steady state (980 ppm) stays under 1,000 ppm. At 30 m³/h the 24 h mean still meets R4, although the night level reaches about 1,350 ppm. This matters for R6: the night mode at 32 m³/h (BBX-DDR-002) meets R4 as written, with a 24 h mean of 712 ppm even if it ran all day, while the room air rises toward about 1,300 ppm for part of the night.
 
 ## 8. Geometry, structure and mass (R8, R9, R11, R12)
 
@@ -159,7 +166,7 @@ The mass part of R9 is met on paper (10.5 kg against 12 kg). The 30 min install 
 
 ## 9. Cost (R15)
 
-The priced BOM totals **$255.00** over 13 lines. That is $35 over `budget_usd: 220` and $5 over the $250 proposed at TRL 2, which is recorded in BBX-DDR-001 item A1 as awaiting Amish. **R15 is not met** against either figure. The increase from $243 comes from the larger fans (+$8), the collars through the panel (+$2) and the input fuse and holder (+$2).
+The priced BOM totals **$255.00** over 13 lines. `budget_usd` is now $250 (Amish's decision of 2026-09-25, BBX-DDR-002; it was $220), so the BOM is $5 over. **R15 is not met.** Whether to accept about $255 or find $5 is still awaiting Amish. The increase from $243 comes from the larger fans (+$8), the collars through the panel (+$2) and the input fuse and holder (+$2).
 
 ## 10. Results
 
@@ -170,9 +177,9 @@ The priced BOM totals **$255.00** over 13 lines. That is $35 over `budget_usd: 2
 | R1 | 30 to 70 m³/h per stream; full-speed limit 80 m³/h with loaded filters; balanced by tach | 30 to 70 m³/h, within 10 % | Met on paper |
 | R2 | 79.8 % at 50 m³/h (73.8 % at 70 m³/h) | 75 % or more at 50 m³/h | Met on paper |
 | R3 | 5.6 W clean, 7.4 W loaded | 12 W or less at 50 m³/h | Met on paper |
-| R4 | 24 h mean 607 ppm; night 980 ppm | 1,000 ppm or less, 24 h mean | Met on paper |
+| R4 | 24 h mean 607 ppm (712 ppm in night mode); night 980 ppm (1,295 ppm in night mode) | 1,000 ppm or less, 24 h mean | Met on paper |
 | R5 | ePM1 50 % supply, coarse exhaust | ePM1 50 % or better | Met by specification |
-| R6 | 39 dB(A) at 50 m³/h; 30 dB(A) at 32 m³/h | 30 dB(A) or less at 50 m³/h | **Not met** |
+| R6 | 39 dB(A) at 50 m³/h; night mode at 32 m³/h 30 dB(A) clean, 32 dB(A) loaded | 30 dB(A) or less at 50 m³/h | **Not met** |
 | R7 | Worst condensate 0.21 L/h drains; frost onset -2.2 °C; supply at 33 % of exhaust at -10 °C | Drain all condensate; no blockage to -10 °C | Met on paper |
 | R8 | Hoods need 686 mm clear width; panel 700 to 1,000 mm | Sash 700 to 1,000 mm; slider adapter | Met on paper (sash) |
 | R9 | 10.5 kg; no drilling; install time not calculable | 12 kg or less; 30 min or less | Not verifiable at TRL 3 (mass met on paper) |
@@ -181,13 +188,13 @@ The priced BOM totals **$255.00** over 13 lines. That is $35 over `budget_usd: 2
 | R12 | Largest opening 2.35 mm; sash locks onto panel | No opening over 100 mm | Met by design, unverified |
 | R13 | Lift-off lid; filters and core slide out | Tool-free filter change in 2 min or less | Not verifiable at TRL 3 |
 | R14 | No firmware yet; checked at firmware review | Local data only | Not verifiable at TRL 3 |
-| R15 | $255.00 | $220 or less ($250 proposed, awaiting Amish) | **Not met** |
+| R15 | $255.00 | $250 or less | **Not met** |
 
 Summary: met 10, not met 2 (R6, R15), not verifiable at TRL 3 3 (R9, R13, R14).
 
 ## 11. Limits of this note
 
-- The fan curve, fan noise and filter resistance are class values, not datasheet values. R1, R3, R6 and R10 should be rechecked when parts are chosen.
+- The fan curve, fan noise and filter resistance are class values, not datasheet values. R1, R3, R6 and R10 should be rechecked when parts are chosen; the night mode noise figure carries the same uncertainty.
 - Laminar, fully developed flow and equal film coefficients are idealizations; real cores with headers usually recover a few points less than this model predicts.
 - Leakage between streams in the core, air leakage around the insert panel and the latent heat released by condensation are not modeled. The last makes the frost onset slightly conservative.
-- In the chosen layout both fans sit in the room-end plenum, so the exhaust side of the core runs at a higher pressure than the supply side. Any core leakage would carry stale air into the supply. This is noted for review; it is not changed here.
+- In the chosen layout both fans sit in the room-end plenum, so the exhaust side of the core runs at a higher pressure than the supply side. Any core leakage would carry stale air into the supply. This is noted for review and remains open (BBX-DDR-002); it is not changed here.

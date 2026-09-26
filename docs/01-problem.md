@@ -3,7 +3,7 @@ doc_id: BBX-PRB-001
 title: BreatheBox problem statement
 project: BreatheBox
 doc_type: Problem statement
-version: "0.3"
+version: "0.4"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -21,6 +21,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: TRL 3 update; sash-first window type and budget position per BBX-DDR-001 (adopted for TRL 3, open for Amish's review); open questions updated
+- version: "0.4"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002)
 ---
 
 # BreatheBox problem statement
@@ -45,11 +49,11 @@ Outdoor air is not always clean either. The World Health Organization reports th
 | Social housing providers and energy retrofit programs | Must fix damp and mould quickly across many homes | A low-cost, repeatable, documented measure that installs in minutes |
 | Makers and community repair groups | Want to build, adapt and fix the unit locally | Open drawings, common parts and no special tools |
 
-**Operating context.** One room of 20 to 40 m³ (for example, a 3 x 4 m bedroom with a 2.5 m ceiling holds 30 m³), one or two occupants, a window with a sill 800 to 1,000 mm above the floor, and a standard wall socket nearby. Outdoor air from about -10 °C to 35 °C. The first target window is the vertical sliding sash (single- or double-hung) common in North America and the United Kingdom, because the lower sash can close down onto an insert panel. This sash-first choice is adopted for TRL 3 under Amish's 2026-09-25 instruction and is open for his review (BBX-DDR-001 item A2).
+**Operating context.** One room of 20 to 40 m³ (for example, a 3 x 4 m bedroom with a 2.5 m ceiling holds 30 m³), one or two occupants, a window with a sill 800 to 1,000 mm above the floor, and a standard wall socket nearby. Outdoor air from about -10 °C to 35 °C. The first target window is the vertical sliding sash (single- or double-hung) common in North America and the United Kingdom, because the lower sash can close down onto an insert panel. This sash-first choice was decided by Amish on 2026-09-25 (BBX-DDR-001 item A2; BBX-DDR-002).
 
 ## Constraints
 
-- Garage-buildable prototype, $220 USD in parts (`project.yaml`). A budget of $250 was recommended at TRL 2 and is awaiting Amish; the priced BOM is $255 (BBX-CAL-001).
+- Garage-buildable prototype, $250 USD in parts (`project.yaml`; raised from $220 by Amish on 2026-09-25, BBX-DDR-002). The priced BOM is $255 (BBX-CAL-001).
 - No drilling of the window frame or wall; installs and removes without damage, so renters can use it.
 - Low voltage only inside the unit (24 V SELV from a certified plug-in adapter); no mains wiring by the builder.
 - Common, replaceable parts: standard fans, filter media cut to size, a spare-part HRV core.
@@ -76,6 +80,6 @@ We have not found an open-source, window-mounted, counterflow heat recovery vent
 
 - [ ] Which windows dominate in the first user group? The first version targets sash windows (BBX-DDR-001 item A2); casement and tilt-and-turn windows (common in continental Europe) need a later insert.
 - [ ] Is a 260 mm raised sash acceptable for security, or is a locking bar needed as standard?
-- [ ] What noise level do users accept at night, and at what airflow? BBX-CAL-001 estimates about 39 dB(A) at 1 m at 50 m³/h and 30 dB(A) only near 32 m³/h, so this question now decides R6.
+- [ ] What noise level do users accept at night, and at what airflow? BBX-CAL-001 estimates about 39 dB(A) at 1 m at 50 m³/h and 30 dB(A) only near 32 m³/h, A quiet night mode at 32 m³/h (about 30 dB(A), BBX-DDR-002) is now part of the design, so the open part is whether users accept it and its overnight CO2 of about 1,300 ppm.
 - [ ] How cold does it get where the first users live, and how often will the frost strategy run?
 - [ ] Who are the first co-design partners (a tenants' group, a social landlord or a retrofit program)? Proposed, awaiting Amish (BBX-DDR-001 item O1).

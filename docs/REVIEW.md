@@ -36,15 +36,15 @@ Requirements not met or at risk:
 - **R1, R6, R7 at risk:** fan operating point, night noise (30 dB(A) at 1 m) and frost behavior are unverified.
 - **R4 marginal:** two sleepers need the 70 m³/h boost to stay under 1,000 ppm, which makes R6 harder.
 
-### Proposed, awaiting Amish
+### Proposed, awaiting Amish (status updated 2026-09-25)
 
-1. **Budget.** Options: (a) raise `budget_usd` from $220 to $250; (b) keep $220 by using a home-made crossflow core (about $10, but only about 50 to 65 % recovery, which fails R2); (c) keep $220 by dropping the CO2 sensor for humidity-only control (about $20 saved, weakens R4). Recommendation: (a). `project.yaml` is unchanged.
-2. **Window type for the first version:** vertical sliding sash (recommended) versus a tilt-and-turn insert for continental Europe.
-3. **Core type:** bought polymer counterflow plate core (recommended) versus alternating regenerative units or an enthalpy core for humid climates.
-4. **Frost strategy:** slow the supply fan (recommended, with the combustion-appliance warning) versus a low-power preheater.
-5. **Nominal airflow:** 50 m³/h with CO2-driven boost to 70 m³/h (recommended) versus 70 m³/h fixed.
-6. **Controller:** single ESP32-C3 class module with an SCD41 class sensor (recommended), with sensor checks on CalRig.
-7. **First co-design partner and region** (for example a tenants' group or social landlord in the UK or Canada).
+1. **Budget.** Options: (a) raise `budget_usd` from $220 to $250; (b) keep $220 by using a home-made crossflow core (about $10, but only about 50 to 65 % recovery, which fails R2); (c) keep $220 by dropping the CO2 sensor for humidity-only control (about $20 saved, weakens R4). Recommendation: (a). **Decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002). `budget_usd` is now $250.
+2. **Window type for the first version:** vertical sliding sash (recommended) versus a tilt-and-turn insert for continental Europe. **Decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002).
+3. **Core type:** bought polymer counterflow plate core (recommended) versus alternating regenerative units or an enthalpy core for humid climates. **Decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002).
+4. **Frost strategy:** slow the supply fan (recommended, with the combustion-appliance warning) versus a low-power preheater. **Decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002).
+5. **Nominal airflow:** 50 m³/h with CO2-driven boost to 70 m³/h (recommended) versus 70 m³/h fixed. **Decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002).
+6. **Controller:** single ESP32-C3 class module with an SCD41 class sensor (recommended), with sensor checks on CalRig. **Decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002). The CalRig check is on hold with TRL 4.
+7. **First co-design partner and region** (for example a tenants' group or social landlord in the UK or Canada). Still proposed, awaiting Amish (no recommendation).
 
 No change to `project.yaml` pitch or problem: the numbers found support "recovering most of the heat".
 
@@ -91,15 +91,15 @@ TRL 2 numbers corrected by the calculations: fan specification raised from about
 
 ### Decisions recorded (BBX-DDR-001)
 
-Each adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open for his review: A1 budget rise to $250 (recorded only; `budget_usd` stays $220), A2 sash windows first, A3 bought polymer counterflow core, A4 frost by slowing the supply fan, A5 50 m³/h nominal with boost to 70 m³/h, A6 ESP32-C3 class controller with an SCD41 class sensor checked on CalRig.
+Each adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open for his review, and since **decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002): A1 budget rise to $250 (recorded only; `budget_usd` stays $220), A2 sash windows first, A3 bought polymer counterflow core, A4 frost by slowing the supply fan, A5 50 m³/h nominal with boost to 70 m³/h, A6 ESP32-C3 class controller with an SCD41 class sensor checked on CalRig.
 
-### Still awaiting Amish
+### Still awaiting Amish (status updated 2026-09-25)
 
-1. **Budget figure (O3).** $220 in `project.yaml`; $250 recommended; design now $255. Options: accept about $255; save about $8 with smaller blowers, which would drop the 70 m³/h boost (R1); or find $5 elsewhere. No recommendation beyond noting that the fan change is what made R1 feasible.
-2. **Noise, R6 (O2).** Options: (a) a quiet night mode near 30 to 32 m³/h, which still meets R4 as written (24 h mean about 730 ppm) but lets the room run near 1,350 ppm overnight; (b) larger, slower fans or a lined silencer section, at extra cost and size; (c) relax R6 to about 35 dB(A). Recommendation: (a) plus (b) checked against a real fan datasheet before any change to R6.
-3. **First co-design partner and region (O1).** No recommendation.
-4. **Engineering proposals made in this session**, awaiting confirmation: the larger blowers (about 100 m³/h free air, 400 Pa), the 2 A time-delay input fuse, a firmware fan speed cap at the 80 m³/h need (the worst case of 35.4 W sits just under the 36 W adapter), and the install restriction for rooms whose door seals airtight.
-5. **Fan position (review point).** Both fans sit in the room-end plenum, so the exhaust side of the core runs at higher pressure than the supply side and any core leakage would reach the supply. Options: keep it (warm, dry, serviceable fans) or move the exhaust fan to the outdoor end (cold, wet air). No change made.
+1. **Budget figure (O3).** $220 in `project.yaml`; $250 recommended; design now $255. Options: accept about $255; save about $8 with smaller blowers, which would drop the 70 m³/h boost (R1); or find $5 elsewhere. No recommendation beyond noting that the fan change is what made R1 feasible. Still proposed, awaiting Amish; `budget_usd` is now $250 under A1.
+2. **Noise, R6 (O2).** Options: (a) a quiet night mode near 30 to 32 m³/h, which still meets R4 as written (24 h mean about 730 ppm) but lets the room run near 1,350 ppm overnight; (b) larger, slower fans or a lined silencer section, at extra cost and size; (c) relax R6 to about 35 dB(A). Recommendation: (a) plus (b) checked against a real fan datasheet before any change to R6. **Decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002). Night mode added; the datasheet check is on hold with TRL 4.
+3. **First co-design partner and region (O1).** No recommendation. Still proposed, awaiting Amish.
+4. **Engineering proposals made in this session**, awaiting confirmation: the larger blowers (about 100 m³/h free air, 400 Pa), the 2 A time-delay input fuse, a firmware fan speed cap at the 80 m³/h need (the worst case of 35.4 W sits just under the 36 W adapter), and the install restriction for rooms whose door seals airtight. **Decided by Amish, 2026-09-25: go with recommendation** (BBX-DDR-002).
+5. **Fan position (review point).** Both fans sit in the room-end plenum, so the exhaust side of the core runs at higher pressure than the supply side and any core leakage would reach the supply. Options: keep it (warm, dry, serviceable fans) or move the exhaust fan to the outdoor end (cold, wet air). No change made. No recommendation, so still proposed, awaiting Amish (BBX-DDR-002 item O4).
 
 ### Cross-repo notes
 
@@ -123,3 +123,45 @@ Each adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open
 ### Recommended next step
 
 Review BBX-DDR-001 and the items above, especially the budget figure and the R6 noise options. TRL 4 is on hold by Amish's instruction; nothing further should be done until he lifts it. For the record, TRL 4 would need a built unit, chosen fan and core datasheets, a lab test report (TST, `environment: lab`) covering flow and balance, pressure drop, power, noise at 1 m, effectiveness, condensate and a cold-chamber frost run, and build log entries.
+
+## Session 2026-09-25: recommendations accepted
+
+Amish wrote on 2026-09-25: "i accept all your recommendations, go with them across all repos." Every item with a recommendation is now **Decided by Amish, 2026-09-25: go with recommendation**. Items without one stay proposed, awaiting Amish.
+
+### Decisions applied and what changed
+
+Recorded in `docs/decisions/0002-recommendations-accepted.md` (BBX-DDR-002 v0.1); BBX-DDR-001 moves to v0.2 with its status column updated. Eleven items decided:
+
+- **Budget (A1):** `budget_usd` $220 to **$250** in `project.yaml`; R15 target $220 to $250. BOM unchanged at $255, so R15 is still not met, now by $5 instead of $35.
+- **Noise (O2), option (a) plus (b):** quiet night mode as a firmware rule, both streams held at **32 m³/h** with the CO2 boost suppressed. Noise at 1 m: 38.6 dB(A) at 50 m³/h (clean) becomes **30.1 dB(A)** clean and **32.0 dB(A)** loaded in night mode. CO2 overnight 980 ppm becomes about **1,295 ppm** in night mode; 24 h mean 607 ppm becomes 712 ppm (bounding case), still under R4's 1,000 ppm. Fan and control power 5.6 W becomes 2.8 W. R6 target unchanged; option (b) (fan datasheet, silencer) is on hold with TRL 4.
+- **Engineering proposals from TRL 3:** larger blowers, 2 A time-delay fuse, firmware speed cap at the 80 m³/h need (now a stated firmware rule) and the airtight-room install restriction, all kept.
+- **A2 to A6:** sash first, bought counterflow core, slowed-fan frost mode, 50 m³/h nominal with 70 m³/h boost, ESP32-C3 plus SCD41 class controller. Wording updated; the design already followed them.
+
+Files changed: `project.yaml`, `README.md` (budget line, performance paragraph, key components, new "What sparked the idea", footer), BBX-PRB-001 v0.4, BBX-PRC-001 v0.4, BBX-REQ-001 v0.4, BBX-CAL-001 v0.2 (`sizing.py` and `results.csv` rerun), BBX-DDR-001 v0.2, BBX-DDR-002 v0.1, `bom/bom-notes.md`, `cad/src/sheets.py` (BBX-DWG-001 Rev P1 to **P2**, note "Flow 30 to 70 m3/h per stream, 50 nominal, 32 night mode"), `cad/src/concept_media.py` (key figures). Geometry and BOM are unchanged; STEP, STL, drawings, media and PDFs were regenerated, which also removes the old site address from every generated file. Temporary `media/_views*` folders deleted.
+
+### Requirement status (BBX-CAL-001 v0.2)
+
+Met 10, not met 2, not verifiable at TRL 3 3.
+
+- **Not met: R6 (noise).** 39 dB(A) at 50 m³/h against 30 dB(A). Night mode reaches 30 dB(A) with clean filters and 32 dB(A) with loaded ones.
+- **Not met: R15 (cost).** $255 against $250.
+- **Not verifiable at TRL 3:** R9 (install time), R13 (filter change time), R14 (firmware).
+- **Met:** R1, R2, R3, R4 (also in night mode), R5, R7, R8 (sash), R10, R11, R12.
+
+### Still awaiting Amish
+
+1. **First co-design partner and region (O1).** No recommendation.
+2. **Budget gap (O3).** $255 against $250: accept, drop the boost with smaller blowers, or find $5. No recommendation.
+3. **Fan position (O4).** Both fans in the room-end plenum or exhaust fan at the outdoor end. No recommendation.
+
+### Cross-repo actions
+
+- **CalRig:** check the SCD41 class CO2 sensor on CalRig before use (decided under A6). This is TRL 4 work and on hold. CalRig was not edited.
+
+### Write-up
+
+"What sparked the idea" in `README.md` now traces the concept to the Saskatchewan Conservation House (Regina, 1977) and its pioneering air-to-air heat exchanger, cited to the Encyclopedia of Saskatchewan (University of Regina). The earlier text about a review of the lab's research areas and the footer line about the portfolio set were removed. `docs/01-problem.md` did not attribute the idea to a review.
+
+### TRL
+
+`trl: 3` and `trl_target: 3` are unchanged. TRL 4 remains on hold by Amish's instruction: no build, test, purchase, PCB or firmware was started. The decided items that need TRL 4 work (CalRig sensor check, fan datasheet and silencer check for R6) are on hold.

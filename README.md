@@ -2,7 +2,7 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
-**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** $220 USD ($250 proposed) · **Difficulty:** 3 of 5
+**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** $250 USD · **Difficulty:** 3 of 5
 
 A window-mounted heat recovery ventilator for single rooms: two small fans and a counterflow core bring in fresh air while recovering most of the heat or cool from the outgoing air.
 
@@ -48,7 +48,7 @@ The cost of getting this wrong is not only energy. In England, 7 % of social ren
 
 ## What sparked the idea
 
-It came out of a September 2026 review of Design Molecule's applied research areas against the open projects already in the lab. It extends the lab's housing and clean tech work. The real-world trigger is the push to fix damp and mould in rented homes, made urgent in England by Awaab's Law ([UK Government](https://www.gov.uk/government/news/awaabs-law-to-force-landlords-to-fix-dangerous-homes)), in homes where tenants cannot add ducts or cut holes in walls.
+The idea traces back to the Saskatchewan Conservation House, an experimental energy-efficient home built in northwest Regina in 1977 with the Saskatchewan Research Council as project manager. Its use of an air-to-air heat exchanger for ventilation was a pioneering effort, and such exchangers are now produced in the tens of thousands each year in North America ([Encyclopedia of Saskatchewan, University of Regina](https://esask.uregina.ca/entry/energy-efficient_houses.html)). That house showed that a tight, well-insulated home needs heat recovery ventilation designed in from the start. BreatheBox asks what the same exchanger looks like when it has to reach an existing room through a sash window, fitted and removed by a tenant, rather than being ducted into a new house.
 
 ## Problem
 
@@ -66,12 +66,12 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 2. Counterflow plate core, about 80 % sensible recovery (estimate)
 3. Two 24 V brushless blowers, 30 to 70 m³/h balanced, 50 m³/h nominal
 4. ePM1 supply filter and coarse exhaust filter
-5. Controller with CO2, humidity and temperature sensing and a frost mode
+5. Controller with CO2, humidity and temperature sensing, a frost mode and a quiet night mode
 6. Condensate tray draining outdoors
 7. Insulated window insert panel with seals, under the raised and locked sash
 8. Two outdoor hoods with insect mesh, a clamped sill bracket and a certified 24 V plug-in adapter
 
-TRL 3 calculations ([BBX-CAL-001](docs/04-calcs/01-sizing.md)): about 267 W of heat kept at 0 °C outdoors and 50 m³/h for about 5.6 W of fan and control power, about 10.5 kg installed, and $255 in parts. Two requirements are not met: noise (about 39 dB(A) at 1 m against 30 dB(A)) and cost ($255 against the $220 budget; $250 is proposed and awaiting Amish). See the [design precis](docs/02-concept.md) and [requirements](docs/03-requirements.md).
+TRL 3 calculations ([BBX-CAL-001](docs/04-calcs/01-sizing.md)): about 267 W of heat kept at 0 °C outdoors and 50 m³/h for about 5.6 W of fan and control power, about 10.5 kg installed, and $255 in parts. Two requirements are not met: noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)) and cost ($255 against the $250 budget). A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters, with overnight CO2 near 1,300 ppm ([BBX-DDR-002](docs/decisions/0002-recommendations-accepted.md)). See the [design precis](docs/02-concept.md) and [requirements](docs/03-requirements.md).
 
 The priced bill of materials is in [bom/bom.csv](bom/bom.csv). The parametric model is `cad/src/model.py`, with STEP and STL exports in `cad/step/` and `cad/stl/`.
 
@@ -102,4 +102,4 @@ Controlled documents follow the portfolio [documentation standard](.kit/STANDARD
 - **Hardware** (CAD, drawings, BOM, electronics): [CERN-OHL-S v2](LICENSE)
 - **Software** (firmware, scripts, notebooks): [MIT](LICENSE-SOFTWARE)
 
-A project of the [Design Molecule](https://designmolecule.com) lab. Extending strong areas set.
+A project of the [Design Molecule](https://designmolecule.com) lab.

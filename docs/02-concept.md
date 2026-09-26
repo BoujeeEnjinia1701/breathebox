@@ -3,7 +3,7 @@ doc_id: BBX-PRC-001
 title: BreatheBox design precis
 project: BreatheBox
 doc_type: Design precis
-version: "0.3"
+version: "0.4"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -21,13 +21,17 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: TRL 3 update; numbers from BBX-CAL-001, layout from the parametric model and BBX-DWG-001, larger fans, design choices adopted for TRL 3 per BBX-DDR-001 (open for Amish's review)
+- version: "0.4"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002)
 ---
 
 # BreatheBox design precis
 
 ## Summary
 
-BreatheBox is a single-room heat recovery ventilator that sits on the sill of a sash window. Two small 24 V blowers push stale room air out and draw fresh air in through a counterflow plate core, so the incoming air picks up about 80 % of the heat (or, in summer, the cool) of the outgoing air. The TRL 3 calculations (BBX-CAL-001) give, for a bedroom at 50 m³/h and 0 °C outdoors: about 267 W of heat kept in the room for about 5.6 W of fan and control power, supply air at about 16 °C, and CO2 near 980 ppm overnight with two sleepers. Two requirements are not met: noise (about 39 dB(A) at 1 m against 30 dB(A)) and cost ($255 against the $220 budget). All figures are paper estimates; nothing has been built.
+BreatheBox is a single-room heat recovery ventilator that sits on the sill of a sash window. Two small 24 V blowers push stale room air out and draw fresh air in through a counterflow plate core, so the incoming air picks up about 80 % of the heat (or, in summer, the cool) of the outgoing air. The TRL 3 calculations (BBX-CAL-001) give, for a bedroom at 50 m³/h and 0 °C outdoors: about 267 W of heat kept in the room for about 5.6 W of fan and control power, supply air at about 16 °C, and CO2 near 980 ppm overnight with two sleepers. Two requirements are not met: noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)) and cost ($255 against the $250 budget). A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters. All figures are paper estimates; nothing has been built.
 
 ![Hero render](../media/hero.png)
 
@@ -40,13 +44,13 @@ Figure 1. Parametric model on a sash window, with a 1.75 m person for scale.
 3. **Supply path.** Outdoor air enters the second hood, 420 mm from the exhaust mouth, passes through a collar in the panel and an ePM1 filter, and flows through the other set of core channels. The supply fan draws it through the core and blows it into the room through a top grille that throws air up and away from the occupant.
 4. **Recover.** The two streams flow in opposite directions on each side of thin polymer plates, so heat passes across without the air mixing.
 5. **Drain.** In winter, moisture from the room air condenses in the core. A tray under the core falls to the outdoor side, and a tube carries the water through the panel and down the outside wall.
-6. **Control.** A small controller reads CO2, humidity and temperature at the room intake and runs the fans between 30 and 70 m³/h, using the fan tach signals to keep the two streams within 10 %. A temperature probe at the core's exhaust outlet triggers a frost mode that slows the supply fan when the cold corner of the core nears 0 °C. Readings show on a status LED and, optionally, on a local web page; nothing needs the cloud.
+6. **Control.** A small controller reads CO2, humidity and temperature at the room intake and runs the fans between 30 and 70 m³/h, using the fan tach signals to keep the two streams within 10 %. A temperature probe at the core's exhaust outlet triggers a frost mode that slows the supply fan when the cold corner of the core nears 0 °C. Readings show on a status LED and, optionally, on a local web page; nothing needs the cloud. The firmware rules accepted in BBX-DDR-002 are: a quiet night mode that holds both streams at 32 m³/h and suppresses the CO2 boost; a speed cap at what 80 m³/h needs, so the worst-case draw stays under the 36 W adapter; and frost mode taking priority over both.
 
 ![Cutaway](../media/cutaway.png)
 
 Figure 2. Cutaway through the supply side: hood and collar (outdoors, left), insert panel, supply filter, core over the condensate tray, supply fan and controller.
 
-The general arrangement is drawing BBX-DWG-001 (Rev P1) in `cad/drawings/`, generated from `cad/src/model.py`.
+The general arrangement is drawing BBX-DWG-001 (Rev P2) in `cad/drawings/`, generated from `cad/src/model.py`.
 
 ## Main components
 
@@ -79,15 +83,15 @@ Table 2. Key numbers at TRL 3.
 | Supply pressure drop at 50 m³/h | 51.8 Pa clean, 79.0 Pa with loaded filter | |
 | Flow limit at full fan speed | 80 m³/h per stream with loaded filters | R1 met on paper |
 | Fan and control power | 5.6 W at 50 m³/h (7.4 W loaded); 14.5 W at 70 m³/h loaded | R3 met on paper |
-| Noise at 1 m | About 39 dB(A) at 50 m³/h; 30 dB(A) near 32 m³/h | **R6 not met** |
+| Noise at 1 m | About 39 dB(A) at 50 m³/h; night mode at 32 m³/h about 30 dB(A) clean, 32 dB(A) with loaded filters | **R6 not met** (written for 50 m³/h) |
 | Heating-season energy kept | About 1,123 kWh for 28 kWh of fan energy (3,500 K·d) | |
-| CO2, two sleepers, 30 m³ room | 980 ppm overnight and 607 ppm 24 h mean at 50 m³/h | R4 met on paper |
+| CO2, two sleepers, 30 m³ room | 980 ppm overnight and 607 ppm 24 h mean at 50 m³/h; about 1,300 ppm overnight and 712 ppm 24 h mean in night mode | R4 met on paper |
 | Condensate, upper bound | 0.21 L/h (70 m³/h, -3 °C) | R7 drain sized |
 | Frost onset | About -2.2 °C outdoors at 50 m³/h | |
 | Frost mode at -10 °C | Supply slowed to 33 % of exhaust; about 2.2 Pa room depressurization through a door undercut | R7 met on paper |
 | Clear distance between hood mouths | 420 mm; hoods fit windows from 686 mm clear width | R11, R8 met on paper |
 | Unit mass | About 10.5 kg installed (10.8 kg with adapter) | R9 mass met on paper |
-| Parts cost | $255 | **R15 not met** ($220; $250 proposed) |
+| Parts cost | $255 | **R15 not met** ($250 budget) |
 
 ![Heat flow](../media/flow.png)
 
@@ -95,16 +99,18 @@ Figure 3. Heat flow in the design case (estimates from BBX-CAL-001).
 
 ## Key design choices
 
-Each choice below was recommended at TRL 2 and is adopted for TRL 3 under Amish's 2026-09-25 instruction, open for his review (BBX-DDR-001).
+Each choice below was recommended at TRL 2 (BBX-DDR-001) and decided by Amish on 2026-09-25: go with recommendation (BBX-DDR-002).
 
 - **Window insert rather than wall core; sash windows first** (item A2). Renters can install it, and it comes out without a trace. The first version fits vertical sliding sash windows from 700 to 1,000 mm clear width, with an adapter for horizontal sliders. Casement and tilt-and-turn windows need a later insert.
 - **Bought polymer counterflow plate core** (item A3). A plate core runs one steady fan per stream, is simple to model and build, and keeps supply and exhaust separate. The core is the part a garage builder cannot make well; a home-made crossflow core would cost about $10 but recover only about 50 to 65 % (estimate). Alternating regenerative units and enthalpy cores remain options for later variants.
 - **Frost by slowing the supply fan** (item A4). The simplest frost strategy for a 24 V unit: holding balanced flow at -10 °C with a preheater would take about 130 W. It unbalances the flows and slightly depressurizes the room (see Safety).
 - **50 m³/h nominal with CO2-driven boost to 70 m³/h** (item A5). The boost is rarely needed for R4 but costs noise (about 45 dB(A) at 70 m³/h with clean filters).
 - **Single ESP32-C3 class controller with an SCD41 class sensor** (item A6), with the sensor checked on CalRig.
+- **Quiet night mode** (BBX-DDR-002). 32 m³/h per stream while people sleep, trading overnight CO2 (about 1,300 ppm) for about 30 dB(A). Larger, slower fans or a lined silencer section are to be checked against a real fan datasheet before R6 is changed; that check is on hold with TRL 4.
+- **Larger blowers, 2 A time-delay input fuse and firmware speed cap** (BBX-DDR-002), as costed and sized in BBX-CAL-001.
 - **24 V SELV only.** A certified plug-in adapter means no mains wiring for the builder (R10).
 
-One layout point is noted for review: both fans sit in the warm room-end plenum, so the exhaust side of the core runs at a slightly higher pressure than the supply side. Any core leakage would carry stale air into the supply stream.
+One layout point remains open for Amish (no recommendation was made): both fans sit in the warm room-end plenum, so the exhaust side of the core runs at a slightly higher pressure than the supply side. Any core leakage would carry stale air into the supply stream.
 
 ![Exploded view](../media/exploded.png)
 
@@ -126,7 +132,7 @@ Figure 4. Exploded view with BOM numbers.
 
 ## Open questions after TRL 3
 
-- Noise: which fan, silencer or night-mode option closes the R6 gap (see `docs/REVIEW.md`)?
+- Noise: does a real fan datasheet, or a lined silencer, close the R6 gap at 50 m³/h, or should R6 be restated for the night mode?
 - Core: which spare-part cores are available at this size, and what are their real effectiveness and pressure drop?
 - Fans: the chosen blower's curve, efficiency and noise data, to replace the class values in BBX-CAL-001.
 - Airtightness: how much air leaks around the insert panel and sash, and does it matter for balance?
