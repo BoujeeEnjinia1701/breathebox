@@ -1,7 +1,14 @@
 item,qty,spec,supplier,unit_cost_usd,make_buy,notes
-Counterflow heat exchanger core,,,,,,
-Two EC fans,,,,,,
-Window insert panel,,,,,,
-Filters for supply air,,,,,,
-CO2 and humidity sensor with controller,,,,,,
-Condensate drain,,,,,,
+1 Insulated housing,1,"Shell about 470 x 560 x 250 mm from 6 mm PVC foam board lined with 10 mm closed-cell foam; lift-off front lid for filter access; divider walls separating the four air paths",Sign and plastics supplier; foam from hardware store,24.00,make,Indicative price; fire-retardant foam grade proposed
+2 Counterflow core,1,"Polymer plate counterflow core about 180 x 180 x 300 mm, rated about 80 % sensible effectiveness near 50 m3/h, washable",HRV spare-parts supplier,48.00,buy,Indicative price; core choice drives R2 and R13
+3 Supply fan,1,"24 V DC brushless (EC) centrifugal blower, 120 mm class, about 60 m3/h free air, PWM speed input and tach output",Electronics distributor,15.00,buy,Indicative price; operating point at about 80 Pa unverified
+4 Exhaust fan,1,"Same as item 3",Electronics distributor,15.00,buy,Indicative price
+5 Supply filter,1,"ISO 16890 ePM1 50 % panel filter cut to about 180 x 90 mm, pleated synthetic media",HVAC filter supplier,10.00,buy,Indicative price; replace about every 6 months
+6 Exhaust filter,1,"ISO 16890 coarse (G3 class) washable pad about 230 x 200 mm to keep lint and dust off the core",HVAC filter supplier,3.00,buy,Indicative price
+7 Controller with CO2 and RH sensing,1,"ESP32-C3 class module; Sensirion SCD41 class CO2, humidity and temperature sensor; two NTC probes (core exhaust outlet and supply); 24 to 3.3 V buck; two PWM fan outputs; status LED and one button",Electronics distributor,42.00,buy,Indicative price (sensor about $25); check sensor on CalRig before use
+8 Condensate tray and drain,1,"Formed PETG tray under the core, falling to the outdoor side; 12 mm silicone drain tube out through the panel",Plastics supplier; hardware store,6.00,make,Indicative price
+9 Window insert panel,1,"20 mm panel (PVC foam skins over XPS core), 260 mm high, trimmed to 700 to 1000 mm opening width, compressible EPDM edge seals, two port cutouts",Hardware store,20.00,make,Indicative price
+10 Outdoor hoods and ducts,1,"Two downward-facing hoods from 3 mm PVC sheet with 1 mm stainless insect mesh, about 420 mm clear between openings; short insulated rectangular ducts to the housing",Plastics supplier; hardware store,22.00,make,Indicative price
+11 Sill bracket,1,"Aluminium angle plate under the room-side overhang with two struts to a rubber-padded wall foot; clamps to the sill without drilling",Hardware store,12.00,make,Indicative price
+12 24 V power supply,1,"Certified plug-in 24 V DC 1.5 A (36 W) SELV adapter with 3 m low-voltage cable",Electronics distributor,14.00,buy,Indicative price; no mains wiring in the unit
+13 Seals fasteners and wiring (not shown),1,"Foam gasket tape, stainless screws, cable ties, JST connectors, aluminium tape",Hardware store,12.00,buy,Indicative price; not numbered in the exploded view
