@@ -3,9 +3,9 @@ doc_id: BBX-PRB-001
 title: BreatheBox problem statement
 project: BreatheBox
 doc_type: Problem statement
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-09-26'
+date: '2026-09-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,6 +29,10 @@ revisions:
   date: '2026-09-26'
   author: Amish Chadha
   change: Budget approved by Amish; constraint now $255
+- version: "0.6"
+  date: '2026-09-30'
+  author: Amish Chadha
+  change: Priced BOM of the constructable design ($283, BBX-DDR-003) noted against the $255 constraint
 ---
 
 # BreatheBox problem statement
@@ -57,7 +61,7 @@ Outdoor air is not always clean either. The World Health Organization reports th
 
 ## Constraints
 
-- Garage-buildable prototype, $255 USD in parts (`project.yaml`; raised from $220 to $250 by Amish on 2026-09-25 and to $255 on 2026-09-26, BBX-DDR-002). The priced BOM is $255 (BBX-CAL-001).
+- Garage-buildable prototype, $255 USD in parts (`project.yaml`; raised from $220 to $250 by Amish on 2026-09-25 and to $255 on 2026-09-26, BBX-DDR-002). The priced BOM of the constructable design is $283 (BBX-CAL-001 v0.4, BBX-DDR-003); a $283 budget is proposed, awaiting Amish.
 - No drilling of the window frame or wall; installs and removes without damage, so renters can use it.
 - Low voltage only inside the unit (24 V SELV from a certified plug-in adapter); no mains wiring by the builder.
 - Common, replaceable parts: standard fans, filter media cut to size, a spare-part HRV core.

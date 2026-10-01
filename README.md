@@ -8,7 +8,7 @@ A window-mounted heat recovery ventilator for single rooms: two small fans and a
 
 ![BreatheBox: window-mounted heat recovery ventilator for one room, product render](media/render-hero.png)
 
-[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement BBX-DWG-001 (PDF)](cad/drawings/BBX-DWG-001.pdf) · [Sizing calculations](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
+[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement BBX-DWG-001 (PDF)](cad/drawings/BBX-DWG-001.pdf) · [Sizing calculations](docs/04-calcs/01-sizing.md) · [Prototype build plan](docs/05-build-plan.md) · [Design decisions](docs/06-design-decisions.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 
@@ -69,11 +69,17 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 5. Controller with CO2, humidity and temperature sensing, a frost mode and a quiet night mode
 6. Condensate tray draining outdoors
 7. Insulated window insert panel with seals, under the raised and locked sash
-8. Two outdoor hoods with insect mesh, a clamped sill bracket and a certified 24 V plug-in adapter
+8. Two outdoor hoods with insect mesh, a sill bracket propped on the wall by a padded foot, and a certified 24 V plug-in adapter
 
-TRL 3 calculations ([BBX-CAL-001](docs/04-calcs/01-sizing.md)): about 267 W of heat kept at 0 °C outdoors and 50 m³/h for about 5.6 W of fan and control power, about 10.5 kg installed, and $255 in parts. One requirement is not met: noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)). Parts cost $255, within the $255 budget. A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters, with overnight CO2 near 1,300 ppm ([BBX-DDR-002](docs/decisions/0002-recommendations-accepted.md)). See the [design precis](docs/02-concept.md) and [requirements](docs/03-requirements.md).
+TRL 3 calculations ([BBX-CAL-001](docs/04-calcs/01-sizing.md)): about 267 W of heat kept at 0 °C outdoors and 50 m³/h for about 5.7 W of fan and control power, about 11.4 kg installed, and $283 in parts. Two requirements are not met: noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)) and cost ($283 against the $255 budget, after the design was made buildable; a $283 budget is proposed, awaiting Amish). A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters, with overnight CO2 near 1,300 ppm ([BBX-DDR-002](docs/decisions/0002-recommendations-accepted.md)). See the [design precis](docs/02-concept.md) and [requirements](docs/03-requirements.md).
 
 The priced bill of materials is in [bom/bom.csv](bom/bom.csv). The parametric model is `cad/src/model.py`, with STEP and STL exports in `cad/step/` and `cad/stl/`.
+
+## Building the prototype
+
+![BreatheBox prototype: every component pulled apart and numbered in build order](docs/05-build-plan/overview.png)
+
+The [prototype build plan](docs/05-build-plan.md) (BBX-BLD-001) shows, in pictures, how to make each of the twenty components and put them together in sixteen steps; nothing has been built yet. The housing is PVC foam board on corner battens with a foam lining, partitions that keep the four air streams apart and a fan bulkhead; the window insert is a panel with flanged collars and hoods bolted through it; the bracket is two rails and two flattened-end struts on a padded wall foot. Writing the plan made the design buildable: joints, seats, partitions, grilles and fixings were added and the bracket was made rigid (BBX-DDR-003, open for Amish's review), and what is still to be decided is in the [design decisions register](docs/06-design-decisions.md). Every picture is drawn from the model, which checks that each part touches what it should and clears what it should not.
 
 ## Safety
 

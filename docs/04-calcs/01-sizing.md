@@ -3,9 +3,9 @@ doc_id: BBX-CAL-001
 title: BreatheBox sizing calculations
 project: BreatheBox
 doc_type: Calculation note
-version: "0.3"
+version: "0.4"
 status: Draft
-date: '2026-09-26'
+date: '2026-09-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -21,11 +21,15 @@ revisions:
   date: '2026-09-26'
   author: Amish Chadha
   change: Budget approved by Amish; budget $255 covers the priced BOM, so R15 is met (BBX-DDR-002 v0.2)
+- version: "0.4"
+  date: '2026-09-30'
+  author: Amish Chadha
+  change: Constructable design (BBX-DDR-003); mass from the components as made, sill stability and bracket joints, filter seat and grille losses, cost $283 so R15 is not met
 ---
 
 # BreatheBox sizing calculations
 
-On paper, BreatheBox meets eleven of its fifteen requirements. **One is not met.** R6 (noise): the estimate is about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A), and 30 dB(A) is reached only at about 32 m³/h. A quiet night mode at 32 m³/h (BBX-DDR-002) brings the estimate to about 30 dB(A) with clean filters and 32 dB(A) with loaded filters, but R6 is written for 50 m³/h. R15 (cost) is met: the priced BOM is $255, equal to the $255 budget that Amish approved on 2026-09-26 (BBX-DDR-002; it was $250). Three requirements (R9 install time, R13 filter change time and R14 firmware behavior) cannot be verified at TRL 3.
+On paper, BreatheBox meets ten of its fifteen requirements. **Two are not met.** R6 (noise): the estimate is about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A), and 30 dB(A) is reached only at about 32 m³/h. A quiet night mode at 32 m³/h (BBX-DDR-002) brings the estimate to about 30 dB(A) with clean filters and 32 dB(A) with loaded filters, but R6 is written for 50 m³/h. R15 (cost): the priced BOM of the constructable design (BBX-DDR-003) is $283, $28 over the $255 budget that Amish approved on 2026-09-26; a $283 budget is proposed, awaiting Amish (BBX-DEC-001). Three requirements (R9 install time, R13 filter change time and R14 firmware behavior) cannot be verified at TRL 3.
 
 The calculations changed four TRL 2 figures. The TRL 2 fans (about 60 m³/h free air) could not reach 70 m³/h against any pressure, so the fan specification rises to about 100 m³/h free air and 400 Pa shut-off. Frost starts at about -2 °C outdoors, not -5 °C, because the plate at the cold corner is colder than the leaving exhaust air. The worst condensate flow is about 0.21 L/h, not 0.14 L/h. Fan and control power at 50 m³/h is about 5.6 W, not 9.5 W, because the system pressure is lower than the 80 Pa assumed.
 
@@ -52,7 +56,8 @@ Every number here is printed by `docs/04-calcs/sizing.py` (run from the repo roo
 | CO2 | 0.014 m³/h per sleeping adult, 420 ppm outdoors, no infiltration, 8 h of sleep | Common planning values |
 | Season | 3,500 K·d over 212 days | Cold-temperate climate |
 | Depressurization | 5 Pa screening limit; 800 x 10 mm door undercut, discharge coefficient 0.6 | Screening assumption; to be checked against local code |
-| Densities | Housing 225 kg/m³ effective (6 mm PVC foam board at 550 kg/m³ with 10 mm foam at 30 kg/m³); panel 190 kg/m³ effective; hoods 1,400 kg/m³; tray 1,270 kg/m³; aluminium 2,700 kg/m³ | Typical materials |
+| Densities | PVC foam board 550 kg/m³; closed-cell foam 30 kg/m³; 10 x 10 mm strip 550 kg/m³; panel 190 kg/m³ effective; rigid PVC sheet 1,400 kg/m³; PETG 1,270 kg/m³; aluminium 2,700 kg/m³; modelled bolts 7,900 kg/m³; applied to each component's modelled volume | Typical materials |
+| Sill friction | About 0.6 for anti-slip rubber tape on a painted or varnished sill | Assumption; to be checked with a push test |
 
 ## 2. Core effectiveness (R2)
 
@@ -76,34 +81,34 @@ The supply stream loses more than the exhaust stream because it carries the ePM1
 
 | Airflow | Supply, clean | Supply, loaded | Exhaust, clean | Exhaust, loaded |
 | --- | --- | --- | --- | --- |
-| 30 m³/h | 27.8 Pa | 44.1 Pa | 13.7 Pa | 16.7 Pa |
-| 50 m³/h | 51.8 Pa | 79.0 Pa | 27.6 Pa | 32.6 Pa |
-| 70 m³/h | 80.3 Pa | 118.4 Pa | 45.2 Pa | 52.2 Pa |
+| 30 m³/h | 27.9 Pa | 44.3 Pa | 14.4 Pa | 18.1 Pa |
+| 50 m³/h | 52.3 Pa | 79.6 Pa | 28.7 Pa | 34.8 Pa |
+| 70 m³/h | 81.4 Pa | 119.5 Pa | 46.8 Pa | 55.4 Pa |
 
-At 50 m³/h the clean supply stream splits into filter 27.2 Pa, core 11.7 Pa, fan inlet 8.8 Pa, room grille 2.4 Pa, hood and mesh 0.9 Pa, plenum turn 0.7 Pa and port 0.2 Pa. The TRL 2 estimate of 80 Pa matches only the loaded supply filter case.
+At 50 m³/h the clean supply stream splits into filter 27.2 Pa, core 11.7 Pa, fan inlet 8.8 Pa, room grille 2.9 Pa, hood and mesh 0.9 Pa, plenum turn 0.7 Pa and port 0.2 Pa. The TRL 2 estimate of 80 Pa matches only the loaded supply filter case. The constructable design (BBX-DDR-003) adds about 0.5 Pa on the supply side, because the top grille opening is now 70 x 220 mm over the supply fan's outlet chamber, and about 1.1 Pa on the exhaust side, because the exhaust pad works through a 200 x 170 mm lining lip. The supply filter's lip lies on its frame, not its media, so its drop is unchanged.
 
 ## 4. Fans, power and noise (R1, R3, R6, R10)
 
-**Operating points.** With the assumed full-speed curve, the fans reach 86 m³/h per stream with clean filters and **80 m³/h with loaded filters**, so the 30 to 70 m³/h range of R1 is covered with a margin. The TRL 2 fan (about 60 m³/h free air) could not reach 70 m³/h even with no system resistance, which is why BOM items 3 and 4 now call for about 100 m³/h free air and 400 Pa shut-off. The supply and exhaust fans run at different speeds for the same flow (0.62 and 0.56 of full speed at 50 m³/h), so balance within 10 % needs the tach feedback and a one-time calibration against the system curves. **R1 is met on paper.**
+**Operating points.** With the assumed full-speed curve, the fans reach 86 m³/h per stream with clean filters and **80 m³/h with loaded filters**, so the 30 to 70 m³/h range of R1 is covered with a margin. The TRL 2 fan (about 60 m³/h free air) could not reach 70 m³/h even with no system resistance, which is why BOM items 3 and 4 now call for about 100 m³/h free air and 400 Pa shut-off. The supply and exhaust fans run at different speeds for the same flow (0.62 and 0.57 of full speed at 50 m³/h), so balance within 10 % needs the tach feedback and a one-time calibration against the system curves. **R1 is met on paper.**
 
 *Table 4. Operating points. Power is fans plus controls.*
 
 | Case | Supply speed | Exhaust speed | Power | Room noise at 1 m |
 | --- | --- | --- | --- | --- |
-| 30 m³/h, clean | 0.40 | 0.35 | 2.6 W | 28.9 dB(A) |
-| 30 m³/h, loaded | 0.45 | 0.36 | 3.2 W | 30.8 dB(A) |
-| 50 m³/h, clean | 0.62 | 0.56 | 5.6 W | 38.6 dB(A) |
-| 50 m³/h, loaded | 0.67 | 0.58 | 7.4 W | 39.9 dB(A) |
-| 70 m³/h, clean | 0.83 | 0.78 | 11.0 W | 45.3 dB(A) |
-| 70 m³/h, loaded | 0.89 | 0.79 | 14.5 W | 46.3 dB(A) |
+| 30 m³/h, clean | 0.40 | 0.35 | 2.6 W | 29.0 dB(A) |
+| 30 m³/h, loaded | 0.45 | 0.37 | 3.3 W | 30.9 dB(A) |
+| 50 m³/h, clean | 0.62 | 0.57 | 5.7 W | 38.7 dB(A) |
+| 50 m³/h, loaded | 0.67 | 0.58 | 7.5 W | 40.0 dB(A) |
+| 70 m³/h, clean | 0.83 | 0.78 | 11.2 W | 45.4 dB(A) |
+| 70 m³/h, loaded | 0.89 | 0.79 | 14.8 W | 46.4 dB(A) |
 
-**Power (R3).** 5.6 W at 50 m³/h with clean filters and 7.4 W with loaded filters, against 12 W. **R3 is met on paper.** Over the heating season the fans and controls use about 28 kWh.
+**Power (R3).** 5.7 W at 50 m³/h with clean filters and 7.5 W with loaded filters, against 12 W. **R3 is met on paper.** Over the heating season the fans and controls use about 29 kWh.
 
 **Noise (R6).** At 50 m³/h the estimate is about **39 dB(A) at 1 m, so R6 is not met.** With clean filters the unit reaches 30 dB(A) only at about 32 m³/h. The noise figure rests on an assumed catalog value and a fan law, so it may be several decibels out in either direction, but even a 5 dB error leaves R6 unmet at 50 m³/h.
 
-**Night mode (BBX-DDR-002).** Amish accepted the recommendation of a quiet night mode, with larger, slower fans or a lined silencer to be checked against a real fan datasheet before any change to R6. The firmware rule is: in night mode both streams run at 32 m³/h (balanced by tach), the CO2 boost is suppressed, and frost mode and the speed cap still apply. At 32 m³/h the estimate is **30.1 dB(A) with clean filters and 32.0 dB(A) with loaded filters**, for 2.8 W and 3.5 W. With loaded filters, 30 dB(A) would need about 29 m³/h, below the 30 m³/h floor of R1, so the night mode stays at 32 m³/h and relies on filter changes. The datasheet check is on hold with TRL 4.
+**Night mode (BBX-DDR-002).** Amish accepted the recommendation of a quiet night mode, with larger, slower fans or a lined silencer to be checked against a real fan datasheet before any change to R6. The firmware rule is: in night mode both streams run at 32 m³/h (balanced by tach), the CO2 boost is suppressed, and frost mode and the speed cap still apply. At 32 m³/h the estimate is **30.2 dB(A) with clean filters and 32.0 dB(A) with loaded filters**, for 2.8 W and 3.6 W. With loaded filters, 30 dB(A) would need about 28 m³/h, below the 30 m³/h floor of R1, so the night mode stays at 32 m³/h and relies on filter changes. The datasheet check is on hold with TRL 4.
 
-**Adapter and fuse (R10).** The 70 m³/h loaded case needs 14.5 W (0.60 A at 24 V). The worst case, both fans at full speed at their peak air power (58 m³/h each on the assumed curve), is about 35.4 W (1.48 A), just under the 36 W adapter rating. The firmware caps fan speed at what 80 m³/h needs (a firmware rule accepted in BBX-DDR-002), and the 24 V input carries a 2 A time-delay fuse. **R10 is met by design** (24 V SELV only).
+**Adapter and fuse (R10).** The 70 m³/h loaded case needs 14.8 W (0.62 A at 24 V). The worst case, both fans at full speed at their peak air power (58 m³/h each on the assumed curve), is about 35.4 W (1.48 A), just under the 36 W adapter rating. The firmware caps fan speed at what 80 m³/h needs (a firmware rule accepted in BBX-DDR-002), and the 24 V input carries a 2 A time-delay fuse. **R10 is met by design** (24 V SELV only).
 
 ## 5. Heat recovery
 
@@ -114,7 +119,7 @@ At 50 m³/h the clean supply stream splits into filter 27.2 Pa, core 11.7 Pa, fa
 | 50 m³/h | 335 W | 267 W | 68 W | 16.0 °C (16.1 °C with fan heat) |
 | 70 m³/h | 469 W | 346 W | 123 W | 14.8 °C (15.0 °C with fan heat) |
 
-Over a season of 3,500 K·d at 50 m³/h the core keeps about 1,123 kWh of heat in the room for about 28 kWh of fan and control energy, a ratio of about 39 to 1. The 335 W is also the heat an open window would lose at the same airflow.
+Over a season of 3,500 K·d at 50 m³/h the core keeps about 1,123 kWh of heat in the room for about 29 kWh of fan and control energy, a ratio of about 39 to 1. The 335 W is also the heat an open window would lose at the same airflow.
 
 ## 6. Condensate and frost (R7)
 
@@ -146,31 +151,33 @@ A preheater that kept the flows balanced at -10 °C would need about 130 W, more
 - **R11, met on paper.** The hood mouths are 130 mm wide with outer edges at ±340 mm, leaving 420 mm between the supply intake and the exhaust outlet. Both face down, with 1 mm mesh.
 - **R8, met on paper for sash windows.** The hoods need at least 686 mm of clear width, just inside the 700 mm lower bound; the panel trims to 700 to 1,000 mm. Casement and tilt-and-turn windows remain outside this version (BBX-DDR-001 item A2).
 - **R12, met by design.** The largest opening through the installed unit is a 2.35 mm core channel; the mesh is 1 mm. The sash locks onto the panel.
-- **Housing.** 510 x 560 x 250 mm, with 110 mm on the sill and 400 mm projecting into the room. The model's clash check between all twelve parts finds no overlap.
-- **Bracket.** The sill-borne parts have their center of mass 152 mm on the room side of the wall face. If the bracket carries all of it, the two struts take about 58 N in total (29 N each), a small load for 20 x 1.5 mm aluminium tube.
+- **Housing.** 510 x 560 x 250 mm, with 110 mm on the sill and 400 mm projecting into the room. The model now holds every component as it is made (BBX-DDR-003); its 84 constructability checks pass and no two of its 40 components overlap.
+- **Stability on the sill (BBX-DDR-003).** The housing, its two rails, the struts and the wall foot are one rigid body, because each strut end has two bolts. The parts it carries weigh 8.6 kg with their centre of mass 162 mm on the room side of the wall face. The body rests on the inner edge of the sill and pushes on the wall at the foot, 400 mm lower, with about 34 N; the collars only slide into the housing, so friction at the sill is all that stops it sliding into the room. The friction needed is 0.40, against about 0.6 for anti-slip tape: a margin of about 1.5. With the concept's foot at 650 mm it would have been 0.65. A positive restraint is an open decision (BBX-DEC-001).
+- **Bracket joints.** Each strut's top joint carries about 6.5 N·m: 17 MPa of bending in the 20 x 1.5 mm tube (6063 yields at about 110 MPa) and about 324 N of shear on each of its two M6 bolts. Both are small.
 
-*Table 7. Mass from the model volumes.*
+*Table 7. Mass from the modelled components (BBX-DDR-003).*
 
 | Item | Mass |
 | --- | --- |
-| 1 Housing | 3.34 kg |
+| 1 Housing: boards, battens, lining, core frames, dividers, bulkhead, filter seats, lid, grilles, latches | 4.79 kg |
 | 2 Core (plates 0.78 kg, frame 0.30 kg) | 1.08 kg |
 | 3, 4 Fans | 0.60 kg |
 | 5, 6 Filters | 0.15 kg |
-| 7 Controller | 0.08 kg |
-| 8 Tray and drain | 0.23 kg |
-| 9 Insert panel | 0.67 kg |
-| 10 Hoods and collars | 1.65 kg |
-| 11 Sill bracket | 2.41 kg |
+| 7 Controller and status board | 0.08 kg |
+| 8 Tray, pads and drain | 0.24 kg |
+| 9 Insert panel and seals | 0.70 kg |
+| 10 Collars, hoods and back plates | 2.08 kg |
+| 11 Sill bracket: rails, cleats, struts, foot and pad | 1.23 kg |
 | 12 Adapter | 0.25 kg |
-| Sundries | 0.30 kg |
-| **Total** | **10.8 kg (10.5 kg installed, without the adapter)** |
+| 13 Modelled bolts and cable gland | 0.19 kg |
+| Sundries (wiring, gasket, glue, small screws) | 0.30 kg |
+| **Total** | **11.7 kg (11.4 kg installed, without the adapter)** |
 
-The mass part of R9 is met on paper (10.5 kg against 12 kg). The 30 min install time cannot be verified until someone fits the unit, so **R9 is not verifiable at TRL 3**.
+The mass part of R9 is met on paper (11.4 kg against 12 kg; it was 10.5 kg before the design was made constructable). The 30 min install time cannot be verified until someone fits the unit, so **R9 is not verifiable at TRL 3**.
 
 ## 9. Cost (R15)
 
-The priced BOM totals **$255.00** over 13 lines. `budget_usd` is now $255 (budget approved by Amish on 2026-09-26, BBX-DDR-002; it was $250, and $220 before 2026-09-25), which covers the priced BOM. **R15 is met.** The increase from $243 comes from the larger fans (+$8), the collars through the panel (+$2) and the input fuse and holder (+$2).
+The priced BOM totals **$283.00** over 13 lines, against the $255 `budget_usd` approved by Amish on 2026-09-26 (BBX-DDR-002; it was $250, and $220 before 2026-09-25). **R15 is not met**, by $28. The concept's BOM was $255; the rise comes from parts the concept needed but did not list, added when the design was made constructable (BBX-DDR-003): partitions, filter seats, grilles and latches (+$18), hood back plates and collar flanges (+$2), the bracket's rails, cleats and foot (+$4), and bolts, gland and anti-slip tape (+$4). A $283 budget is proposed, awaiting Amish (BBX-DEC-001). Earlier, the increase from $243 to $255 came from the larger fans (+$8), the collars through the panel (+$2) and the input fuse and holder (+$2).
 
 ## 10. Results
 
@@ -180,21 +187,21 @@ The priced BOM totals **$255.00** over 13 lines. `budget_usd` is now $255 (budge
 | --- | --- | --- | --- |
 | R1 | 30 to 70 m³/h per stream; full-speed limit 80 m³/h with loaded filters; balanced by tach | 30 to 70 m³/h, within 10 % | Met on paper |
 | R2 | 79.8 % at 50 m³/h (73.8 % at 70 m³/h) | 75 % or more at 50 m³/h | Met on paper |
-| R3 | 5.6 W clean, 7.4 W loaded | 12 W or less at 50 m³/h | Met on paper |
+| R3 | 5.7 W clean, 7.5 W loaded | 12 W or less at 50 m³/h | Met on paper |
 | R4 | 24 h mean 607 ppm (712 ppm in night mode); night 980 ppm (1,295 ppm in night mode) | 1,000 ppm or less, 24 h mean | Met on paper |
 | R5 | ePM1 50 % supply, coarse exhaust | ePM1 50 % or better | Met by specification |
 | R6 | 39 dB(A) at 50 m³/h; night mode at 32 m³/h 30 dB(A) clean, 32 dB(A) loaded | 30 dB(A) or less at 50 m³/h | **Not met** |
 | R7 | Worst condensate 0.21 L/h drains; frost onset -2.2 °C; supply at 33 % of exhaust at -10 °C | Drain all condensate; no blockage to -10 °C | Met on paper |
 | R8 | Hoods need 686 mm clear width; panel 700 to 1,000 mm | Sash 700 to 1,000 mm; slider adapter | Met on paper (sash) |
-| R9 | 10.5 kg; no drilling; install time not calculable | 12 kg or less; 30 min or less | Not verifiable at TRL 3 (mass met on paper) |
-| R10 | 36 W SELV adapter; 14.5 W at 70 m³/h loaded; 35.4 W worst case; 2 A fuse | 24 V SELV only | Met by design |
+| R9 | 11.4 kg; no drilling; install time not calculable | 12 kg or less; 30 min or less | Not verifiable at TRL 3 (mass met on paper) |
+| R10 | 36 W SELV adapter; 14.8 W at 70 m³/h loaded; 35.4 W worst case; 2 A fuse | 24 V SELV only | Met by design |
 | R11 | 420 mm between mouths; 1 mm mesh; mouths face down | 400 mm or more; mesh 1.5 mm or finer | Met on paper |
 | R12 | Largest opening 2.35 mm; sash locks onto panel | No opening over 100 mm | Met by design, unverified |
 | R13 | Lift-off lid; filters and core slide out | Tool-free filter change in 2 min or less | Not verifiable at TRL 3 |
 | R14 | No firmware yet; checked at firmware review | Local data only | Not verifiable at TRL 3 |
-| R15 | $255.00 | $255 or less | Met |
+| R15 | $283.00 | $255 or less | **Not met** |
 
-Summary: met 11, not met 1 (R6), not verifiable at TRL 3 3 (R9, R13, R14).
+Summary: met 10, not met 2 (R6, R15), not verifiable at TRL 3 3 (R9, R13, R14).
 
 ## 11. Limits of this note
 

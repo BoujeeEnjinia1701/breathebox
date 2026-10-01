@@ -1,10 +1,10 @@
-"""BreatheBox sizing calculations (BBX-CAL-001 v0.2).
+"""BreatheBox sizing calculations (BBX-CAL-001 v0.4).
 
 Run from the repo root:  python docs/04-calcs/sizing.py
 Prints every number quoted in docs/04-calcs/01-sizing.md and writes
 docs/04-calcs/results.csv (requirement status table).
 
-Geometry comes from cad/src/model.py (PARAMS and part volumes); costs come from
+Geometry comes from cad/src/model.py (PARAMS and component volumes); costs come from
 bom/bom.csv; the budget from project.yaml. All values are first-principles estimates
 for a paper design. Nothing is measured.
 """
@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "cad/src"))
-from model import PARAMS as P, build_parts, derived  # noqa: E402
+from model import PARAMS as P, build_components, derived  # noqa: E402
 
 D = derived()
 
@@ -98,7 +98,7 @@ def eff(q_s, q_e=None):
 
 # ---------------------------------------------------------------- 3. pressure drop per stream
 sf_area = P["port_w"] * P["port_h"] / 1e6
-ef_area = P["efilter_w"] * P["efilter_h"] / 1e6
+ef_area = (P["efilter_w"] - 2 * P["ef_lip"]) * (P["efilter_h"] - 2 * P["ef_lip"]) / 1e6   # pad seen through the lining lip (BBX-DDR-003)
 mouth_area = (P["mouth_w"] - 2 * P["hood_t"]) * (P["hood_d"] - 2 * P["hood_t"]) / 1e6
 port_area = sf_area
 half_face = (P["core_w"] / 2) * P["core_h"] / 1e6
@@ -247,30 +247,51 @@ def co2_24h(q):
 
 
 # ---------------------------------------------------------------- 7. mass, statics, cost
-DENS = {  # kg/m3, effective for the massing solid
-    1: (P["shell_t"] * 550 + P["lining_t"] * 30) / (P["shell_t"] + P["lining_t"]),  # PVC foam board + lining
-    8: 1270.0,    # PETG tray and silicone tube
-    9: (6 * 550 + (P["panel_t"] - 6) * 35) / P["panel_t"],                           # PVC skins over XPS
-    10: 1400.0,   # rigid PVC sheet
-    11: 2700.0,   # aluminium
+DENS = {  # kg/m3, by material of each modelled component (BBX-DDR-003)
+    "pvc_board": 550.0,      # 6 mm PVC foam board: shell, lid, core frames, dividers, bulkhead
+    "foam": 30.0,            # 10 mm closed-cell foam lining and foam blocks
+    "strip": 550.0,          # 10 x 10 mm PVC or pine strip: battens, filter seats
+    "aluminium": 2700.0,     # bracket, grilles
+    "latch": 2300.0,         # small toggle latch and keeper, as a solid block
+    "petg": 1270.0, "silicone": 1150.0, "epdm": 1200.0, "rubber": 1200.0, "nylon": 1150.0,
+    "panel": (6 * 550 + (P["panel_t"] - 6) * 35) / P["panel_t"],   # PVC skins over XPS
+    "pvc_sheet": 1400.0,     # 3 mm rigid PVC: collars, hoods, hood back plates
+    "steel": 7900.0,         # modelled bolts and nuts, as solid cylinders
 }
 FIXED_KG = {3: 0.30, 4: 0.30, 5: 0.10, 6: 0.05, 7: 0.08, 12: 0.25}
 CORE_FRAME_KG, PLATE_RHO = 0.30, 1350.0
-SUNDRIES_KG = 0.30
+SUNDRIES_KG = 0.30           # wiring, gasket tape, glue, small screws not modelled
+MU_ANTISLIP = 0.6            # anti-slip rubber tape on a painted or varnished sill (assumption)
+NAMES = {1: "Housing (boards, battens, lining, partitions, seats, lid, grilles, latches)", 2: "Core",
+         3: "Supply fan", 4: "Exhaust fan", 5: "Supply filter", 6: "Exhaust filter", 7: "Controller and status board",
+         8: "Tray, pads and drain", 9: "Insert panel and seals", 10: "Collars, hoods and back plates",
+         11: "Sill bracket", 12: "Adapter", 13: "Modelled bolts and cable gland"}
+ON_SILL_EXCLUDE = {"panel", "seals", "collars", "hoods", "hood_plates", "hood_bolts", "psu"}
 
 
 def masses():
-    m = {}
-    names = {}
-    for name, shape, _, bom, _ in build_parts():
-        names[bom] = name
-        if bom in DENS:
-            m[bom] = shape.volume / 1e9 * DENS[bom]
-        elif bom == 2:
-            m[bom] = a_plate * pt * PLATE_RHO + CORE_FRAME_KG
+    """Mass per BOM line, and the mass and centre of mass of the parts carried by the sill and
+    bracket (everything except the window insert and the adapter)."""
+    C = build_components()
+    m, mc = {}, {}
+    for k, c in C.items():
+        if c.bom in FIXED_KG:
+            continue
+        if c.bom == 2:
+            mk = a_plate * pt * PLATE_RHO + CORE_FRAME_KG
         else:
-            m[bom] = FIXED_KG[bom]
-    return m, names
+            mk = c.shape.volume / 1e9 * DENS[c.material]
+        m[c.bom] = m.get(c.bom, 0.0) + mk
+        mc[k] = mk
+    for b, v in FIXED_KG.items():
+        m[b] = v
+    for k, c in C.items():
+        if c.bom in FIXED_KG:
+            mc[k] = FIXED_KG[c.bom] / sum(1 for cc in C.values() if cc.bom == c.bom)
+    on = [k for k in C if k not in ON_SILL_EXCLUDE]
+    w = sum(mc[k] for k in on)
+    xc = sum(mc[k] * C[k].shape.center().X for k in on) / w
+    return m, NAMES, w, xc
 
 
 def bom_total():
@@ -378,21 +399,32 @@ def main():
     pr(f"  largest opening through the installed unit: {P['plate_pitch']-P['plate_t']:.2f} mm core channels; mesh 1 mm")
 
     pr("\n== Mass ==")
-    m, names = masses()
+    m, names, m_on, cg_x = masses()
     for k in sorted(m):
-        pr(f"  {k:2d} {names[k]:30s} {m[k]:.2f} kg")
+        pr(f"  {k:2d} {names[k]:60s} {m[k]:.2f} kg")
     total_m = sum(m.values()) + SUNDRIES_KG
     unit_m = total_m - m[12]
     pr(f"  sundries {SUNDRIES_KG:.2f} kg; total {total_m:.1f} kg; installed unit without adapter {unit_m:.1f} kg")
 
-    # statics: bracket carries the overhang, housing pivots on the inner wall edge
-    parts = {b: s for _, s, _, b, _ in build_parts()}
-    cg_x = sum(m[b] * parts[b].center().X for b in m if b not in (12, 9, 10)) / sum(m[b] for b in m if b not in (12, 9, 10))
-    w_on = 9.81 * sum(m[b] for b in m if b not in (12, 9, 10))
-    strut_ang = math.atan2(P["sill_z"] - P["bracket_t"] - 10 - P["foot_z"], P["bracket_x1"] - 20 - 8)
-    f_strut = w_on * max(cg_x, 0) / (P["bracket_x1"] - 20) / math.sin(strut_ang)
-    pr(f"  center of mass of the sill-borne parts at X = {cg_x:.0f} mm (room side of the wall face); "
-       f"strut force if the bracket carries it all {f_strut:.0f} N total, {f_strut/2:.0f} N per strut")
+    # statics (BBX-DDR-003): housing, bracket plate, struts and foot are one rigid body (two bolts at
+    # each strut end). It rests on the inner edge of the sill and pushes on the wall at the foot; the
+    # collars only slide into the housing ports, so the sill friction alone stops it sliding into the room.
+    w_on = 9.81 * (m_on + SUNDRIES_KG)
+    lever = P["sill_z"] - P["foot_z"]
+    h_foot = w_on * cg_x / lever
+    mu_req = h_foot / w_on
+    xs, zs = D["strut_top"]
+    m_joint = h_foot / 2 * (zs - P["foot_z"]) / 1000          # per strut, at the top joint, N m
+    r_o, r_i = P["strut_r"], P["strut_r"] - P["strut_wall"]
+    z_sec = math.pi * (r_o ** 4 - r_i ** 4) / (4 * r_o)       # mm3
+    sig = m_joint * 1000 / z_sec
+    v_bolt = m_joint / (P["hole_pitch"] / 1000)
+    pr(f"  sill-borne parts {m_on + SUNDRIES_KG:.1f} kg, centre of mass at X = {cg_x:.0f} mm (room side of the wall face)")
+    pr(f"  foot push on the wall {h_foot:.0f} N ({lever:.0f} mm below the sill edge); sill friction needed {mu_req:.2f} "
+       f"(anti-slip tape about {MU_ANTISLIP:.1f}: margin {MU_ANTISLIP / mu_req:.1f})")
+    pr(f"  for comparison, the concept foot at 650 mm needed {w_on * cg_x / (P['sill_z'] - 650.0) / w_on:.2f}")
+    pr(f"  strut top joint: {m_joint:.1f} N m per strut; tube 20 x 1.5 bending {sig:.0f} MPa (6063 yield about 110 MPa); "
+       f"bolt pair shear {v_bolt:.0f} N per bolt (M6)")
 
     pr("\n== Cost ==")
     tot, rows = bom_total()

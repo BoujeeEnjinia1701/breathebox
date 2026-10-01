@@ -3,9 +3,9 @@ doc_id: BBX-PRC-001
 title: BreatheBox design precis
 project: BreatheBox
 doc_type: Design precis
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-09-26'
+date: '2026-09-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,13 +29,17 @@ revisions:
   date: '2026-09-26'
   author: Amish Chadha
   change: Budget approved by Amish; parts cost now within the $255 budget
+- version: "0.6"
+  date: '2026-09-30'
+  author: Amish Chadha
+  change: Design made constructable (BBX-DDR-003, open for Amish's review); components, mass, power and cost updated; build plan BBX-BLD-001 and register BBX-DEC-001 added
 ---
 
 # BreatheBox design precis
 
 ## Summary
 
-BreatheBox is a single-room heat recovery ventilator that sits on the sill of a sash window. Two small 24 V blowers push stale room air out and draw fresh air in through a counterflow plate core, so the incoming air picks up about 80 % of the heat (or, in summer, the cool) of the outgoing air. The TRL 3 calculations (BBX-CAL-001) give, for a bedroom at 50 m³/h and 0 °C outdoors: about 267 W of heat kept in the room for about 5.6 W of fan and control power, supply air at about 16 °C, and CO2 near 980 ppm overnight with two sleepers. One requirement is not met: noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)). Parts cost $255, within the $255 budget. A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters. All figures are paper estimates; nothing has been built.
+BreatheBox is a single-room heat recovery ventilator that sits on the sill of a sash window. Two small 24 V blowers push stale room air out and draw fresh air in through a counterflow plate core, so the incoming air picks up about 80 % of the heat (or, in summer, the cool) of the outgoing air. The TRL 3 calculations (BBX-CAL-001) give, for a bedroom at 50 m³/h and 0 °C outdoors: about 267 W of heat kept in the room for about 5.7 W of fan and control power, supply air at about 16 °C, and CO2 near 980 ppm overnight with two sleepers. Two requirements are not met: noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)) and cost (parts $283 against the $255 budget, after the design was made constructable; a $283 budget is proposed, awaiting Amish). A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters. All figures are paper estimates; nothing has been built.
 
 ![Hero render](../media/hero.png)
 
@@ -43,7 +47,7 @@ Figure 1. Parametric model on a sash window, with a 1.75 m person for scale.
 
 ## How it works
 
-1. **Mount.** A 20 mm insulated panel fills the gap under the raised lower sash, which closes down onto it and is locked. The housing (510 x 560 x 250 mm) rests 110 mm on the sill and projects 400 mm into the room, where a clamped bracket with a padded wall foot carries it; nothing is drilled.
+1. **Mount.** A 20 mm insulated panel fills the gap under the raised lower sash, which closes down onto it and is locked. The housing (510 x 560 x 250 mm) rests 110 mm on the sill and projects 400 mm into the room, where a bracket of two rails and two struts, propped on the wall by a padded foot, carries it; nothing is drilled.
 2. **Exhaust path.** Room air enters a front grille, passes a coarse filter, and the exhaust fan blows it through one set of core channels, across the outdoor plenum and out of a downward-facing hood.
 3. **Supply path.** Outdoor air enters the second hood, 420 mm from the exhaust mouth, passes through a collar in the panel and an ePM1 filter, and flows through the other set of core channels. The supply fan draws it through the core and blows it into the room through a top grille that throws air up and away from the occupant.
 4. **Recover.** The two streams flow in opposite directions on each side of thin polymer plates, so heat passes across without the air mixing.
@@ -54,7 +58,7 @@ Figure 1. Parametric model on a sash window, with a 1.75 m person for scale.
 
 Figure 2. Cutaway through the supply side: hood and collar (outdoors, left), insert panel, supply filter, core over the condensate tray, supply fan and controller.
 
-The general arrangement is drawing BBX-DWG-001 (Rev P2) in `cad/drawings/`, generated from `cad/src/model.py`.
+The general arrangement is drawing BBX-DWG-001 (Rev P3) in `cad/drawings/`, generated from `cad/src/model.py`. How to build the prototype, component by component, is in the build plan BBX-BLD-001 (`docs/05-build-plan.md`); BBX-DDR-003 records the changes that made the concept buildable, and the design decisions register BBX-DEC-001 (`docs/06-design-decisions.md`) lists what is still open.
 
 ## Main components
 
@@ -62,16 +66,16 @@ Table 1. Main components. Numbers match `bom/bom.csv` and Figure 4.
 
 | # | Component | Choice for TRL 3 | Notes |
 | --- | --- | --- | --- |
-| 1 | Insulated housing | PVC foam board shell with 10 mm foam lining, 510 x 560 x 250 mm, dividers for the four air paths | Lift-off lid for filters |
+| 1 | Insulated housing | 6 mm PVC foam board on corner battens with 10 mm foam lining, 510 x 560 x 250 mm; core frames, dividers and a fan bulkhead for the four air paths; filter seats; two slotted grilles | Lift-off lid with two latches |
 | 2 | Counterflow core | Polymer plate core 180 x 180 x 300 mm, about 2.5 mm plate pitch | Bought spare-part HRV core; washable |
 | 3, 4 | Supply and exhaust fans | 24 V brushless centrifugal blowers, 120 x 120 x 32 mm class, about 100 m³/h free air and 400 Pa shut-off, PWM with tach | Larger than at TRL 2 (see BBX-CAL-001 section 4) |
 | 5 | Supply filter | ISO 16890 ePM1 50 % pleated panel, 150 x 170 x 25 mm, at the supply port | Replace about every 6 months or at twice the clean pressure drop |
 | 6 | Exhaust filter | Coarse washable pad, 220 x 190 mm | Keeps lint off the core |
 | 7 | Controller | ESP32-C3 class module with a Sensirion SCD41 class CO2, humidity and temperature sensor and two NTC probes | Check the sensor on the lab's CalRig before use |
-| 8 | Condensate tray and drain | PETG tray, 12 x 8 mm tube to outdoors | Falls outward |
+| 8 | Condensate tray and drain | PETG tray under the core, 12 x 8 mm tube to outdoors from the tray floor | Tube falls outdoors |
 | 9 | Window insert panel | 20 mm insulated panel with EPDM edge seals, trimmed to 700 to 1,000 mm | Sash locks onto it |
-| 10 | Outdoor hoods and collars | Two PVC hoods with 1 mm stainless mesh on 130 mm wide mouths, 420 mm apart; collars through the panel | Mouths face down |
-| 11 | Sill bracket | Aluminium plate and two tube struts to a padded wall foot | Clamps; no drilling |
+| 10 | Outdoor hoods and collars | Two PVC hoods on back plates with 1 mm stainless mesh on 130 mm wide mouths, 420 mm apart; flanged collars bolted through the panel | Mouths face down |
+| 11 | Sill bracket | Two aluminium rails under the housing and two tube struts, bolted rigid, to a padded wall foot | Props on the wall; no drilling |
 | 12 | Power supply | Certified 24 V, 1.5 A plug-in adapter; 2 A fuse on the 24 V input | No mains wiring in the unit |
 
 ## Key numbers
@@ -84,18 +88,18 @@ Table 2. Key numbers at TRL 3.
 | --- | --- | --- |
 | Core effectiveness | 79.8 % at 50 m³/h; 73.8 % at 70 m³/h | R2 met on paper |
 | Heat recovered at 0 °C outdoors, 50 m³/h | 267 W of 335 W; 68 W lost; supply air 16.0 °C | |
-| Supply pressure drop at 50 m³/h | 51.8 Pa clean, 79.0 Pa with loaded filter | |
+| Supply pressure drop at 50 m³/h | 52.3 Pa clean, 79.6 Pa with loaded filter | |
 | Flow limit at full fan speed | 80 m³/h per stream with loaded filters | R1 met on paper |
-| Fan and control power | 5.6 W at 50 m³/h (7.4 W loaded); 14.5 W at 70 m³/h loaded | R3 met on paper |
+| Fan and control power | 5.7 W at 50 m³/h (7.5 W loaded); 14.8 W at 70 m³/h loaded | R3 met on paper |
 | Noise at 1 m | About 39 dB(A) at 50 m³/h; night mode at 32 m³/h about 30 dB(A) clean, 32 dB(A) with loaded filters | **R6 not met** (written for 50 m³/h) |
-| Heating-season energy kept | About 1,123 kWh for 28 kWh of fan energy (3,500 K·d) | |
+| Heating-season energy kept | About 1,123 kWh for 29 kWh of fan energy (3,500 K·d) | |
 | CO2, two sleepers, 30 m³ room | 980 ppm overnight and 607 ppm 24 h mean at 50 m³/h; about 1,300 ppm overnight and 712 ppm 24 h mean in night mode | R4 met on paper |
 | Condensate, upper bound | 0.21 L/h (70 m³/h, -3 °C) | R7 drain sized |
 | Frost onset | About -2.2 °C outdoors at 50 m³/h | |
 | Frost mode at -10 °C | Supply slowed to 33 % of exhaust; about 2.2 Pa room depressurization through a door undercut | R7 met on paper |
 | Clear distance between hood mouths | 420 mm; hoods fit windows from 686 mm clear width | R11, R8 met on paper |
-| Unit mass | About 10.5 kg installed (10.8 kg with adapter) | R9 mass met on paper |
-| Parts cost | $255 | R15 met ($255 budget) |
+| Unit mass | About 11.4 kg installed (11.7 kg with adapter) | R9 mass met on paper |
+| Parts cost | $283 | **R15 not met** ($255 budget; $283 proposed) |
 
 ![Heat flow](../media/flow.png)
 

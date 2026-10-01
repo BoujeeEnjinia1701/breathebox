@@ -206,3 +206,62 @@ This is an appearance model only: no tolerances, fabrication detail, PCB layout 
 - Kit 1.5.0 synced: STANDARDS v1.5 (sections 12 to 15: product renders, storefront images and image quality, public release, authorship and signing), `.kit/cards.py`, `.kit/image_qc.py`, `.kit/release_gate.py`, issue templates, and the `/render-product` and `/release` commands. `CLAUDE.md` now matches `.kit/CLAUDE.md`.
 - Every `media/render-*.png` recaptioned from its original render with the new layout: the title, concept label and repository sit in a band above the render and the view note in a band below it, each line wrapped to the image width, so no text overlaps other text or the render or runs off the image. `media/card.png` and `media/social-preview.png` regenerated with the same rules.
 - `python .kit/image_qc.py` and `python .kit/release_gate.py` pass. trl stays 3.
+
+## Session 2026-09-30: build plan and design for construction (kit 1.7.0)
+
+Amish approved the build plan format on 2026-09-30 ("this is the correct build plan ... Extend this across all the other repos") and asked that outstanding decisions go in a separate register, not the build plan. Earlier the same day he wrote: "If you are realising that the design cannot be built as per concept - fix the design assumptions to match and be physically feasible as you draw the illustrations." This session applied both to BreatheBox.
+
+### What was done
+
+- Kit 1.7.0 installed (`.kit/`, `.claude/commands/`); `CLAUDE.md` matches `.kit/CLAUDE.md`.
+- `cad/src/model.py` rewritten so every component is modelled as it is made (40 components, grouped by BOM line for the media), with 84 constructability checks (`python cad/src/model.py --check`); all pass and no two components overlap. STEP and STL re-exported.
+- `docs/decisions/0003-design-for-construction.md` (BBX-DDR-003 v0.1, Draft): every change below, with reasons; made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review.
+- `cad/src/build_plan_media.py` (uses `.kit/build_views.py`): overview, 14 making sketches (BBX-DWG-101 to 114), 10 joint close-ups, 16 assembly step pictures and a block wiring diagram, in `docs/05-build-plan/` and `cad/drawings/`.
+- `docs/05-build-plan.md` (BBX-BLD-001 v0.1) and `docs/06-design-decisions.md` (BBX-DEC-001 v0.1).
+- `bom/bom.csv` lines 1, 8, 9, 10, 11 and 13 respecified (lines 1, 10, 11 and 13 repriced); `bom/bom-notes.md`.
+- `docs/04-calcs/sizing.py` and BBX-CAL-001 v0.4: mass from the components as made, sill stability and strut joints, filter seat and grille losses, cost. BBX-REQ-001 v0.6, BBX-PRC-001 v0.6, BBX-PRB-001 v0.6, README (links line, key numbers, "Building the prototype"), `project.yaml` (`design_state: constructable`, evidence).
+- BBX-DWG-001 Rev P3; concept media regenerated (`media/hero.png`, `concept-blueprint.*`, `cutaway.png`, `exploded.png`, `flow.png`, `model.glb`, `viewer.html`); PDFs rebuilt.
+
+### Design changes made for construction (BBX-DDR-003)
+
+1. Housing: six 6 mm PVC foam boards glued and screwed into eight 10 x 10 mm corner battens, 10 mm foam lining, lift-off lid with a foam plug and two toggle latches (was one solid shell).
+2. Air paths: two core frames with a U the core bears on, three full-height dividers (two with a tongue to the core face), and a foam hold-down under the lid (air could pass round the core and under the dividers).
+3. Fans: a 6 mm fan bulkhead 94 mm in from the room face; supply fan on its room side, exhaust fan on its core side with its inlet facing the room; both still at the room end (each fan's inlet and outlet were in one chamber).
+4. Core: tray shortened to the core's length between the frames, four pads carry the core (it floated 8 mm above the tray).
+5. Filters: strip seats with lips and stops, lining lips behind them, foam blocks under the lid (both filters floated; the exhaust pad was the size of its opening).
+6. Controller: on the room-side divider in the room-air intake; status light and button behind the room face (it floated across two air streams).
+7. Grilles: two slotted aluminium grilles added; the top supply opening moved to 70 x 220 mm over the supply fan's outlet chamber (no finger guards were in the BOM).
+8. Window insert: flanged collars and hood back plates bolted through the panel with four M5 bolts per side; collars slide 6 mm into the housing on foam gasket (no fixings).
+9. Bracket: two 50 x 4 mm rails bolted under the housing replace the plate; flattened-end struts bolted with two M6 bolts at each end to angle cleats; padded foot bar lowered from 650 to 500 mm; anti-slip tape on the sill (nothing was fixed, and the unit needed 0.65 friction to stay on the sill; now 0.40).
+10. Drain: from the tray's end wall at floor level, 40 mm to the exhaust side, through the frame, end wall and panel (it pierced a divider and started above the tray floor).
+11. Power entry: M12 gland in the right side wall into the supply outlet chamber (it entered beside the core).
+12. Core frames and dividers in 3 mm board to keep the mass under 12 kg.
+
+### Key results (BBX-CAL-001 v0.4)
+
+- Mass 11.4 kg installed (was 10.5 kg); R9 mass part still met on paper, margin 0.6 kg.
+- Sill friction needed 0.40 against about 0.6 for anti-slip tape (margin about 1.5); strut top joints 6.5 N·m, 17 MPa in the tube.
+- Fans and controls 5.7 W clean, 7.5 W loaded at 50 m³/h; 14.8 W at 70 m³/h loaded; night mode 30.2 dB(A). R1, R3, R6 and R10 status unchanged.
+- **R15 now not met:** parts $283.00 against the $255 budget. **R6 still not met** (39 dB(A) at 50 m³/h). Met 10, not met 2, not verifiable at TRL 3 3.
+
+### Proposed, awaiting Amish (all in BBX-DEC-001)
+
+1. Accept the design-for-construction changes (BBX-DDR-003). Recommendation: accept.
+2. Budget $283 (A1). Recommendation: set `budget_usd` to $283; it stays $255 until Amish decides.
+3. Sliding restraint (A2): rely on sill friction with a push test at TRL 4, lower the foot, or add a positive restraint. Recommendation: friction and push test.
+4. Sash lock (A3, safety case): no part locks the raised sash onto the panel. Recommendation: a bought no-drill sash jammer (about $10).
+5. Still open from before: fan position (O4), co-design partner (O1), and the appearance-model items (status light position, lid window, lid joint).
+
+### Safety concerns
+
+- The unit stays on the sill by friction alone (item 3 above); until that is decided and tested, the build plan treats the prototype as supervised only.
+- The raised sash has no lock (item 4); R12 stays "met by design, unverified" only if a lock is added.
+- Frost-mode depressurisation and fuel-burning appliances: unchanged, still in every safety section.
+
+### Stale media (made on Amish's Mac; not regenerated here)
+
+The design changed visibly, so these still show the concept and need regenerating with `/render-product` after `cad/src/product_model.py` is updated: `media/render-*.png` (no bulkhead, old fan positions, old 90 x 190 top grille and no grilles, sill plate and old bracket foot, no hood back plates), `media/card.png` and `media/social-preview.png`.
+
+### Recommended next step
+
+Amish reviews BBX-DEC-001 (items 1 to 4). Then update the appearance model to the constructable design on the Mac and regenerate the renders and cards. TRL 4 (building to this plan) stays on hold.
