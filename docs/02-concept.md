@@ -3,7 +3,7 @@ doc_id: BBX-PRC-001
 title: BreatheBox design precis
 project: BreatheBox
 doc_type: Design precis
-version: "0.7"
+version: "0.8"
 status: Draft
 date: '2026-10-01'
 author: Amish Chadha
@@ -37,6 +37,10 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.8"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: BioMedical area (BBX-DEC-001 v0.3); safety states a research and educational prototype, not a medical device
 ---
 
 # BreatheBox design precis
@@ -140,7 +144,7 @@ Figure 4. Exploded view with BOM numbers.
 - Fan impellers can cut fingers: guards or grilles on both room openings, and disconnect power before opening the lid.
 - The drain tube can freeze outdoors in long cold spells; route it to fall continuously and check it in winter.
 - Clean the tray and replace filters on schedule; standing water and wet filters can grow mould.
-- The CO2 reading is a ventilation indicator only and is not a health or medical measurement.
+- BreatheBox is a research and educational prototype, not a medical device. The CO2 reading is a ventilation indicator only and is not a health or medical measurement.
 
 ## Open questions after TRL 3
 

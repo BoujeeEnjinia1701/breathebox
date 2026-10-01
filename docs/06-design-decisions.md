@@ -3,7 +3,7 @@ doc_id: BBX-DEC-001
 title: BreatheBox design decisions register
 project: BreatheBox
 doc_type: Design decisions register
-version: "0.2"
+version: "0.3"
 status: Draft
 date: '2026-10-01'
 author: Amish Chadha
@@ -17,6 +17,10 @@ revisions:
     date: '2026-10-01'
     author: Amish Chadha
     change: Budget treated as a value-engineering target
+  - version: "0.3"
+    date: '2026-10-01'
+    author: Amish Chadha
+    change: Dr. Geeti Chadha added as a contributor and the project moved to the BioMedical (healthcare) area (decided by Amish)
 ---
 
 # BreatheBox design decisions register
@@ -72,3 +76,4 @@ Value-engineering target: USD 255 (a hypothetical control target, not a limit). 
 | 2026-09-26 | Budget set to $255 to cover the concept's priced BOM | Amish: "i approve all the budget items." | BBX-DDR-002 v0.2 |
 | 2026-09-30 | Build plans in the approved format, with outstanding decisions kept in this separate register, not in the build plan | Amish: "this is the correct build plan ... Extend this across all the other repos"; "don't log outstanding decisions in this build plan" | BBX-BLD-001; this register |
 | 2026-09-30 | Where the concept cannot be built, fix the design assumptions so it is physically feasible (instruction; the resulting changes are open item 1 above) | Amish: "If you are realising that the design cannot be built as per concept - fix the design assumptions to match and be physically feasible as you draw the illustrations." | BBX-DDR-003 |
+| 2026-10-01 | Dr. Geeti Chadha added as a contributor (CONTRIBUTORS.md, README Credits) and the project moved to the BioMedical (healthcare) area, with soft, non-clinical wording: a research and educational prototype, not a medical device | Amish: "yes add Dr. Geeti Chadha to breathebox and dustbadge and make those both healthcare projects" | `project.yaml`, `CONTRIBUTORS.md`, `README.md`, BBX-PRB-001 v0.7, BBX-PRC-001 v0.8 |

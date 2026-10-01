@@ -6,6 +6,7 @@ BreatheBox is designed by Amish Chadha at Design Molecule. The people below cont
 | --- | --- | --- |
 | Amish Chadha | Author, lead designer | Design Molecule |
 | Ashok Kumar Chadha | Contributor | |
+| Dr. Geeti Chadha | Contributor | |
 
 ## AI assistance
 

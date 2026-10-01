@@ -2,7 +2,7 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827) [![DOI](https://zenodo.org/badge/1388475312.svg)](https://zenodo.org/badge/latestdoi/1388475312) [![REUSE compliant](https://github.com/BoujeeEnjinia1701/breathebox/actions/workflows/reuse.yml/badge.svg)](https://github.com/BoujeeEnjinia1701/breathebox/actions/workflows/reuse.yml) [![Archived in Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/BoujeeEnjinia1701/breathebox/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/BoujeeEnjinia1701/breathebox)
 
-**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** $255 USD · **Difficulty:** 3 of 5
+**Area:** BioMedical · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** $255 USD · **Difficulty:** 3 of 5
 
 A window-mounted heat recovery ventilator for single rooms: two small fans and a counterflow core bring in fresh air while recovering most of the heat or cool from the outgoing air.
 
@@ -14,7 +14,7 @@ A window-mounted heat recovery ventilator for single rooms: two small fans and a
 
 Most homes will never get a ducted whole-house ventilation system, but almost every room has a window. BreatheBox puts heat recovery where the fresh air already comes in: a small counterflow core and two small 24 V fans in a box that sits on the sill, with an insulated panel under the raised sash. Room air and outdoor air pass each other on opposite sides of thin plates, so the room gets filtered fresh air at close to room temperature instead of a cold draft. A CO2 sensor runs the fans only as hard as the room needs.
 
-It is open and garage-buildable because the people who most need it (renters, social housing tenants, owners of older homes) are the least served by installer-only products. Apart from the core and the fans, the parts are foam board, filter media and a small controller. The design files let a community repair group or a housing provider build, adapt and fix units locally, and the firmware keeps data on the device.
+It is open and garage-buildable because the people who most need it (renters, social housing tenants, owners of older homes) are the least served by installer-only products. Apart from the core and the fans, the parts are foam board, filter media and a small controller. The design files let a community repair group or a housing provider build, adapt and fix units locally, and the firmware keeps data on the device. It is a research and educational prototype, not a medical device.
 
 ## Burning platform
 
@@ -84,6 +84,8 @@ The [prototype build plan](docs/05-build-plan.md) (BBX-BLD-001) shows, in pictur
 ## Safety
 
 > The unit runs on 24 V from a certified plug-in adapter; do not open the adapter or add mains wiring. Do not use it in a room with an open-flued or unflued fuel-burning appliance, because frost mode extracts more air than it supplies. Lock the raised sash onto the insert panel and never install from outside above ground level. Fan impellers can cut fingers: unplug before opening the lid.
+>
+> BreatheBox is a research and educational prototype, not a medical device. Its CO2 reading indicates how well the room is ventilated; it is not a health or medical measurement.
 
 ## Repository layout
 
@@ -105,7 +107,7 @@ Controlled documents follow the portfolio [documentation standard](.kit/STANDARD
 
 ## Credits
 
-Designed by Amish Chadha, with contributions from Ashok Kumar Chadha. See [CONTRIBUTORS.md](CONTRIBUTORS.md) for roles. To cite this design, use [CITATION.cff](CITATION.cff) (GitHub shows it as "Cite this repository").
+Designed by Amish Chadha, with contributions from Ashok Kumar Chadha and Dr. Geeti Chadha. See [CONTRIBUTORS.md](CONTRIBUTORS.md) for roles. To cite this design, use [CITATION.cff](CITATION.cff) (GitHub shows it as "Cite this repository").
 
 AI assistance (Claude) was used to accelerate concept renders, prototype documentation and first-pass sizing calculations. Design direction and all decisions are Amish Chadha's, recorded in this repository's decision records (`docs/decisions/`).
 

@@ -265,3 +265,33 @@ The design changed visibly, so these still show the concept and need regeneratin
 ### Recommended next step
 
 Amish reviews BBX-DEC-001 (items 1 to 4). Then update the appearance model to the constructable design on the Mac and regenerate the renders and cards. TRL 4 (building to this plan) stays on hold.
+
+## Session 2026-10-01: Dr. Geeti Chadha added; BioMedical (healthcare) area
+
+Instruction from Amish, 2026-10-01: "yes add Dr. Geeti Chadha to breathebox and dustbadge and make those both healthcare projects". Matched to the TremorTrace worked example.
+
+### What was done
+
+- `project.yaml`: `area` changed from Sustainable Housing to BioMedical, the portfolio's healthcare area; tags now lead with `biomedical`, keeping `sustainable-housing` after it.
+- `CONTRIBUTORS.md`: row added for Dr. Geeti Chadha, Contributor.
+- `README.md`: area line now BioMedical; Credits name both contributors, Ashok Kumar Chadha and Dr. Geeti Chadha as contributors; the concept rationale and the Safety section state that BreatheBox is a research and educational prototype, not a medical device.
+- `CITATION.cff`: `biomedical` keyword added. Dr. Geeti Chadha is not added to the authors, matching TremorTrace, where only Amish is listed.
+- `docs/01-problem.md` (BBX-PRB-001 v0.7) and `docs/02-concept.md` (BBX-PRC-001 v0.8): the not-a-medical-device statement added to the existing scope and safety wording.
+- `docs/06-design-decisions.md` (BBX-DEC-001 v0.3): the decision recorded under "Decisions made".
+- `docs/pdf/`: PDFs of the changed controlled documents rebuilt.
+
+### Wording
+
+No clinical claims were found that needed softening: the documents already describe the CO2 reading as a ventilation indicator, not a health measurement. The changes add the research-and-educational-prototype and not-a-medical-device statement only. Design, requirements, numbers and safety content are unchanged.
+
+### Stale media (on Amish's Mac; not regenerated here)
+
+`media/card.png` and `media/social-preview.png` show the area (Sustainable Housing) and must be regenerated on Amish's Mac with `python .kit/cards.py .`.
+
+### Proposed, awaiting Amish
+
+- None new. The `pitch` and `problem` lines in `project.yaml` are unchanged.
+
+### Recommended next step
+
+Regenerate the card and social preview on the Mac, then continue with the open items in BBX-DEC-001.

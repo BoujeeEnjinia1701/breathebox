@@ -3,9 +3,9 @@ doc_id: BBX-PRB-001
 title: BreatheBox problem statement
 project: BreatheBox
 doc_type: Problem statement
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,6 +33,10 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Priced BOM of the constructable design ($283, BBX-DDR-003) noted against the $255 constraint
+- version: "0.7"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: BioMedical area (BBX-DEC-001 v0.3); out of scope states a research and educational prototype, not a medical device
 ---
 
 # BreatheBox problem statement
@@ -73,7 +77,7 @@ Outdoor air is not always clean either. The World Health Organization reports th
 - Whole-house ventilation, ducted systems and replacement of building code ventilation.
 - Heating or cooling the room (the unit recovers heat; it does not add it beyond fan heat).
 - Kitchen and bathroom extraction, which need higher extract rates, and removal of combustion products from stoves or open-flued appliances.
-- Medical or health claims. The CO2 display is an indicator of ventilation, not a health measurement.
+- Medical or health claims. BreatheBox is a research and educational prototype, not a medical device. The CO2 display is an indicator of ventilation, not a health measurement.
 
 ## Prior work
 
