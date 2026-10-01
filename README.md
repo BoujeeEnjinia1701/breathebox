@@ -2,7 +2,7 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827) [![DOI](https://zenodo.org/badge/1388475312.svg)](https://zenodo.org/badge/latestdoi/1388475312) [![REUSE compliant](https://github.com/BoujeeEnjinia1701/breathebox/actions/workflows/reuse.yml/badge.svg)](https://github.com/BoujeeEnjinia1701/breathebox/actions/workflows/reuse.yml) [![Archived in Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/BoujeeEnjinia1701/breathebox/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/BoujeeEnjinia1701/breathebox)
 
-**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** $255 USD · **Difficulty:** 3 of 5
+**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** $255 USD · **Difficulty:** 3 of 5
 
 A window-mounted heat recovery ventilator for single rooms: two small fans and a counterflow core bring in fresh air while recovering most of the heat or cool from the outgoing air.
 
@@ -71,7 +71,7 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 7. Insulated window insert panel with seals, under the raised and locked sash
 8. Two outdoor hoods with insect mesh, a sill bracket propped on the wall by a padded foot, and a certified 24 V plug-in adapter
 
-TRL 3 calculations ([BBX-CAL-001](docs/04-calcs/01-sizing.md)): about 267 W of heat kept at 0 °C outdoors and 50 m³/h for about 5.7 W of fan and control power, about 11.4 kg installed, and $283 in parts. Two requirements are not met: noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)) and cost ($283 against the $255 budget, after the design was made buildable; a $283 budget is proposed, awaiting Amish). A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters, with overnight CO2 near 1,300 ppm ([BBX-DDR-002](docs/decisions/0002-recommendations-accepted.md)). See the [design precis](docs/02-concept.md) and [requirements](docs/03-requirements.md).
+TRL 3 calculations ([BBX-CAL-001](docs/04-calcs/01-sizing.md)): about 267 W of heat kept at 0 °C outdoors and 50 m³/h for about 5.7 W of fan and control power, about 11.4 kg installed, and $283 in parts. One requirement is not met, noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)), and cost is $28 over the value-engineering target ($283 against the $255 target, after the design was made buildable). A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters, with overnight CO2 near 1,300 ppm ([BBX-DDR-002](docs/decisions/0002-recommendations-accepted.md)). See the [design precis](docs/02-concept.md) and [requirements](docs/03-requirements.md).
 
 The priced bill of materials is in [bom/bom.csv](bom/bom.csv). The parametric model is `cad/src/model.py`, with STEP and STL exports in `cad/step/` and `cad/stl/`.
 

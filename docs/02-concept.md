@@ -3,9 +3,9 @@ doc_id: BBX-PRC-001
 title: BreatheBox design precis
 project: BreatheBox
 doc_type: Design precis
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,13 +33,17 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Design made constructable (BBX-DDR-003, open for Amish's review); components, mass, power and cost updated; build plan BBX-BLD-001 and register BBX-DEC-001 added
+- version: "0.7"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target
 ---
 
 # BreatheBox design precis
 
 ## Summary
 
-BreatheBox is a single-room heat recovery ventilator that sits on the sill of a sash window. Two small 24 V blowers push stale room air out and draw fresh air in through a counterflow plate core, so the incoming air picks up about 80 % of the heat (or, in summer, the cool) of the outgoing air. The TRL 3 calculations (BBX-CAL-001) give, for a bedroom at 50 m³/h and 0 °C outdoors: about 267 W of heat kept in the room for about 5.7 W of fan and control power, supply air at about 16 °C, and CO2 near 980 ppm overnight with two sleepers. Two requirements are not met: noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)) and cost (parts $283 against the $255 budget, after the design was made constructable; a $283 budget is proposed, awaiting Amish). A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters. All figures are paper estimates; nothing has been built.
+BreatheBox is a single-room heat recovery ventilator that sits on the sill of a sash window. Two small 24 V blowers push stale room air out and draw fresh air in through a counterflow plate core, so the incoming air picks up about 80 % of the heat (or, in summer, the cool) of the outgoing air. The TRL 3 calculations (BBX-CAL-001) give, for a bedroom at 50 m³/h and 0 °C outdoors: about 267 W of heat kept in the room for about 5.7 W of fan and control power, supply air at about 16 °C, and CO2 near 980 ppm overnight with two sleepers. One requirement is not met, noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)), and cost is $28 over the value-engineering target (parts $283 against the $255 target, after the design was made constructable). A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters. All figures are paper estimates; nothing has been built.
 
 ![Hero render](../media/hero.png)
 
@@ -99,7 +103,7 @@ Table 2. Key numbers at TRL 3.
 | Frost mode at -10 °C | Supply slowed to 33 % of exhaust; about 2.2 Pa room depressurization through a door undercut | R7 met on paper |
 | Clear distance between hood mouths | 420 mm; hoods fit windows from 686 mm clear width | R11, R8 met on paper |
 | Unit mass | About 11.4 kg installed (11.7 kg with adapter) | R9 mass met on paper |
-| Parts cost | $283 | **R15 not met** ($255 budget; $283 proposed) |
+| Parts cost | $283 | **R15 over the value-engineering target by $28** ($255 target) |
 
 ![Heat flow](../media/flow.png)
 

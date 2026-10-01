@@ -3,9 +3,9 @@ doc_id: BBX-DDR-003
 title: BreatheBox design for construction
 project: BreatheBox
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,12 +13,16 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Changes that make the concept physically buildable, with the reason for each; made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review
+- version: "0.2"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target
 ---
 
 # 0003: Design for construction
 
 - **Date:** 2026-09-30
-- **Status:** Draft. The changes in Table 1 were made under Amish's 2026-09-30 instruction to make the design physically buildable; they are open for his review. The items in Table 3 change the budget or the safety case and are **Proposed, awaiting Amish**; they are listed in the design decisions register (BBX-DEC-001).
+- **Status:** Draft. The changes in Table 1 were made under Amish's 2026-09-30 instruction to make the design physically buildable; they are open for his review. The items in Table 3 change the safety case or note value engineering and are **Proposed, awaiting Amish**; they are listed in the design decisions register (BBX-DEC-001).
 
 ## Context
 
@@ -52,21 +56,21 @@ The changes below keep what the unit does: the same window insert, hood mouths a
 | Mass | Installed unit 11.4 kg (was 10.5 kg), 0.6 kg under R9's 12 kg; 11.7 kg with the adapter. | Partitions, seats, grilles, latches, back plates, flanges, cleats and bolts; offset in part by the rails (P9) and 3 mm partitions (P12). |
 | Stability | The parts carried by the sill and bracket weigh 8.6 kg with their centre of mass 162 mm into the room. The foot pushes on the wall with about 34 N; the sill needs 0.40 friction (0.65 with the concept's foot at 650 mm). Each strut's top joint carries about 6.5 N·m: 17 MPa in the tube and about 324 N on each M6 bolt. | P9. |
 | Pressure and power | Exhaust stream +1.1 Pa and supply stream +0.5 Pa at 50 m³/h. Fans and controls 5.7 W clean, 7.5 W with loaded filters at 50 m³/h (was 5.6 and 7.4 W); 14.8 W at 70 m³/h loaded (was 14.5 W). Night mode 30.2 dB(A) clean (was 30.1). R1, R3, R6 and R10 status unchanged. | P5, P7. |
-| Cost | BOM lines 1, 8, 9, 10, 11 and 13 respecified; lines 1, 10, 11 and 13 repriced. Parts $283.00 against the $255 `budget_usd`: **R15 is not met** ($28 over). A $283 budget is proposed (Table 3, A1). | Parts the concept needed but did not list. |
+| Cost | BOM lines 1, 8, 9, 10, 11 and 13 respecified; lines 1, 10, 11 and 13 repriced. Parts $283.00 against the $255 value-engineering target (`budget_usd`): **R15 is over the target by $28**. See Table 3, A1. | Parts the concept needed but did not list. |
 | Drawing | BBX-DWG-001 Rev P3; making sketches BBX-DWG-101 to 114 added. | Follows the model. |
-| Documents | BBX-CAL-001 v0.4, BBX-REQ-001 v0.6, BBX-PRC-001 v0.6: mass, stability, pressure, power and cost figures; R15 status Met to Not met. | Follows the model. |
+| Documents | BBX-CAL-001 v0.4, BBX-REQ-001 v0.6, BBX-PRC-001 v0.6: mass, stability, pressure, power and cost figures; R15 status within the value-engineering target to over it by $28. | Follows the model. |
 
 *Table 3. Proposed, awaiting Amish.*
 
 | # | Question | Options | Recommendation |
 | --- | --- | --- | --- |
-| A1 | Budget: the constructable design costs $283.00 against the $255 budget. | (a) set `budget_usd` to $283; (b) look for $28 of savings (for example 3D-printed grilles and a cheaper core), which may cost performance; (c) keep $255 and record R15 as not met for the prototype. | (a): the added parts are all needed to build and guard the unit. |
+| A1 | Value engineering (a note, not a decision). The constructable design costs $283.00 against the $255 value-engineering target, $28 over. | (a) look for $28 of savings (for example 3D-printed grilles and a cheaper core), which may cost performance; (b) accept the estimate as the cost of building and guarding the unit. | (b), with (a) pursued where performance allows; the added parts are all needed. |
 | A2 | Only friction at the sill stops the unit sliding into the room (margin about 1.5 on anti-slip tape). If it slid, it would tip off the sill into the room. | (a) accept, with a 50 N push test at the trial window (TRL 4); (b) lower the foot to 400 mm (margin about 1.9, longer struts); (c) add a positive restraint, such as a strap or a clamp to the window board, which may need drilling and conflict with R9. | (a), moving to (b) if the push test fails. |
-| A3 | Sash lock (R12). The concept says the raised sash locks onto the insert panel, but no part does this: the window's own catch no longer meets once the lower sash is raised. | (a) a bought no-drill sash jammer or adjustable bar wedged in the inner track above the raised sash (about $10, which would raise A1); (b) screw-fixed sash stops, which need drilling (R9). | (a). |
+| A3 | Sash lock (R12). The concept says the raised sash locks onto the insert panel, but no part does this: the window's own catch no longer meets once the lower sash is raised. | (a) a bought no-drill sash jammer or adjustable bar wedged in the inner track above the raised sash (about $10, which adds to the estimate in A1); (b) screw-fixed sash stops, which need drilling (R9). | (a). |
 
 ## Consequences
 
 - `design_state: constructable` in `project.yaml`. The build plan BBX-BLD-001 shows every component and step in pictures generated from the model (`cad/src/build_plan_media.py`); the design decisions register BBX-DEC-001 lists everything still open.
-- Requirement status (BBX-CAL-001 v0.4): met 10, not met 2 (R6 noise at 50 m³/h, unchanged; R15 cost, new), not verifiable at TRL 3 3 (R9 install time, R13, R14). R9's mass part is met on paper at 11.4 kg.
+- Requirement status (BBX-CAL-001 v0.4): met 10, not met 1 (R6 noise at 50 m³/h, unchanged), over the value-engineering target 1 (R15 cost, new), not verifiable at TRL 3 3 (R9 install time, R13, R14). R9's mass part is met on paper at 11.4 kg.
 - The appearance model `cad/src/product_model.py` and the photoreal renders (`media/render-*.png`), `media/card.png` and `media/social-preview.png` still show the concept: no bulkhead, the old fan positions and grille, the sill plate and the old bracket foot. They need regenerating on Amish's Mac, where Blender is.
 - The core's port arrangement, the blowers' inlet and mounting, and the trial window's sill, stop bead and wall below are to be confirmed when parts are bought (BBX-DEC-001).

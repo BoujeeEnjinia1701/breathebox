@@ -3,9 +3,9 @@ doc_id: BBX-REQ-001
 title: BreatheBox requirements
 project: BreatheBox
 doc_type: Requirements
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,11 +33,15 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Status against the constructable design (BBX-DDR-003, BBX-CAL-001 v0.4); R15 Met to Not met at $283; R3, R9 and R10 figures updated; no target changed
+- version: "0.7"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target
 ---
 
 # BreatheBox requirements
 
-These requirements are proposals for review, not yet validated with users, and will be revised after co-design (see BBX-PRB-001). Status is judged against the TRL 3 calculations in BBX-CAL-001 and the parametric model in `cad/src/model.py`; nothing has been built or measured. No target was relaxed at TRL 3. On 2026-09-25 Amish accepted the review recommendations (BBX-DDR-002): R15 read against a $250 budget (it was $220), and R4 and R6 show the quiet night mode; R6 itself is unchanged until a real fan datasheet has been checked. The R7 condensate figure was corrected from 0.15 to 0.21 L/h because the calculation showed a higher worst case. On 2026-09-26 Amish approved a $255 budget, which covered the concept's priced BOM. On 2026-09-30 the design was made constructable (BBX-DDR-003): the parts it needed bring the BOM to $283, so R15 is not met again; a $283 budget is proposed, awaiting Amish (BBX-DEC-001). No target changed.
+These requirements are proposals for review, not yet validated with users, and will be revised after co-design (see BBX-PRB-001). Status is judged against the TRL 3 calculations in BBX-CAL-001 and the parametric model in `cad/src/model.py`; nothing has been built or measured. No target was relaxed at TRL 3. On 2026-09-25 Amish accepted the review recommendations (BBX-DDR-002): R15 read against a $250 value-engineering target (it was $220), and R4 and R6 show the quiet night mode; R6 itself is unchanged until a real fan datasheet has been checked. The R7 condensate figure was corrected from 0.15 to 0.21 L/h because the calculation showed a higher worst case. The value-engineering target was set at $255 on 2026-09-26, and the concept's priced BOM was within it. On 2026-09-30 the design was made constructable (BBX-DDR-003): the parts it needed bring the BOM to $283, $28 over the target; BBX-DEC-001 lists the savings worth trying. No target changed.
 
 The **design case** is a 30 m³ bedroom with two sleeping adults, 20 °C and 50 % relative humidity indoors, 0 °C outdoors, and a vertical sliding sash window with a 900 mm clear width.
 
@@ -59,12 +63,12 @@ Table 1. Requirements and status at TRL 3.
 | R12 | Security and child safety | Raised sash lockable onto the insert panel; no opening wider than 100 mm through the installed unit | Met by design, unverified: largest opening 2.35 mm | Design review with a locking bar |
 | R13 | Serviceable | Filters changed without tools in 2 min or less; core removable for washing; all parts replaceable with a screwdriver | Not verifiable at TRL 3: lift-off lid and slide-out filters and core in the model | Timed trials |
 | R14 | Local data only | CO2, humidity and temperature shown on the unit; works with no network or cloud account; optional local logging | Not verifiable at TRL 3: no firmware yet | Firmware review |
-| R15 | Affordable | Prototype parts $255 or less (was $250, and $220 before that; BBX-DDR-002) | **Not met:** $283 (priced BOM of the constructable design, BBX-DDR-003); a $283 budget is proposed, awaiting Amish | Priced BOM (`bom/bom.csv`) |
+| R15 | Affordable | Prototype parts at or under the $255 value-engineering target (a hypothetical control target; was $250, and $220 before that; BBX-DDR-002) | **Over the value-engineering target by $28:** $283 (priced BOM of the constructable design, BBX-DDR-003) | Priced BOM (`bom/bom.csv`) |
 
 ## Requirements not met
 
 - **R6 (noise) not met:** about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A). The accepted night mode (32 m³/h) gives about 30 dB(A) with clean filters and 32 dB(A) with loaded filters; larger, slower fans or a silencer are to be checked against a real fan datasheet (on hold with TRL 4) before any change to R6.
-- **R15 (cost) not met:** $283 against the $255 budget in `project.yaml` (approved by Amish on 2026-09-26, BBX-DDR-002). The constructable design added partitions, filter seats, grilles, latches, flanges, bracket parts and bolts that the concept needed but did not list (BBX-DDR-003). A $283 budget is proposed, awaiting Amish.
+- **R15 (cost) over the value-engineering target by $28:** $283 against the $255 target (`budget_usd` in `project.yaml`, set on 2026-09-26, BBX-DDR-002). The constructable design added partitions, filter seats, grilles, latches, flanges, bracket parts and bolts that the concept needed but did not list (BBX-DDR-003). The savings worth trying are in the design decisions register (BBX-DEC-001).
 - **Not verifiable at TRL 3:** R9 (install time), R13 (filter change time) and R14 (firmware).
 
 ## Assumptions

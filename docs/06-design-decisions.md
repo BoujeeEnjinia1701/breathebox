@@ -3,9 +3,9 @@ doc_id: BBX-DEC-001
 title: BreatheBox design decisions register
 project: BreatheBox
 doc_type: Design decisions register
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
     date: '2026-09-30'
     author: Amish Chadha
     change: Register opened with the open decisions from REVIEW.md, BBX-DDR-002 and BBX-DDR-003
+  - version: "0.2"
+    date: '2026-10-01'
+    author: Amish Chadha
+    change: Budget treated as a value-engineering target
 ---
 
 # BreatheBox design decisions register
@@ -26,14 +30,13 @@ Every design decision still to be made, and every decision made, in one place. E
 | # | Decision needed | Options | Recommendation | Affects in the build | Source |
 | --- | --- | --- | --- | --- | --- |
 | 1 | Design for construction: accept the changes that make the concept buildable (housing boards and battens, core frames, dividers and fan bulkhead, filter seats, grilles, bolted window insert, rigid rail-and-strut bracket with the foot at 500 mm, drain and power entry) | Accept as made; or ask for changes item by item | Accept | The whole build plan | BBX-DDR-003, P1 to P12 |
-| 2 | Budget: parts now cost $283.00 against the $255 budget, so R15 is not met | (a) set the budget to $283; (b) find $28 of savings, such as printed grilles or a cheaper core, at some cost in performance; (c) keep $255 and record R15 as not met for the prototype | (a) | Bill of materials; R15 | BBX-DDR-003, A1 |
-| 3 | Sliding restraint: only sill friction (needed 0.40, about 0.6 available on anti-slip tape) stops the unit sliding into the room and tipping off the sill | (a) accept, with a 50 N push test at TRL 4; (b) lower the foot to 400 mm (margin about 1.9, longer struts); (c) a positive restraint such as a strap or a clamp to the window board, which may need drilling | (a), moving to (b) if the push test fails | Wall foot height and strut length (sections 3.12 and 3.13); first checks | BBX-DDR-003, A2 |
-| 4 | Sash lock (R12, safety case): no part locks the raised sash onto the insert panel, and the window's own catch no longer meets | (a) a bought no-drill sash jammer or adjustable bar in the inner track above the raised sash, about $10; (b) screw-fixed sash stops, which need drilling (R9) | (a) | Window fitting (step 15); bill of materials | BBX-DDR-003, A3 |
-| 5 | Fan position: both fans at the room end put the exhaust side of the core at the higher pressure, so any core leakage reaches the supply | Keep both fans at the room end (warm, dry, easy to reach); or move the exhaust fan to the outdoor end (cold, wet air) | None made | Fan bulkhead and fan positions (section 3.6) | BBX-DDR-002, O4 |
-| 6 | First co-design partner and region (for example a tenants' group or social landlord in the UK or Canada) | Open | None made | Trial window and its sill, stop bead and wall | BBX-DDR-001 and BBX-DDR-002, O1 |
-| 7 | Status light and button on the room face, in a small pod (appearance model) | Adopt the room-face position; or keep them inside on the controller board | Adopt; the build plan already puts them behind two holes in the room face | Room end board holes and status board (sections 3.1 and 3.8) | REVIEW.md, 2026-09-26, item 2 |
-| 8 | Clear inspection window in the lid (appearance model) | Keep for the renders and decide at TRL 4 on a clear lid's cost and fire rating; or an opaque lid | Keep for the renders, decide at TRL 4; the build plan uses an opaque lid | Lid (section 3.11) | REVIEW.md, 2026-09-26, item 1 |
-| 9 | Lid joint: the appearance model splits the lid 40 mm below the top with side latches; the constructable design's lid is the top board alone, with two toggle latches | Top board lid as built; or the appearance model's deeper lid | Top board lid; update the appearance model to match | Lid and latches (section 3.11) | REVIEW.md, 2026-09-26, item 3; BBX-DDR-003, P1 |
+| 2 | Sliding restraint: only sill friction (needed 0.40, about 0.6 available on anti-slip tape) stops the unit sliding into the room and tipping off the sill | (a) accept, with a 50 N push test at TRL 4; (b) lower the foot to 400 mm (margin about 1.9, longer struts); (c) a positive restraint such as a strap or a clamp to the window board, which may need drilling | (a), moving to (b) if the push test fails | Wall foot height and strut length (sections 3.12 and 3.13); first checks | BBX-DDR-003, A2 |
+| 3 | Sash lock (R12, safety case): no part locks the raised sash onto the insert panel, and the window's own catch no longer meets | (a) a bought no-drill sash jammer or adjustable bar in the inner track above the raised sash, about $10; (b) screw-fixed sash stops, which need drilling (R9) | (a) | Window fitting (step 15); bill of materials | BBX-DDR-003, A3 |
+| 4 | Fan position: both fans at the room end put the exhaust side of the core at the higher pressure, so any core leakage reaches the supply | Keep both fans at the room end (warm, dry, easy to reach); or move the exhaust fan to the outdoor end (cold, wet air) | None made | Fan bulkhead and fan positions (section 3.6) | BBX-DDR-002, O4 |
+| 5 | First co-design partner and region (for example a tenants' group or social landlord in the UK or Canada) | Open | None made | Trial window and its sill, stop bead and wall | BBX-DDR-001 and BBX-DDR-002, O1 |
+| 6 | Status light and button on the room face, in a small pod (appearance model) | Adopt the room-face position; or keep them inside on the controller board | Adopt; the build plan already puts them behind two holes in the room face | Room end board holes and status board (sections 3.1 and 3.8) | REVIEW.md, 2026-09-26, item 2 |
+| 7 | Clear inspection window in the lid (appearance model) | Keep for the renders and decide at TRL 4 on a clear lid's cost and fire rating; or an opaque lid | Keep for the renders, decide at TRL 4; the build plan uses an opaque lid | Lid (section 3.11) | REVIEW.md, 2026-09-26, item 1 |
+| 8 | Lid joint: the appearance model splits the lid 40 mm below the top with side latches; the constructable design's lid is the top board alone, with two toggle latches | Top board lid as built; or the appearance model's deeper lid | Top board lid; update the appearance model to match | Lid and latches (section 3.11) | REVIEW.md, 2026-09-26, item 3; BBX-DDR-003, P1 |
 
 ## To confirm when parts are bought
 
@@ -47,6 +50,14 @@ Every design decision still to be made, and every decision made, in one place. E
 | 4 | The trial window's sill is at least 110 mm deep, its stop bead fits the 17 mm gap between the housing and the collar flange, and the wall below is clear for the foot 470 to 530 mm above the floor (no radiator) | Sets the collar length and whether the bracket fits as drawn | BBX-DDR-003, P8 and P9 |
 | 5 | The anti-slip tape grips the trial sill's finish with friction of about 0.6 or more | The unit needs 0.40 to stay put | BBX-DDR-003, A2 |
 | 6 | The toggle latches fit 6 mm board, and the latch screws can be backed by nuts inside | Lid fixing | BBX-DDR-003, P1 |
+
+## Value engineering
+
+Value-engineering target: USD 255 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 283 (USD 28 over the target). Main cost drivers and savings worth trying:
+
+- The largest lines are the counterflow core (USD 48), the insulated housing (USD 42), the controller with CO2 and humidity sensing (USD 42), the outdoor hoods and collars (USD 26), the window insert panel (USD 20) and the two fans (USD 19 each).
+- The concept's bill of materials was USD 255. The rise came from parts the concept needed but did not list (BBX-DDR-003): partitions, filter seats, grilles and latches (USD 18), hood back plates and collar flanges (USD 2), the bracket's rails, cleats and foot (USD 4), and bolts, gland and anti-slip tape (USD 4).
+- Savings worth trying: printed grilles and a cheaper core, at some cost in performance. A bought sash jammer (about USD 10, open decision 3) would add to the estimate.
 
 ## Decisions made
 

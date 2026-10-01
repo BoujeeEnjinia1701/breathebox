@@ -3,9 +3,9 @@ doc_id: BBX-CAL-001
 title: BreatheBox sizing calculations
 project: BreatheBox
 doc_type: Calculation note
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,11 +25,15 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Constructable design (BBX-DDR-003); mass from the components as made, sill stability and bracket joints, filter seat and grille losses, cost $283 so R15 is not met
+- version: "0.5"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target
 ---
 
 # BreatheBox sizing calculations
 
-On paper, BreatheBox meets ten of its fifteen requirements. **Two are not met.** R6 (noise): the estimate is about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A), and 30 dB(A) is reached only at about 32 m³/h. A quiet night mode at 32 m³/h (BBX-DDR-002) brings the estimate to about 30 dB(A) with clean filters and 32 dB(A) with loaded filters, but R6 is written for 50 m³/h. R15 (cost): the priced BOM of the constructable design (BBX-DDR-003) is $283, $28 over the $255 budget that Amish approved on 2026-09-26; a $283 budget is proposed, awaiting Amish (BBX-DEC-001). Three requirements (R9 install time, R13 filter change time and R14 firmware behavior) cannot be verified at TRL 3.
+On paper, BreatheBox meets ten of its fifteen requirements. **One is not met and one is over its value-engineering target.** R6 (noise): the estimate is about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A), and 30 dB(A) is reached only at about 32 m³/h. A quiet night mode at 32 m³/h (BBX-DDR-002) brings the estimate to about 30 dB(A) with clean filters and 32 dB(A) with loaded filters, but R6 is written for 50 m³/h. R15 (cost): the priced BOM of the constructable design (BBX-DDR-003) is $283, $28 over the $255 value-engineering target set on 2026-09-26; the savings worth trying are in the design decisions register (BBX-DEC-001). Three requirements (R9 install time, R13 filter change time and R14 firmware behavior) cannot be verified at TRL 3.
 
 The calculations changed four TRL 2 figures. The TRL 2 fans (about 60 m³/h free air) could not reach 70 m³/h against any pressure, so the fan specification rises to about 100 m³/h free air and 400 Pa shut-off. Frost starts at about -2 °C outdoors, not -5 °C, because the plate at the cold corner is colder than the leaving exhaust air. The worst condensate flow is about 0.21 L/h, not 0.14 L/h. Fan and control power at 50 m³/h is about 5.6 W, not 9.5 W, because the system pressure is lower than the 80 Pa assumed.
 
@@ -177,7 +181,7 @@ The mass part of R9 is met on paper (11.4 kg against 12 kg; it was 10.5 kg befor
 
 ## 9. Cost (R15)
 
-The priced BOM totals **$283.00** over 13 lines, against the $255 `budget_usd` approved by Amish on 2026-09-26 (BBX-DDR-002; it was $250, and $220 before 2026-09-25). **R15 is not met**, by $28. The concept's BOM was $255; the rise comes from parts the concept needed but did not list, added when the design was made constructable (BBX-DDR-003): partitions, filter seats, grilles and latches (+$18), hood back plates and collar flanges (+$2), the bracket's rails, cleats and foot (+$4), and bolts, gland and anti-slip tape (+$4). A $283 budget is proposed, awaiting Amish (BBX-DEC-001). Earlier, the increase from $243 to $255 came from the larger fans (+$8), the collars through the panel (+$2) and the input fuse and holder (+$2).
+The priced BOM totals **$283.00** over 13 lines, against the $255 value-engineering target (`budget_usd`, set on 2026-09-26, BBX-DDR-002; it was $250, and $220 before 2026-09-25). **R15 is over the target by $28.** The concept's BOM was $255; the rise comes from parts the concept needed but did not list, added when the design was made constructable (BBX-DDR-003): partitions, filter seats, grilles and latches (+$18), hood back plates and collar flanges (+$2), the bracket's rails, cleats and foot (+$4), and bolts, gland and anti-slip tape (+$4). The savings worth trying are in the design decisions register (BBX-DEC-001). Earlier, the increase from $243 to $255 came from the larger fans (+$8), the collars through the panel (+$2) and the input fuse and holder (+$2).
 
 ## 10. Results
 
@@ -199,9 +203,9 @@ The priced BOM totals **$283.00** over 13 lines, against the $255 `budget_usd` a
 | R12 | Largest opening 2.35 mm; sash locks onto panel | No opening over 100 mm | Met by design, unverified |
 | R13 | Lift-off lid; filters and core slide out | Tool-free filter change in 2 min or less | Not verifiable at TRL 3 |
 | R14 | No firmware yet; checked at firmware review | Local data only | Not verifiable at TRL 3 |
-| R15 | $283.00 | $255 or less | **Not met** |
+| R15 | $283.00 | $255 value-engineering target | **Over the target by $28** |
 
-Summary: met 10, not met 2 (R6, R15), not verifiable at TRL 3 3 (R9, R13, R14).
+Summary: met 10, not met 1 (R6), over the value-engineering target 1 (R15), not verifiable at TRL 3 3 (R9, R13, R14).
 
 ## 11. Limits of this note
 

@@ -242,12 +242,12 @@ Amish approved the build plan format on 2026-09-30 ("this is the correct build p
 - Mass 11.4 kg installed (was 10.5 kg); R9 mass part still met on paper, margin 0.6 kg.
 - Sill friction needed 0.40 against about 0.6 for anti-slip tape (margin about 1.5); strut top joints 6.5 N·m, 17 MPa in the tube.
 - Fans and controls 5.7 W clean, 7.5 W loaded at 50 m³/h; 14.8 W at 70 m³/h loaded; night mode 30.2 dB(A). R1, R3, R6 and R10 status unchanged.
-- **R15 now not met:** parts $283.00 against the $255 budget. **R6 still not met** (39 dB(A) at 50 m³/h). Met 10, not met 2, not verifiable at TRL 3 3.
+- **R15 now over the value-engineering target:** parts $283.00 against the $255 target ($28 over). **R6 still not met** (39 dB(A) at 50 m³/h). Met 10, not met 1, over the target 1, not verifiable at TRL 3 3.
 
 ### Proposed, awaiting Amish (all in BBX-DEC-001)
 
 1. Accept the design-for-construction changes (BBX-DDR-003). Recommendation: accept.
-2. Budget $283 (A1). Recommendation: set `budget_usd` to $283; it stays $255 until Amish decides.
+2. Value engineering (A1): the estimate is $28 over the $255 target; `budget_usd` stays $255.
 3. Sliding restraint (A2): rely on sill friction with a push test at TRL 4, lower the foot, or add a positive restraint. Recommendation: friction and push test.
 4. Sash lock (A3, safety case): no part locks the raised sash onto the panel. Recommendation: a bought no-drill sash jammer (about $10).
 5. Still open from before: fan position (O4), co-design partner (O1), and the appearance-model items (status light position, lid window, lid joint).
