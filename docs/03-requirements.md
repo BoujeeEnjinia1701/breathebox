@@ -3,9 +3,9 @@ doc_id: BBX-REQ-001
 title: BreatheBox requirements
 project: BreatheBox
 doc_type: Requirements
-version: "0.7"
+version: "0.8"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -37,6 +37,10 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.8"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "R12: sash held by a bought no-drill sash jammer, decided by Amish on 2026-10-02 (BBX-DEC-001)"
 ---
 
 # BreatheBox requirements
@@ -60,7 +64,7 @@ Table 1. Requirements and status at TRL 3.
 | R9 | Renter-friendly installation | No drilling of frame or wall; one person installs or removes in 30 min or less; unit mass 12 kg or less | Not verifiable at TRL 3: mass 11.4 kg met on paper; install time needs a trial | Timed trials |
 | R10 | Electrical safety | Only 24 V SELV inside the unit, from a certified plug-in adapter; fused low-voltage input; no user-accessible mains | Met by design: 36 W adapter, 2 A fuse; worst case 35.4 W | Design review |
 | R11 | Weather and outdoor air | Rain-proof downward-facing hoods; insect mesh 1.5 mm or finer; 400 mm or more between supply intake and exhaust outlet | Met on paper: 420 mm; 1 mm mesh | Spray test |
-| R12 | Security and child safety | Raised sash lockable onto the insert panel; no opening wider than 100 mm through the installed unit | Met by design, unverified: largest opening 2.35 mm | Design review with a locking bar |
+| R12 | Security and child safety | Raised sash lockable onto the insert panel; no opening wider than 100 mm through the installed unit | Met by design, unverified: largest opening 2.35 mm; the raised sash is held by a bought no-drill sash jammer (decided 2026-10-02), which is still to be added to the bill of materials | Design review with the sash jammer fitted |
 | R13 | Serviceable | Filters changed without tools in 2 min or less; core removable for washing; all parts replaceable with a screwdriver | Not verifiable at TRL 3: lift-off lid and slide-out filters and core in the model | Timed trials |
 | R14 | Local data only | CO2, humidity and temperature shown on the unit; works with no network or cloud account; optional local logging | Not verifiable at TRL 3: no firmware yet | Firmware review |
 | R15 | Affordable | Prototype parts at or under the $255 value-engineering target (a hypothetical control target; was $250, and $220 before that; BBX-DDR-002) | **Over the value-engineering target by $28:** $283 (priced BOM of the constructable design, BBX-DDR-003) | Priced BOM (`bom/bom.csv`) |

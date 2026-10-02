@@ -3,9 +3,9 @@ doc_id: BBX-PRB-001
 title: BreatheBox problem statement
 project: BreatheBox
 doc_type: Problem statement
-version: "0.7"
+version: "0.8"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -37,6 +37,10 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: BioMedical area (BBX-DEC-001 v0.3); out of scope states a research and educational prototype, not a medical device
+- version: "0.8"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Sash lock and first co-design partner decided by Amish on 2026-10-02; ACORN Canada named as the first candidate to approach (BBX-DEC-001)"
 ---
 
 # BreatheBox problem statement
@@ -91,7 +95,7 @@ We have not found an open-source, window-mounted, counterflow heat recovery vent
 ## Open questions
 
 - [ ] Which windows dominate in the first user group? The first version targets sash windows (BBX-DDR-001 item A2); casement and tilt-and-turn windows (common in continental Europe) need a later insert.
-- [ ] Is a 260 mm raised sash acceptable for security, or is a locking bar needed as standard?
+- [x] Is a 260 mm raised sash acceptable for security, or is a locking bar needed as standard? Decided 2026-10-02: a bought no-drill sash jammer or adjustable security bar in the inner track is part of the kit (BBX-DEC-001).
 - [ ] What noise level do users accept at night, and at what airflow? BBX-CAL-001 estimates about 39 dB(A) at 1 m at 50 m³/h and 30 dB(A) only near 32 m³/h, A quiet night mode at 32 m³/h (about 30 dB(A), BBX-DDR-002) is now part of the design, so the open part is whether users accept it and its overnight CO2 of about 1,300 ppm.
 - [ ] How cold does it get where the first users live, and how often will the frost strategy run?
-- [ ] Who are the first co-design partners (a tenants' group, a social landlord or a retrofit program)? Proposed, awaiting Amish (BBX-DDR-001 item O1).
+- [x] Who are the first co-design partners (a tenants' group, a social landlord or a retrofit program)? Decided 2026-10-02: Canada first, with a tenant organization in a city with older double-hung rental stock and cold winters. The first candidate to approach is ACORN Canada in Toronto, with ACORN in the United Kingdom as the alternative; nothing is agreed with either (BBX-DEC-001).

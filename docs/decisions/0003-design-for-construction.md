@@ -3,9 +3,9 @@ doc_id: BBX-DDR-003
 title: BreatheBox design for construction
 project: BreatheBox
 doc_type: Design decision record
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,12 +17,16 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.3"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Accepted by Amish on 2026-10-02, with A2 decided as option (b) (foot at 400 mm) and A3 as option (a) (sash jammer)"
 ---
 
 # 0003: Design for construction
 
 - **Date:** 2026-09-30
-- **Status:** Draft. The changes in Table 1 were made under Amish's 2026-09-30 instruction to make the design physically buildable; they are open for his review. The items in Table 3 change the safety case or note value engineering and are **Proposed, awaiting Amish**; they are listed in the design decisions register (BBX-DEC-001).
+- **Status:** accepted. Amish, 2026-10-02: "i approve your recommendations for all 555 open decisions." This covers every change in Tables 1 and 2 (P1 to P12, with the cost rise they bring) and the questions A2 and A3 in Table 3, now decided and recorded in the design decisions register (BBX-DEC-001). A2 was decided as option (b), not the option first recommended here: the first prototype has its wall foot at 400 mm. A1 is a value-engineering note, not a decision, and stands as written.
 
 ## Context
 
@@ -41,7 +45,7 @@ The changes below keep what the unit does: the same window insert, hood mouths a
 | P3 | Each fan sat in one open chamber with its inlet and its outlet both in it, so it would mostly stir its own air. | A 6 mm fan bulkhead across the box 94 mm in from the room face. The supply fan sits on its room side, inlet through the bulkhead, blowing up to the top grille. The exhaust fan sits on its core side, inlet through the bulkhead from the room-air chamber, blowing into the core. Both stay in the room-end plenum. | Each fan now draws from one chamber and blows into another. The exhaust side of the core still runs at the higher pressure, so the open fan-position question (O4) is unchanged. |
 | P4 | The core floated 8 mm above the tray, touching only the edges of the dividers; the tray's walls were outside the core's footprint. | The tray is shortened to the core's length (300 x 200 x 14 mm) and sits between the core frames; four 20 x 20 x 12 mm pads in the tray carry the core at its corners; the lid's foam block holds it down. | Water runs freely under the core to the drain; the core lifts straight out when the lid is off (R13). |
 | P5 | Both filters floated in their chambers with no seat (the supply filter 4 mm and the exhaust pad 2 mm from the lining), and the exhaust pad was exactly the size of its opening, so air could pass round both. | Filter seats from 10 x 10 mm strip: side strips, lip strips that lap 6 mm (supply) and 10 mm (pad) over the filter edges on the downstream side, and a bottom stop; foam blocks under the lid press on the top edges. The lining forms a 5 mm lip behind the supply filter's frame and a 10 mm lip behind the pad. | The airflow pushes each filter onto its lips, so the seal improves as the filter loads. Filters still slide out by hand once the lid is off (R13). The pad now works through a 200 x 170 mm window: about 1 Pa more on the exhaust side at 50 m³/h (BBX-CAL-001 v0.4). |
-| P6 | The controller floated in the air above the room-end divider, with its CO2 sensor straddling the supply outlet and the room-air intake. | The controller is mounted on standoffs on the room-side divider, inside the room-air intake chamber, so its sensor reads room air as the concept says. The status light and button are on a small board behind two holes in the room face. | The sensor sees only incoming room air. The light and button position matches the appearance-model proposal of 2026-09-26, which is still open (BBX-DEC-001). |
+| P6 | The controller floated in the air above the room-end divider, with its CO2 sensor straddling the supply outlet and the room-air intake. | The controller is mounted on standoffs on the room-side divider, inside the room-air intake chamber, so its sensor reads room air as the concept says. The status light and button are on a small board behind two holes in the room face. | The sensor sees only incoming room air. The light and button position matches the appearance-model proposal of 2026-09-26, adopted on 2026-10-02 (BBX-DEC-001). |
 | P7 | The room openings had no grilles or finger guards in the BOM, although the safety notes require them, and the top supply opening sat partly over the core-side chamber once the bulkhead was in. | Two perforated or slotted aluminium grilles with openings no wider than 5 mm, bolted over the openings. The supply opening is moved to 310 to 380 mm from the inside wall face and widened to 220 mm (70 x 220 mm, was 90 x 190 mm), so it is wholly over the supply fan's outlet chamber. | Fingers cannot reach a fan. The smaller supply opening adds about 0.5 Pa at 50 m³/h. |
 | P8 | The collars butted the housing back and passed through the panel with no fixing, and the hoods had nothing holding them to the panel. | Each collar is a 3 mm PVC tube with a 20 mm flange on the panel's room face. Each hood is glued to a 3 mm back plate on the panel's outdoor face; four M5 bolts per side clamp flange, panel and back plate. The collar's outdoor end fits the back plate's opening; its room end slides 6 mm into the housing opening on 2 mm foam gasket and stops on the end lining. Panel cut-outs are 158 x 178 mm. | Panel, collars and hoods become one window insert, built on the bench and set in the sash track from inside. The hoods cannot fall outward. The slip joint takes up small differences between windows; the collar is cut to length at the first fit. |
 | P9 | The sill bracket plate was not fixed to the housing; the tube struts ended against the plate and the foot with no joint; and the unit relied on 0.65 friction at the sill to stop it sliding into the room. | Two 50 x 4 mm aluminium rails (replacing the 390 x 400 x 4 mm plate) bolted under the housing base with two M5 bolts each. Each strut's ends are flattened and bolted with two M6 bolts to 40 x 40 x 3 mm angle cleats under the rail and on a 60 x 6 mm foot bar with a 2 mm rubber pad. The foot is lowered from 650 to 500 mm above the floor. Anti-slip rubber tape under the housing base on the sill. | Two bolts at each strut end make the bracket a rigid frame; with single bolts it would fold. The lower foot halves the sill friction needed to 0.40, a margin of about 1.5 on anti-slip tape. The rails save 1.3 kg, which keeps the unit under the 12 kg mass limit (R9). |
@@ -60,17 +64,18 @@ The changes below keep what the unit does: the same window insert, hood mouths a
 | Drawing | BBX-DWG-001 Rev P3; making sketches BBX-DWG-101 to 114 added. | Follows the model. |
 | Documents | BBX-CAL-001 v0.4, BBX-REQ-001 v0.6, BBX-PRC-001 v0.6: mass, stability, pressure, power and cost figures; R15 status within the value-engineering target to over it by $28. | Follows the model. |
 
-*Table 3. Proposed, awaiting Amish.*
+*Table 3. Items that change the safety case or note value engineering: proposed, then decided by Amish on 2026-10-02 (A2 and A3).*
 
 | # | Question | Options | Recommendation |
 | --- | --- | --- | --- |
 | A1 | Value engineering (a note, not a decision). The constructable design costs $283.00 against the $255 value-engineering target, $28 over. | (a) look for $28 of savings (for example 3D-printed grilles and a cheaper core), which may cost performance; (b) accept the estimate as the cost of building and guarding the unit. | (b), with (a) pursued where performance allows; the added parts are all needed. |
-| A2 | Only friction at the sill stops the unit sliding into the room (margin about 1.5 on anti-slip tape). If it slid, it would tip off the sill into the room. | (a) accept, with a 50 N push test at the trial window (TRL 4); (b) lower the foot to 400 mm (margin about 1.9, longer struts); (c) add a positive restraint, such as a strap or a clamp to the window board, which may need drilling and conflict with R9. | (a), moving to (b) if the push test fails. |
-| A3 | Sash lock (R12). The concept says the raised sash locks onto the insert panel, but no part does this: the window's own catch no longer meets once the lower sash is raised. | (a) a bought no-drill sash jammer or adjustable bar wedged in the inner track above the raised sash (about $10, which adds to the estimate in A1); (b) screw-fixed sash stops, which need drilling (R9). | (a). |
+| A2 | Only friction at the sill stops the unit sliding into the room (margin about 1.5 on anti-slip tape). If it slid, it would tip off the sill into the room. | (a) accept, with a 50 N push test at the trial window (TRL 4); (b) lower the foot to 400 mm (margin about 1.9, longer struts); (c) add a positive restraint, such as a strap or a clamp to the window board, which may need drilling and conflict with R9. | (a), moving to (b) if the push test fails. **Decided 2026-10-02: (b)**, the foot at 400 mm for the first prototype, with the 50 N push test at the trial window; back to 500 mm only where a radiator or skirting blocks the lower foot and the push test passes on that sill. |
+| A3 | Sash lock (R12). The concept says the raised sash locks onto the insert panel, but no part does this: the window's own catch no longer meets once the lower sash is raised. | (a) a bought no-drill sash jammer or adjustable bar wedged in the inner track above the raised sash (about $10, which adds to the estimate in A1); (b) screw-fixed sash stops, which need drilling (R9). | (a). **Decided 2026-10-02: (a)**; the jammer is to be added to the bill of materials. |
 
 ## Consequences
 
-- `design_state: constructable` in `project.yaml`. The build plan BBX-BLD-001 shows every component and step in pictures generated from the model (`cad/src/build_plan_media.py`); the design decisions register BBX-DEC-001 lists everything still open.
+- `design_state: constructable` in `project.yaml`. The build plan BBX-BLD-001 shows every component and step in pictures generated from the model (`cad/src/build_plan_media.py`); the design decisions register BBX-DEC-001 records the decisions.
 - Requirement status (BBX-CAL-001 v0.4): met 10, not met 1 (R6 noise at 50 m³/h, unchanged), over the value-engineering target 1 (R15 cost, new), not verifiable at TRL 3 3 (R9 install time, R13, R14). R9's mass part is met on paper at 11.4 kg.
 - The appearance model `cad/src/product_model.py` and the photoreal renders (`media/render-*.png`), `media/card.png` and `media/social-preview.png` still show the concept: no bulkhead, the old fan positions and grille, the sill plate and the old bracket foot. They need regenerating on Amish's Mac, where Blender is.
 - The core's port arrangement, the blowers' inlet and mounting, and the trial window's sill, stop bead and wall below are to be confirmed when parts are bought (BBX-DEC-001).
+- With A2 decided as option (b), the wall foot of the first prototype moves from 500 to 400 mm (longer struts); the model, making sketches, build plan pictures and stability calculation still show 500 mm and are to be updated. With A3 decided, a no-drill sash jammer is to be added to the bill of materials (about USD 10; the estimate becomes about USD 293).

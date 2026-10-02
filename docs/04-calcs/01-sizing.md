@@ -3,9 +3,9 @@ doc_id: BBX-CAL-001
 title: BreatheBox sizing calculations
 project: BreatheBox
 doc_type: Calculation note
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,6 +29,10 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.6"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "R12 text: sash held by a sash jammer, decided by Amish on 2026-10-02; no figures changed"
 ---
 
 # BreatheBox sizing calculations
@@ -154,7 +158,7 @@ A preheater that kept the flows balanced at -10 °C would need about 130 W, more
 
 - **R11, met on paper.** The hood mouths are 130 mm wide with outer edges at ±340 mm, leaving 420 mm between the supply intake and the exhaust outlet. Both face down, with 1 mm mesh.
 - **R8, met on paper for sash windows.** The hoods need at least 686 mm of clear width, just inside the 700 mm lower bound; the panel trims to 700 to 1,000 mm. Casement and tilt-and-turn windows remain outside this version (BBX-DDR-001 item A2).
-- **R12, met by design.** The largest opening through the installed unit is a 2.35 mm core channel; the mesh is 1 mm. The sash locks onto the panel.
+- **R12, met by design.** The largest opening through the installed unit is a 2.35 mm core channel; the mesh is 1 mm. The raised sash is held down on the panel by a bought no-drill sash jammer in the inner track (decided 2026-10-02, BBX-DEC-001; still to be added to the bill of materials).
 - **Housing.** 510 x 560 x 250 mm, with 110 mm on the sill and 400 mm projecting into the room. The model now holds every component as it is made (BBX-DDR-003); its 84 constructability checks pass and no two of its 40 components overlap.
 - **Stability on the sill (BBX-DDR-003).** The housing, its two rails, the struts and the wall foot are one rigid body, because each strut end has two bolts. The parts it carries weigh 8.6 kg with their centre of mass 162 mm on the room side of the wall face. The body rests on the inner edge of the sill and pushes on the wall at the foot, 400 mm lower, with about 34 N; the collars only slide into the housing, so friction at the sill is all that stops it sliding into the room. The friction needed is 0.40, against about 0.6 for anti-slip tape: a margin of about 1.5. With the concept's foot at 650 mm it would have been 0.65. A positive restraint is an open decision (BBX-DEC-001).
 - **Bracket joints.** Each strut's top joint carries about 6.5 N·m: 17 MPa of bending in the 20 x 1.5 mm tube (6063 yields at about 110 MPa) and about 324 N of shear on each of its two M6 bolts. Both are small.
@@ -200,7 +204,7 @@ The priced BOM totals **$283.00** over 13 lines, against the $255 value-engineer
 | R9 | 11.4 kg; no drilling; install time not calculable | 12 kg or less; 30 min or less | Not verifiable at TRL 3 (mass met on paper) |
 | R10 | 36 W SELV adapter; 14.8 W at 70 m³/h loaded; 35.4 W worst case; 2 A fuse | 24 V SELV only | Met by design |
 | R11 | 420 mm between mouths; 1 mm mesh; mouths face down | 400 mm or more; mesh 1.5 mm or finer | Met on paper |
-| R12 | Largest opening 2.35 mm; sash locks onto panel | No opening over 100 mm | Met by design, unverified |
+| R12 | Largest opening 2.35 mm; sash held by a sash jammer (decided 2026-10-02, not yet in the BOM) | No opening over 100 mm | Met by design, unverified |
 | R13 | Lift-off lid; filters and core slide out | Tool-free filter change in 2 min or less | Not verifiable at TRL 3 |
 | R14 | No firmware yet; checked at firmware review | Local data only | Not verifiable at TRL 3 |
 | R15 | $283.00 | $255 value-engineering target | **Over the target by $28** |

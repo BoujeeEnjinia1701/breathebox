@@ -295,3 +295,41 @@ No clinical claims were found that needed softening: the documents already descr
 ### Recommended next step
 
 Regenerate the card and social preview on the Mac, then continue with the open items in BBX-DEC-001.
+
+## Session 2026-10-02: open decisions decided
+
+Amish approved every recommendation for the open decisions on 2026-10-02: "i approve your recommendations for all 555 open decisions."
+
+### Decisions recorded
+
+Eight, all moved to "Decisions made" in BBX-DEC-001 (open items 1 to 8): design for construction accepted (BBX-DDR-003, P1 to P12); wall foot at 400 mm for the first prototype with the 50 N push test at the trial window; a bought no-drill sash jammer for R12; both fans kept at the room end with a cross-leakage check at TRL 4; Canada first, with ACORN Canada in Toronto as the first candidate partner to approach (ACORN in the United Kingdom as the alternative); status light and button on the room face; opaque lid for the prototype (clear lid in the renders only); top-board lid with two toggle latches.
+
+### Documents changed
+
+- `docs/06-design-decisions.md` BBX-DEC-001 v0.4: decisions made; open decisions section now reads "None"; To confirm items 4 and 5 and the value engineering note updated.
+- `docs/decisions/0003-design-for-construction.md` BBX-DDR-003 v0.3: accepted (status Draft kept); A2 decided as option (b), A3 as option (a).
+- `docs/01-problem.md` BBX-PRB-001 v0.8: sash lock and first partner questions answered.
+- `docs/02-concept.md` BBX-PRC-001 v0.9: fan position decision and the cross-leakage check; the sash jammer in the component table.
+- `docs/03-requirements.md` BBX-REQ-001 v0.8: R12 status and verification name the sash jammer.
+- `docs/04-calcs/01-sizing.md` BBX-CAL-001 v0.6: R12 text only; no figures changed.
+- `bom/bom-notes.md`: sash jammer and the 400 mm foot noted.
+
+### Follow-up actions to carry approved decisions into the design
+
+1. Decision 2 (model): move the wall foot from 500 to 400 mm above the floor in `cad/src/model.py`, with longer struts, and re-run the constructability check.
+2. Decision 2 (drawings): update BBX-DWG-001 and the bracket making sketches for the 400 mm foot.
+3. Decision 2 (pictures): regenerate the bracket and fitting pictures in `docs/05-build-plan/` and the build plan text (sections 3.12, 3.13 and the fitting steps) for the 400 mm foot.
+4. Decision 2 (calculations): rerun the sill stability, strut joint and mass figures in `docs/04-calcs/sizing.py` and BBX-CAL-001 for the 400 mm foot.
+5. Decision 2 (BOM): re-specify the strut lengths in row 11.
+6. Decision 3 (BOM): add the no-drill sash jammer (about $10) as a line in `bom/bom.csv` and carry the new total into BBX-CAL-001 and the value engineering note.
+7. Decision 3 (model, pictures): add the sash jammer to the model and to the window fitting step (step 15) of the build plan.
+8. Decision 3 (calculations): change the R12 row text in `docs/04-calcs/sizing.py` to name the sash jammer, so `results.csv` matches BBX-CAL-001.
+9. Decision 4 (docs): add the CO2 tracer cross-leakage check to the TRL 4 test plan when it is written.
+10. Decisions 7 and 8 (model, pictures): update `cad/src/product_model.py` to the top-board lid with two toggle latches and re-render on Amish's Mac, keeping the clear lid window in the renders only.
+
+### Points found in the review
+
+- Items 6 and 8 are already settled by DDR-003 (P6 puts the light and button in the room face; P1 makes the lid the top board), so accepting item 1 closes them; they can be merged.
+- R12 is shown as "Met by design, unverified", but no part locks the sash (item 3). It should read "Not met" until the sash jammer is in the bill of materials.
+- The value-engineering estimate of $283 leaves out the sash jammer (about $10), so the real figure is about $293, $38 over the $255 target.
+- Wall clearance item 4 under "To confirm" assumes no radiator 470 to 530 mm above the floor; radiators under sash windows are common in the UK and Canada, so the bracket foot may clash at either height.

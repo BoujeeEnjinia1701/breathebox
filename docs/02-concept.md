@@ -3,9 +3,9 @@ doc_id: BBX-PRC-001
 title: BreatheBox design precis
 project: BreatheBox
 doc_type: Design precis
-version: "0.8"
+version: "0.9"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -41,6 +41,10 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: BioMedical area (BBX-DEC-001 v0.3); safety states a research and educational prototype, not a medical device
+- version: "0.9"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Fan position and sash jammer decided by Amish on 2026-10-02 (BBX-DEC-001)"
 ---
 
 # BreatheBox design precis
@@ -81,7 +85,7 @@ Table 1. Main components. Numbers match `bom/bom.csv` and Figure 4.
 | 6 | Exhaust filter | Coarse washable pad, 220 x 190 mm | Keeps lint off the core |
 | 7 | Controller | ESP32-C3 class module with a Sensirion SCD41 class CO2, humidity and temperature sensor and two NTC probes | Check the sensor on the lab's CalRig before use |
 | 8 | Condensate tray and drain | PETG tray under the core, 12 x 8 mm tube to outdoors from the tray floor | Tube falls outdoors |
-| 9 | Window insert panel | 20 mm insulated panel with EPDM edge seals, trimmed to 700 to 1,000 mm | Sash locks onto it |
+| 9 | Window insert panel | 20 mm insulated panel with EPDM edge seals, trimmed to 700 to 1,000 mm | Raised sash held down on it by a bought no-drill sash jammer in the inner track (decided 2026-10-02) |
 | 10 | Outdoor hoods and collars | Two PVC hoods on back plates with 1 mm stainless mesh on 130 mm wide mouths, 420 mm apart; flanged collars bolted through the panel | Mouths face down |
 | 11 | Sill bracket | Two aluminium rails under the housing and two tube struts, bolted rigid, to a padded wall foot | Props on the wall; no drilling |
 | 12 | Power supply | Certified 24 V, 1.5 A plug-in adapter; 2 A fuse on the 24 V input | No mains wiring in the unit |
@@ -126,7 +130,7 @@ Each choice below was recommended at TRL 2 (BBX-DDR-001) and decided by Amish on
 - **Larger blowers, 2 A time-delay input fuse and firmware speed cap** (BBX-DDR-002), as costed and sized in BBX-CAL-001.
 - **24 V SELV only.** A certified plug-in adapter means no mains wiring for the builder (R10).
 
-One layout point remains open for Amish (no recommendation was made): both fans sit in the warm room-end plenum, so the exhaust side of the core runs at a slightly higher pressure than the supply side. Any core leakage would carry stale air into the supply stream.
+Both fans sit in the warm room-end plenum, so the exhaust side of the core runs at a slightly higher pressure than the supply side, and any core leakage would carry stale air into the supply stream. Amish decided on 2026-10-02 to keep both fans at the room end for the prototype and to add a cross-leakage check at TRL 4: a CO2 tracer in the exhaust stream, measured in the supply. The exhaust fan moves to the outdoor end only if the transfer exceeds about 3 % (BBX-DEC-001).
 
 ![Exploded view](../media/exploded.png)
 
