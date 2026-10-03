@@ -1,4 +1,4 @@
-"""BreatheBox sizing calculations (BBX-CAL-001 v0.4).
+"""BreatheBox sizing calculations (BBX-CAL-001 v0.7).
 
 Run from the repo root:  python docs/04-calcs/sizing.py
 Prints every number quoted in docs/04-calcs/01-sizing.md and writes
@@ -258,15 +258,15 @@ DENS = {  # kg/m3, by material of each modelled component (BBX-DDR-003)
     "pvc_sheet": 1400.0,     # 3 mm rigid PVC: collars, hoods, hood back plates
     "steel": 7900.0,         # modelled bolts and nuts, as solid cylinders
 }
-FIXED_KG = {3: 0.30, 4: 0.30, 5: 0.10, 6: 0.05, 7: 0.08, 12: 0.25}
+FIXED_KG = {3: 0.30, 4: 0.30, 5: 0.10, 6: 0.05, 7: 0.08, 12: 0.25, 14: 0.30}   # 14: bought sash jammer (estimate)
 CORE_FRAME_KG, PLATE_RHO = 0.30, 1350.0
 SUNDRIES_KG = 0.30           # wiring, gasket tape, glue, small screws not modelled
 MU_ANTISLIP = 0.6            # anti-slip rubber tape on a painted or varnished sill (assumption)
 NAMES = {1: "Housing (boards, battens, lining, partitions, seats, lid, grilles, latches)", 2: "Core",
          3: "Supply fan", 4: "Exhaust fan", 5: "Supply filter", 6: "Exhaust filter", 7: "Controller and status board",
          8: "Tray, pads and drain", 9: "Insert panel and seals", 10: "Collars, hoods and back plates",
-         11: "Sill bracket", 12: "Adapter", 13: "Modelled bolts and cable gland"}
-ON_SILL_EXCLUDE = {"panel", "seals", "collars", "hoods", "hood_plates", "hood_bolts", "psu"}
+         11: "Sill bracket", 12: "Adapter", 13: "Modelled bolts and cable gland", 14: "Sash jammer (bought)"}
+ON_SILL_EXCLUDE = {"panel", "seals", "collars", "hoods", "hood_plates", "hood_bolts", "psu", "jammer"}
 
 
 def masses():
@@ -404,7 +404,8 @@ def main():
         pr(f"  {k:2d} {names[k]:60s} {m[k]:.2f} kg")
     total_m = sum(m.values()) + SUNDRIES_KG
     unit_m = total_m - m[12]
-    pr(f"  sundries {SUNDRIES_KG:.2f} kg; total {total_m:.1f} kg; installed unit without adapter {unit_m:.1f} kg")
+    pr(f"  sundries {SUNDRIES_KG:.2f} kg; total {total_m:.1f} kg; installed unit without adapter {unit_m:.1f} kg "
+       f"(sash jammer {m[14]:.2f} kg included)")
 
     # statics (BBX-DDR-003): housing, bracket plate, struts and foot are one rigid body (two bolts at
     # each strut end). It rests on the inner edge of the sill and pushes on the wall at the foot; the
@@ -422,15 +423,18 @@ def main():
     pr(f"  sill-borne parts {m_on + SUNDRIES_KG:.1f} kg, centre of mass at X = {cg_x:.0f} mm (room side of the wall face)")
     pr(f"  foot push on the wall {h_foot:.0f} N ({lever:.0f} mm below the sill edge); sill friction needed {mu_req:.2f} "
        f"(anti-slip tape about {MU_ANTISLIP:.1f}: margin {MU_ANTISLIP / mu_req:.1f})")
-    pr(f"  for comparison, the concept foot at 650 mm needed {w_on * cg_x / (P['sill_z'] - 650.0) / w_on:.2f}")
+    for zf_ in (500.0, 650.0):
+        pr(f"  for comparison, a foot at {zf_:.0f} mm would need {w_on * cg_x / (P['sill_z'] - zf_) / w_on:.2f}"
+           f" (margin {MU_ANTISLIP / (cg_x / (P['sill_z'] - zf_)):.1f})")
+    pr(f"  strut {D['strut_len']:.1f} mm between end holes, cut {D['strut_len'] + 26:.0f} mm, at {D['strut_angle']:.1f} deg")
     pr(f"  strut top joint: {m_joint:.1f} N m per strut; tube 20 x 1.5 bending {sig:.0f} MPa (6063 yield about 110 MPa); "
        f"bolt pair shear {v_bolt:.0f} N per bolt (M6)")
 
     pr("\n== Cost ==")
     tot, rows = bom_total()
     b = budget()
-    pr(f"  BOM total ${tot:.2f} ({len(rows)} lines); budget_usd ${b:.0f}: {'within' if tot <= b else 'over'} by ${abs(tot-b):.2f} "
-       f"(budget set to $255 by Amish on 2026-09-26, BBX-DDR-002; was $250, and $220 before that)")
+    pr(f"  Value-engineering target: USD {b:.0f}. Estimated cost of the constructable design: USD {tot:.0f} "
+       f"(USD {abs(tot-b):.0f} {'over' if tot > b else 'under'} the target). BOM {len(rows)} lines, ${tot:.2f}")
 
     # --------------------------------------------------------------- requirements table
     o50, o50l, o70l = op(Q_NOM), op(Q_NOM, True), op(Q_MAX, True)
@@ -455,11 +459,12 @@ def main():
         ("R10", f"24 V SELV adapter {PSU_W:.0f} W; {o70l['w_total']:.1f} W at 70 m3/h loaded, {full_w:.1f} W worst case at full speed; 2 A input fuse",
          "24 V SELV only", "Met by design"),
         ("R11", f"{D['mouth_clear']:.0f} mm between mouths; 1 mm mesh; mouths face down", "400 mm or more; mesh 1.5 mm or finer", "Met on paper"),
-        ("R12", f"largest through opening {P['plate_pitch']-P['plate_t']:.2f} mm; sash locks onto panel", "No opening over 100 mm", "Met by design, unverified"),
+        ("R12", f"largest through opening {P['plate_pitch']-P['plate_t']:.2f} mm; raised sash held down on the panel by a bought no-drill sash jammer (BOM line 14)",
+         "Sash lockable onto the panel; no opening over 100 mm", "Met by design, unverified"),
         ("R13", "lift-off lid; filters and core slide out", "Tool-free filter change in 2 min or less", "Not verifiable at TRL 3"),
         ("R14", "no firmware yet; checked at firmware review", "Local data only", "Not verifiable at TRL 3"),
-        ("R15", f"${tot:.2f}", f"${b:.0f} or less",
-         "Not met" if tot > b else "Met"),
+        ("R15", f"${tot:.2f}", f"${b:.0f} value-engineering target",
+         f"Over the value-engineering target by ${tot - b:.0f}" if tot > b else "Within the value-engineering target"),
     ]
     pr("\n== Requirement status ==")
     with (ROOT / "docs/04-calcs/results.csv").open("w", newline="") as f:

@@ -3,7 +3,7 @@ doc_id: BBX-DDR-003
 title: BreatheBox design for construction
 project: BreatheBox
 doc_type: Design decision record
-version: "0.3"
+version: "0.4"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -21,6 +21,10 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "Accepted by Amish on 2026-10-02, with A2 decided as option (b) (foot at 400 mm) and A3 as option (a) (sash jammer)"
+- version: "0.4"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Consequences updated: the 400 mm foot and the sash jammer are now in the model, BOM, calculations, drawings, build plan and appearance model"
 ---
 
 # 0003: Design for construction
@@ -70,12 +74,12 @@ The changes below keep what the unit does: the same window insert, hood mouths a
 | --- | --- | --- | --- |
 | A1 | Value engineering (a note, not a decision). The constructable design costs $283.00 against the $255 value-engineering target, $28 over. | (a) look for $28 of savings (for example 3D-printed grilles and a cheaper core), which may cost performance; (b) accept the estimate as the cost of building and guarding the unit. | (b), with (a) pursued where performance allows; the added parts are all needed. |
 | A2 | Only friction at the sill stops the unit sliding into the room (margin about 1.5 on anti-slip tape). If it slid, it would tip off the sill into the room. | (a) accept, with a 50 N push test at the trial window (TRL 4); (b) lower the foot to 400 mm (margin about 1.9, longer struts); (c) add a positive restraint, such as a strap or a clamp to the window board, which may need drilling and conflict with R9. | (a), moving to (b) if the push test fails. **Decided 2026-10-02: (b)**, the foot at 400 mm for the first prototype, with the 50 N push test at the trial window; back to 500 mm only where a radiator or skirting blocks the lower foot and the push test passes on that sill. |
-| A3 | Sash lock (R12). The concept says the raised sash locks onto the insert panel, but no part does this: the window's own catch no longer meets once the lower sash is raised. | (a) a bought no-drill sash jammer or adjustable bar wedged in the inner track above the raised sash (about $10, which adds to the estimate in A1); (b) screw-fixed sash stops, which need drilling (R9). | (a). **Decided 2026-10-02: (a)**; the jammer is to be added to the bill of materials. |
+| A3 | Sash lock (R12). The concept says the raised sash locks onto the insert panel, but no part does this: the window's own catch no longer meets once the lower sash is raised. | (a) a bought no-drill sash jammer or adjustable bar wedged in the inner track above the raised sash (about $10, which adds to the estimate in A1); (b) screw-fixed sash stops, which need drilling (R9). | (a). **Decided 2026-10-02: (a)**; the jammer is bill of materials line 14 ($10.00). |
 
 ## Consequences
 
 - `design_state: constructable` in `project.yaml`. The build plan BBX-BLD-001 shows every component and step in pictures generated from the model (`cad/src/build_plan_media.py`); the design decisions register BBX-DEC-001 records the decisions.
 - Requirement status (BBX-CAL-001 v0.4): met 10, not met 1 (R6 noise at 50 m³/h, unchanged), over the value-engineering target 1 (R15 cost, new), not verifiable at TRL 3 3 (R9 install time, R13, R14). R9's mass part is met on paper at 11.4 kg.
-- The appearance model `cad/src/product_model.py` and the photoreal renders (`media/render-*.png`), `media/card.png` and `media/social-preview.png` still show the concept: no bulkhead, the old fan positions and grille, the sill plate and the old bracket foot. They need regenerating on Amish's Mac, where Blender is.
+- The appearance model `cad/src/product_model.py` was updated to the constructable design on 2026-10-02 (top-board lid with two toggle latches, bulkhead and fan positions, grilles, controls, collars and hood back plates, rails, struts and the 400 mm foot, sash jammer), and its render scenes exported. The photoreal renders (`media/render-*.png`), `media/card.png` and `media/social-preview.png` still show the concept until they are rendered again on Amish's Mac, where Blender is.
 - The core's port arrangement, the blowers' inlet and mounting, and the trial window's sill, stop bead and wall below are to be confirmed when parts are bought (BBX-DEC-001).
-- With A2 decided as option (b), the wall foot of the first prototype moves from 500 to 400 mm (longer struts); the model, making sketches, build plan pictures and stability calculation still show 500 mm and are to be updated. With A3 decided, a no-drill sash jammer is to be added to the bill of materials (about USD 10; the estimate becomes about USD 293).
+- With A2 decided as option (b), the wall foot of the first prototype moved from 500 to 400 mm on 2026-10-02: struts 621 mm cut (595 mm between end holes, 55°), sill friction needed 0.32 (margin 1.9), strut top joint 6.6 N·m, 18 MPa, 329 N per M6 bolt (BBX-CAL-001 v0.7, BBX-DWG-001 Rev P4, BBX-DWG-111 to 113 Rev P2, BBX-BLD-001 v0.2). With A3 decided, the no-drill sash jammer is bill of materials line 14 and is in the model and build plan step 15. Value-engineering target: USD 255. Estimated cost of the constructable design: USD 294 (USD 39 over the target). Installed mass 11.8 kg with the sash jammer.

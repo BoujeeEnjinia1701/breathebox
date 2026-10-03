@@ -3,7 +3,7 @@ doc_id: BBX-PRC-001
 title: BreatheBox design precis
 project: BreatheBox
 doc_type: Design precis
-version: "0.9"
+version: "0.10"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -45,13 +45,17 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "Fan position and sash jammer decided by Amish on 2026-10-02 (BBX-DEC-001)"
+- version: "0.10"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Approved follow-ups carried out: wall foot at 400 mm, sash jammer as component 14, mass 11.8 kg installed, cost USD 294 (USD 39 over the value-engineering target); drawing BBX-DWG-001 Rev P4"
 ---
 
 # BreatheBox design precis
 
 ## Summary
 
-BreatheBox is a single-room heat recovery ventilator that sits on the sill of a sash window. Two small 24 V blowers push stale room air out and draw fresh air in through a counterflow plate core, so the incoming air picks up about 80 % of the heat (or, in summer, the cool) of the outgoing air. The TRL 3 calculations (BBX-CAL-001) give, for a bedroom at 50 m³/h and 0 °C outdoors: about 267 W of heat kept in the room for about 5.7 W of fan and control power, supply air at about 16 °C, and CO2 near 980 ppm overnight with two sleepers. One requirement is not met, noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)), and cost is $28 over the value-engineering target (parts $283 against the $255 target, after the design was made constructable). A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters. All figures are paper estimates; nothing has been built.
+BreatheBox is a single-room heat recovery ventilator that sits on the sill of a sash window. Two small 24 V blowers push stale room air out and draw fresh air in through a counterflow plate core, so the incoming air picks up about 80 % of the heat (or, in summer, the cool) of the outgoing air. The TRL 3 calculations (BBX-CAL-001) give, for a bedroom at 50 m³/h and 0 °C outdoors: about 267 W of heat kept in the room for about 5.7 W of fan and control power, supply air at about 16 °C, and CO2 near 980 ppm overnight with two sleepers. One requirement is not met, noise (about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A)), and cost is over the value-engineering target. Value-engineering target: USD 255. Estimated cost of the constructable design: USD 294 (USD 39 over the target). A quiet night mode at 32 m³/h brings the noise estimate to about 30 dB(A) with clean filters. All figures are paper estimates; nothing has been built.
 
 ![Hero render](../media/hero.png)
 
@@ -59,7 +63,7 @@ Figure 1. Parametric model on a sash window, with a 1.75 m person for scale.
 
 ## How it works
 
-1. **Mount.** A 20 mm insulated panel fills the gap under the raised lower sash, which closes down onto it and is locked. The housing (510 x 560 x 250 mm) rests 110 mm on the sill and projects 400 mm into the room, where a bracket of two rails and two struts, propped on the wall by a padded foot, carries it; nothing is drilled.
+1. **Mount.** A 20 mm insulated panel fills the gap under the raised lower sash, which closes down onto it and is held there by a bought no-drill sash jammer in the inner track above it. The housing (510 x 560 x 250 mm) rests 110 mm on the sill and projects 400 mm into the room, where a bracket of two rails and two struts, propped on the wall by a padded foot 400 mm above the floor, carries it; nothing is drilled.
 2. **Exhaust path.** Room air enters a front grille, passes a coarse filter, and the exhaust fan blows it through one set of core channels, across the outdoor plenum and out of a downward-facing hood.
 3. **Supply path.** Outdoor air enters the second hood, 420 mm from the exhaust mouth, passes through a collar in the panel and an ePM1 filter, and flows through the other set of core channels. The supply fan draws it through the core and blows it into the room through a top grille that throws air up and away from the occupant.
 4. **Recover.** The two streams flow in opposite directions on each side of thin polymer plates, so heat passes across without the air mixing.
@@ -70,7 +74,7 @@ Figure 1. Parametric model on a sash window, with a 1.75 m person for scale.
 
 Figure 2. Cutaway through the supply side: hood and collar (outdoors, left), insert panel, supply filter, core over the condensate tray, supply fan and controller.
 
-The general arrangement is drawing BBX-DWG-001 (Rev P3) in `cad/drawings/`, generated from `cad/src/model.py`. How to build the prototype, component by component, is in the build plan BBX-BLD-001 (`docs/05-build-plan.md`); BBX-DDR-003 records the changes that made the concept buildable, and the design decisions register BBX-DEC-001 (`docs/06-design-decisions.md`) lists what is still open.
+The general arrangement is drawing BBX-DWG-001 (Rev P4) in `cad/drawings/`, generated from `cad/src/model.py`. How to build the prototype, component by component, is in the build plan BBX-BLD-001 (`docs/05-build-plan.md`); BBX-DDR-003 records the changes that made the concept buildable, and the design decisions register BBX-DEC-001 (`docs/06-design-decisions.md`) records the decisions made and the items to confirm when parts are bought.
 
 ## Main components
 
@@ -87,8 +91,9 @@ Table 1. Main components. Numbers match `bom/bom.csv` and Figure 4.
 | 8 | Condensate tray and drain | PETG tray under the core, 12 x 8 mm tube to outdoors from the tray floor | Tube falls outdoors |
 | 9 | Window insert panel | 20 mm insulated panel with EPDM edge seals, trimmed to 700 to 1,000 mm | Raised sash held down on it by a bought no-drill sash jammer in the inner track (decided 2026-10-02) |
 | 10 | Outdoor hoods and collars | Two PVC hoods on back plates with 1 mm stainless mesh on 130 mm wide mouths, 420 mm apart; flanged collars bolted through the panel | Mouths face down |
-| 11 | Sill bracket | Two aluminium rails under the housing and two tube struts, bolted rigid, to a padded wall foot | Props on the wall; no drilling |
+| 11 | Sill bracket | Two aluminium rails under the housing and two tube struts, bolted rigid, to a padded wall foot 400 mm above the floor | Props on the wall; no drilling |
 | 12 | Power supply | Certified 24 V, 1.5 A plug-in adapter; 2 A fuse on the 24 V input | No mains wiring in the unit |
+| 14 | Sash jammer | Bought no-drill adjustable sash jammer, wedged in the inner track between the raised sash and the window head | Holds the sash down on the panel (R12) |
 
 ## Key numbers
 
@@ -110,8 +115,8 @@ Table 2. Key numbers at TRL 3.
 | Frost onset | About -2.2 °C outdoors at 50 m³/h | |
 | Frost mode at -10 °C | Supply slowed to 33 % of exhaust; about 2.2 Pa room depressurization through a door undercut | R7 met on paper |
 | Clear distance between hood mouths | 420 mm; hoods fit windows from 686 mm clear width | R11, R8 met on paper |
-| Unit mass | About 11.4 kg installed (11.7 kg with adapter) | R9 mass met on paper |
-| Parts cost | $283 | **R15 over the value-engineering target by $28** ($255 target) |
+| Unit mass | About 11.8 kg installed, sash jammer included (12.0 kg with adapter) | R9 mass met on paper (margin 0.2 kg) |
+| Parts cost | $294 | **R15 over the value-engineering target by $39** ($255 target) |
 
 ![Heat flow](../media/flow.png)
 
@@ -140,7 +145,7 @@ Figure 4. Exploded view with BOM numbers.
 
 > **Safety:** Do not use BreatheBox in a room with an open-flued or unflued fuel-burning appliance (gas fire, oil or wood stove, water heater). In frost mode the unit extracts more air than it supplies and could draw combustion gases into the room. Do not install it in a room whose door seals airtight, because the depressurization would then be much larger than the 2 to 4 Pa estimated for a door with an undercut.
 
-> **Safety:** The raised sash must be locked onto the insert panel. An unlocked sash is a security risk, and a loose panel or hood could fall outward from an upper floor. Check the bracket and panel before leaving the unit unattended, and never install from outside above ground level.
+> **Safety:** The raised sash must be held down on the insert panel by the sash jammer. An unlocked sash is a security risk, and a loose panel or hood could fall outward from an upper floor. Check the bracket and panel before leaving the unit unattended, and never install from outside above ground level.
 
 > **Safety:** Use only a certified 24 V SELV plug-in adapter, with a 2 A time-delay fuse on the low-voltage input. Do not open or modify the adapter. Keep the cable clear of the sash and of the condensate tube.
 

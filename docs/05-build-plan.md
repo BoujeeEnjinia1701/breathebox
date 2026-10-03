@@ -3,9 +3,9 @@ doc_id: BBX-BLD-001
 title: BreatheBox prototype build plan
 project: BreatheBox
 doc_type: Build plan
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
     date: '2026-09-30'
     author: Amish Chadha
     change: First build plan, with pictures by component and step; design made constructable (BBX-DDR-003)
+  - version: "0.2"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: "Decisions of 2026-10-02 carried into the plan: wall foot at 400 mm with longer struts (sections 3.2, 3.12 and 3.13, step 13, Figures 4, 5 and 21 to 23), the bought sash jammer (section 3.17, step 15, Figure 1); design for construction accepted"
 ---
 
 # BreatheBox prototype build plan
@@ -23,15 +27,15 @@ revisions:
 
 ![Figure 1. Every component, pulled apart and numbered in build order](05-build-plan/overview.png)
 
-*Figure 1. Every component pulled apart and numbered in build order. The window insert (17 to 19) is built on the bench and fitted to the window before the unit goes on the sill.*
+*Figure 1. Every component pulled apart and numbered in build order. The window insert (17 to 19) is built on the bench and fitted to the window, and the sash jammer (21) wedged above the sash, before the unit goes on the sill.*
 
-The prototype is one BreatheBox for a sash window: a lined box 510 x 560 x 250 mm that sits on the sill and holds a counterflow core, two small 24 V fans, two filters and a controller, plus a window insert that fills the gap under the raised lower sash and carries two outdoor hoods. Figure 1 shows the 20 components in the order you make or fit them. Fourteen are made in a home workshop: the housing boards and battens, the foam lining, the core frames, dividers and fan bulkhead, the filter seats, the condensate tray, the grilles and the lid; the bracket rails, struts and wall foot; and the insert panel, collars and hoods. The core, fans, filters, controller and adapter are bought. The work is cutting and gluing PVC foam board and foam, bending one PETG tray, cutting, drilling and bending aluminium bar, angle and tube, and plugging bought modules together at 24 V. The parts cost about $283 from the bill of materials.
+The prototype is one BreatheBox for a sash window: a lined box 510 x 560 x 250 mm that sits on the sill and holds a counterflow core, two small 24 V fans, two filters and a controller, plus a window insert that fills the gap under the raised lower sash and carries two outdoor hoods. Figure 1 shows the 21 components in the order you make or fit them. Fourteen are made in a home workshop: the housing boards and battens, the foam lining, the core frames, dividers and fan bulkhead, the filter seats, the condensate tray, the grilles and the lid; the bracket rails, struts and wall foot; and the insert panel, collars and hoods. The core, fans, filters, controller, adapter and sash jammer are bought. The work is cutting and gluing PVC foam board and foam, bending one PETG tray, cutting, drilling and bending aluminium bar, angle and tube, and plugging bought modules together at 24 V. The parts cost about $294 from the bill of materials.
 
 > **Safety:** The unit runs only from a certified 24 V plug-in adapter; there is no mains wiring in it. Fan impellers can cut fingers: unplug the adapter before opening the lid. Do not use the unit in a room with an open-flued or unflued fuel-burning appliance, or in a room whose door seals airtight. Fit the window insert from inside only; never work outside a window above ground level. PVC cement and contact adhesive give off solvent fumes, and a heat gun on PETG gives off fumes: work in a ventilated space. Cut aluminium edges are sharp: deburr everything.
 
 ## 2. What changed to make it buildable
 
-The concept showed what the unit does; most of its parts could not be made, fixed or sealed as drawn. Each change below keeps what the unit does, and all of them are recorded in decision record BBX-DDR-003, open for Amish's review.
+The concept showed what the unit does; most of its parts could not be made, fixed or sealed as drawn. Each change below keeps what the unit does, and all of them are recorded in decision record BBX-DDR-003, which Amish accepted on 2 October 2026.
 
 *Table 1. Changes from the concept.*
 
@@ -45,7 +49,7 @@ The concept showed what the unit does; most of its parts could not be made, fixe
 | Controller | Floating above a divider, its sensor across two air streams | On the divider in the room-air intake; status light and button behind the room face (Figure 14) | The sensor reads room air |
 | Grilles | None in the parts list | Two slotted aluminium grilles; the top opening moved over the supply fan (Figure 18) | Fingers cannot reach a fan |
 | Collars and hoods | No fixing to the panel or the housing | Flanged collars and hood back plates bolted through the panel; the collar slides into the housing (Figures 25 to 27) | The insert is one rigid assembly and the hoods cannot fall |
-| Sill bracket | A plate with tube struts touching it, no joints; a foot 650 mm up | Two rails bolted under the housing; flattened struts with two bolts at each end on angle cleats; a padded foot 500 mm up (Figures 4, 5 and 21 to 23) | The bracket is rigid and the unit needs half the sill friction to stay put |
+| Sill bracket | A plate with tube struts touching it, no joints; a foot 650 mm up | Two rails bolted under the housing; flattened struts with two bolts at each end on angle cleats; a padded foot 400 mm up (Figures 4, 5 and 21 to 23) | The bracket is rigid and the unit needs half the sill friction to stay put |
 | Drain | Through a divider, starting above the tray floor | From the tray's end wall at floor level, on the exhaust side (Figures 16 and 17) | No standing water; no divider pierced |
 | Power entry | Beside the core, in a closed space | A cable gland in the right side wall (Figure 14) | The cable never crosses the core seal |
 
@@ -95,7 +99,7 @@ The ends fit between the sides and everything stands on the base. The battens li
 2. Drill two 5.5 holes in each, 30 and 330 from the wall end, 25 in from the inner long edge, for the housing bolts.
 3. Drill two 5.5 holes 348 and 378 from the wall end, 31 in from the inner edge, and countersink them from the top so M5 countersunk screws sit flush.
 4. Cut two cleats 50 long from the angle. Lay the flat leg under the rail from 338 to 388 from the wall end, upright leg on the inner side, and drill through the rail holes.
-5. Leave the upright leg's strut holes until the struts are made (section 3.12); mark them now at 27 and 13.8 from the cleat's wall-side end, 16 and 31 down from the rail's underside.
+5. Leave the upright leg's strut holes until the struts are made (section 3.12); mark them now at 27 and 15.5 from the cleat's wall-side end, 16 and 32.4 down from the rail's underside.
 6. Fit each cleat with two M5 countersunk screws and nyloc nuts.
 
 **How it fits the parts next to it.**
@@ -324,15 +328,15 @@ The tray sits on the floor lining between the core frames; the core sits on its 
 
 **How to make it.**
 
-1. Cut two tubes 543 long.
+1. Cut two tubes 621 long.
 2. Flatten 40 of each end in a vice between two flat bars, both flats in the same plane. If the tube cracks, anneal the ends with a gas torch first.
 3. Trim each flat to 26 wide and round its end to a 13 radius.
-4. Drill a 6.6 hole in each flat, 516.6 apart (end to end), centred 13 from each end.
+4. Drill a 6.6 hole in each flat, 595.3 apart (end to end), centred 13 from each end.
 5. Clamp the strut to its top cleat and its foot cleat in place, and drill the second 6.6 hole in each flat, 20 in from the first, through the strut and the cleat together.
 
-**How it fits the parts next to it.** The top flat bolts to the inside face of the top cleat's upright leg, the bottom flat to the inside face of the foot cleat, two M6 bolts at each end, heads on the strut side and nyloc nuts on the cleat (Figures 5 and 23). The strut rises at about 49° from the foot to the rail.
+**How it fits the parts next to it.** The top flat bolts to the inside face of the top cleat's upright leg, the bottom flat to the inside face of the foot cleat, two M6 bolts at each end, heads on the strut side and nyloc nuts on the cleat (Figures 5 and 23). The strut rises at about 55° from the foot to the rail.
 
-**Check before moving on.** End holes 516.6 apart within 0.5; the flats are not twisted.
+**Check before moving on.** End holes 595.3 apart within 0.5; the flats are not twisted.
 
 ### 3.13 Wall foot
 
@@ -346,7 +350,7 @@ The tray sits on the floor lining between the core frames; the core sits on its 
 
 1. Cut the bar 400 long. Drill four 5.5 holes, 181 each side of centre, 15 above and below the bar's centre line, and countersink them from the wall side.
 2. Cut two cleats 50 long. Bolt one leg of each to the bar's room face with two M5 countersunk screws and nyloc nuts, the other leg pointing into the room on the inner side.
-3. Mark the cleats' strut holes, 16 and 29.2 out from the bar face and 17 and 32 up from the cleat's lower end, and drill them with the strut in place (section 3.12).
+3. Mark the cleats' strut holes, 16 and 27.5 out from the bar face and 17 and 33.4 up from the cleat's lower end, and drill them with the strut in place (section 3.12).
 4. Glue the 400 x 60 rubber pad to the wall side, with relief holes over the screw heads.
 
 **How it fits the parts next to it.**
@@ -355,7 +359,7 @@ The tray sits on the floor lining between the core frames; the core sits on its 
 
 *Figure 23. The strut's lower flat bolts to the foot cleat with two M6 bolts; the pad only presses on the wall.*
 
-The foot's centre line is 500 above the floor. Nothing is fixed to the wall.
+The foot's centre line is 400 above the floor, so the wall below the window must be clear from about 370 to 430 above the floor (no radiator or skirting there). Nothing is fixed to the wall.
 
 **Check before moving on.** The pad lies flat on the wall along its whole length.
 
@@ -433,6 +437,7 @@ Buy to specification, not brand. Line numbers are those of the bill of materials
 - **Exhaust filter (line 6).** Coarse washable pad, 220 x 190 x 12.
 - **Controller (line 7).** As section 3.8.
 - **Adapter (line 12).** Certified 24 V DC, 1.5 A (36 W) plug-in SELV adapter with a 3 m low-voltage lead.
+- **Sash jammer (line 14).** A no-drill adjustable sash jammer or window security bar: a telescopic bar about 22 square with rubber end pads, adjustable to at least the gap between the top of the raised lower sash and the window head (about 340 on the trial window). Nothing to make; check that it locks at that length and that its pads do not touch the glass.
 - **Fixings and sundries (line 13).** Stainless: 8 M5 x 35 bolts for the hoods, 4 M5 x 20 bolts for the rails, 8 M5 x 12 countersunk screws for the cleats, 8 M6 x 16 bolts for the struts, all with nyloc nuts and washers; M4 bolts for the grilles; M4 nylon screws and rubber grommets for the fans; 3.5 x 16 screws for the battens; M12 cable gland; 3 mm foam gasket tape; anti-slip rubber tape; PVC cement; contact adhesive; clear silicone; aluminium tape; cable ties; connectors; 2 A time-delay fuse and inline holder.
 
 ## 4. Putting it together
@@ -515,7 +520,7 @@ Check the gasket tape is whole and no wire lies across a wall top. Drop the lid 
 
 ![Step 13](05-build-plan/step-13.png)
 
-Bolt each strut to its top cleat and to the foot cleat, two M6 bolts at each end, and tighten all. The unit, bracket and foot are now one rigid piece of about 9 kg.
+Bolt each strut to its top cleat and to the foot cleat, two M6 bolts at each end, and tighten all. The unit, bracket and foot are now one rigid piece of about 9 kg. The struts now rise steeply, at about 55°, because the foot sits 400 above the floor.
 
 ### Step 14: window insert on the bench
 
@@ -523,11 +528,11 @@ Bolt each strut to its top cleat and to the foot cleat, two M6 bolts at each end
 
 Collars through the panel from the room side, hoods on the outdoor side, four M5 bolts per side through flange, panel and back plate. Feed the drain tube through the panel's hole.
 
-### Step 15: insert into the window
+### Step 15: insert into the window, sash jammer fitted
 
 ![Step 15](05-build-plan/step-15.png)
 
-From inside, raise the lower sash fully, pass the hoods out under it, and stand the panel in the lower sash's track with the hoods outside. Close the sash down onto the panel. **Hold point:** safety stop S4.
+From inside, raise the lower sash fully, pass the hoods out under it, and stand the panel in the lower sash's track with the hoods outside. Close the sash down onto the panel. Then set the sash jammer upright in the inner track, between the top of the lower sash and the window head, near one jamb; extend it until both rubber pads bear firmly and lock it. Try to lift the lower sash: it must not move. **Hold point:** safety stop S4.
 
 ### Step 16: unit onto the sill
 
@@ -548,12 +553,14 @@ These are the checks a TRL 4 test report would record; this plan only lists them
 | Supply and power | R10 | Adapter's label; meter on the 24 V input with the fuse in; both fans at full speed | 24 V SELV, certified; input under 1.5 A |
 | Fans run and report | R1 | Run each fan from the controller at low and full speed with the lid on | Each turns the right way, and its tach reading follows its speed |
 | Balance | R1 | Flow hood or vane anemometer on both grilles at 50 m³/h | Supply and exhaust within 10 % |
+| Cross-leakage in the core | R4 | Release CO2 as a tracer into the exhaust stream at the room grille; measure CO2 in the supply air at the top grille and in the room air, at 50 m³/h | Under about 3 % of the exhaust CO2 rise reaches the supply air |
 | Drain | R7 | 100 ml of water into the tray with the unit on the sill | All of it reaches the end of the tube outdoors |
 | Openings | R12 | Probe each grille and hood mouth | No opening wider than 5 at the grilles; mesh whole |
 | Hood spacing and mesh | R11 | Measure between the inner edges of the two mouths | 420 or more; mesh 1.5 or finer |
 | Window fit | R8 | Fit the insert in the trial window | Seals touch both jambs; the sash closes down onto the panel |
+| Sash held down | R12 | With the sash jammer locked, lift the lower sash by hand from inside | The sash does not lift off the panel |
 | Stays put on the sill | R9 | Push the room face toward the room with 50 N (a luggage scale) | Nothing moves |
-| Mass | R9 | Weigh the unit with its bracket, and the insert | 12 kg or less together (11.4 kg estimated) |
+| Mass | R9 | Weigh the unit with its bracket, the insert and the sash jammer | 12 kg or less together (11.8 kg estimated) |
 | Install time | R9 | Time one person fitting the insert and the unit | 30 min or less |
 
 ## 6. Safety stops
@@ -563,7 +570,7 @@ Stop at each point. Carry on only when everything listed is true.
 - **S1. Before cutting and gluing.** A ventilated space for PVC cement and contact adhesive; no flames near solvents; safety glasses and a cut-resistant glove for knife work.
 - **S2. Before first power.** The adapter is a certified, undamaged 24 V SELV unit; the 2 A fuse is in its holder; the 24 V polarity at the controller is checked with a meter; the lid is on and latched, and both grilles are fitted.
 - **S3. Whenever the lid comes off.** The adapter is unplugged first. Never run the fans with the lid off.
-- **S4. Before fitting the insert in a window.** All eight insert bolts are tight; the work is done from inside only, never from outside a window above ground level; the hoods are held until the panel stands in its track and the sash is down on it.
+- **S4. Before fitting the insert in a window.** All eight insert bolts are tight; the work is done from inside only, never from outside a window above ground level; the hoods are held until the panel stands in its track and the sash is down on it and held by the locked sash jammer.
 - **S5. Before running the unit in a room.** The room has no open-flued or unflued fuel-burning appliance (gas fire, stove, water heater), and its door has an undercut or gap, so frost mode cannot depressurise it much. The push test of section 5 has passed.
 - **S6. Leaving it running.** This plan builds a supervised test prototype: do not leave it in a window unattended, and keep the adapter cable clear of the sash and of the drain tube.
 
@@ -579,10 +586,10 @@ Stop at each point. Carry on only when everything listed is true.
 
 ## 8. Where the numbers come from
 
-- Model and constructability checks: `cad/src/model.py` (`python cad/src/model.py --check`, 84 checks); STEP and STL exports in `cad/step/` and `cad/stl/`.
+- Model and constructability checks: `cad/src/model.py` (`python cad/src/model.py --check`, 90 checks); STEP and STL exports in `cad/step/` and `cad/stl/`.
 - Pictures: `cad/src/build_plan_media.py`, using `.kit/build_views.py`; written to `docs/05-build-plan/` and `cad/drawings/BBX-DWG-101` to `BBX-DWG-114`.
-- General arrangement: `cad/drawings/BBX-DWG-001.pdf`, Rev P3.
-- Calculations: `docs/04-calcs/01-sizing.md` (BBX-CAL-001 v0.4) and `docs/04-calcs/sizing.py`; mass, stability, pressure and power in sections 3, 4 and 8.
+- General arrangement: `cad/drawings/BBX-DWG-001.pdf`, Rev P4.
+- Calculations: `docs/04-calcs/01-sizing.md` (BBX-CAL-001 v0.7) and `docs/04-calcs/sizing.py`; mass, stability, pressure and power in sections 3, 4 and 8.
 - Bill of materials: `bom/bom.csv` and `bom/bom-notes.md`.
-- Decisions: `docs/decisions/0003-design-for-construction.md` (BBX-DDR-003), with BBX-DDR-001 and BBX-DDR-002; open items in `docs/06-design-decisions.md` (BBX-DEC-001).
-- Requirements: `docs/03-requirements.md` (BBX-REQ-001 v0.6).
+- Decisions: `docs/decisions/0003-design-for-construction.md` (BBX-DDR-003), with BBX-DDR-001 and BBX-DDR-002; decisions made and items to confirm in `docs/06-design-decisions.md` (BBX-DEC-001).
+- Requirements: `docs/03-requirements.md` (BBX-REQ-001 v0.9).

@@ -3,7 +3,7 @@ doc_id: BBX-CAL-001
 title: BreatheBox sizing calculations
 project: BreatheBox
 doc_type: Calculation note
-version: "0.6"
+version: "0.7"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -33,11 +33,15 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "R12 text: sash held by a sash jammer, decided by Amish on 2026-10-02; no figures changed"
+- version: "0.7"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Approved follow-ups carried out: wall foot at 400 mm (sill friction 0.32, margin 1.9; strut joints rerun), sash jammer added as BOM line 14 (R12), mass 11.8 kg installed, cost USD 294 (USD 39 over the value-engineering target); fan position decided"
 ---
 
 # BreatheBox sizing calculations
 
-On paper, BreatheBox meets ten of its fifteen requirements. **One is not met and one is over its value-engineering target.** R6 (noise): the estimate is about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A), and 30 dB(A) is reached only at about 32 m³/h. A quiet night mode at 32 m³/h (BBX-DDR-002) brings the estimate to about 30 dB(A) with clean filters and 32 dB(A) with loaded filters, but R6 is written for 50 m³/h. R15 (cost): the priced BOM of the constructable design (BBX-DDR-003) is $283, $28 over the $255 value-engineering target set on 2026-09-26; the savings worth trying are in the design decisions register (BBX-DEC-001). Three requirements (R9 install time, R13 filter change time and R14 firmware behavior) cannot be verified at TRL 3.
+On paper, BreatheBox meets ten of its fifteen requirements. **One is not met and one is over its value-engineering target.** R6 (noise): the estimate is about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A), and 30 dB(A) is reached only at about 32 m³/h. A quiet night mode at 32 m³/h (BBX-DDR-002) brings the estimate to about 30 dB(A) with clean filters and 32 dB(A) with loaded filters, but R6 is written for 50 m³/h. R15 (cost): Value-engineering target: USD 255. Estimated cost of the constructable design: USD 294 (USD 39 over the target), including the sash jammer decided on 2026-10-02; the savings worth trying are in the design decisions register (BBX-DEC-001). Three requirements (R9 install time, R13 filter change time and R14 firmware behavior) cannot be verified at TRL 3.
 
 The calculations changed four TRL 2 figures. The TRL 2 fans (about 60 m³/h free air) could not reach 70 m³/h against any pressure, so the fan specification rises to about 100 m³/h free air and 400 Pa shut-off. Frost starts at about -2 °C outdoors, not -5 °C, because the plate at the cold corner is colder than the leaving exhaust air. The worst condensate flow is about 0.21 L/h, not 0.14 L/h. Fan and control power at 50 m³/h is about 5.6 W, not 9.5 W, because the system pressure is lower than the 80 Pa assumed.
 
@@ -158,10 +162,10 @@ A preheater that kept the flows balanced at -10 °C would need about 130 W, more
 
 - **R11, met on paper.** The hood mouths are 130 mm wide with outer edges at ±340 mm, leaving 420 mm between the supply intake and the exhaust outlet. Both face down, with 1 mm mesh.
 - **R8, met on paper for sash windows.** The hoods need at least 686 mm of clear width, just inside the 700 mm lower bound; the panel trims to 700 to 1,000 mm. Casement and tilt-and-turn windows remain outside this version (BBX-DDR-001 item A2).
-- **R12, met by design.** The largest opening through the installed unit is a 2.35 mm core channel; the mesh is 1 mm. The raised sash is held down on the panel by a bought no-drill sash jammer in the inner track (decided 2026-10-02, BBX-DEC-001; still to be added to the bill of materials).
-- **Housing.** 510 x 560 x 250 mm, with 110 mm on the sill and 400 mm projecting into the room. The model now holds every component as it is made (BBX-DDR-003); its 84 constructability checks pass and no two of its 40 components overlap.
-- **Stability on the sill (BBX-DDR-003).** The housing, its two rails, the struts and the wall foot are one rigid body, because each strut end has two bolts. The parts it carries weigh 8.6 kg with their centre of mass 162 mm on the room side of the wall face. The body rests on the inner edge of the sill and pushes on the wall at the foot, 400 mm lower, with about 34 N; the collars only slide into the housing, so friction at the sill is all that stops it sliding into the room. The friction needed is 0.40, against about 0.6 for anti-slip tape: a margin of about 1.5. With the concept's foot at 650 mm it would have been 0.65. A positive restraint is an open decision (BBX-DEC-001).
-- **Bracket joints.** Each strut's top joint carries about 6.5 N·m: 17 MPa of bending in the 20 x 1.5 mm tube (6063 yields at about 110 MPa) and about 324 N of shear on each of its two M6 bolts. Both are small.
+- **R12, met by design.** The largest opening through the installed unit is a 2.35 mm core channel; the mesh is 1 mm. The raised sash is held down on the panel by a bought no-drill sash jammer wedged in the inner track between the top of the raised sash and the window head (decided 2026-10-02, BBX-DEC-001; bill of materials line 14, about $10, 0.30 kg estimated).
+- **Housing.** 510 x 560 x 250 mm, with 110 mm on the sill and 400 mm projecting into the room. The model now holds every component as it is made (BBX-DDR-003); its 90 constructability checks pass and no two of its 41 components (the sash jammer included) overlap.
+- **Stability on the sill (BBX-DDR-003).** The housing, its two rails, the struts and the wall foot are one rigid body, because each strut end has two bolts. The parts it carries weigh 8.6 kg with their centre of mass 162 mm on the room side of the wall face. The body rests on the inner edge of the sill and pushes on the wall at the foot, whose centre line is 400 mm above the floor (500 mm below the sill edge), with about 27 N; the collars only slide into the housing, so friction at the sill is all that stops it sliding into the room. The friction needed is 0.32, against about 0.6 for anti-slip tape: a margin of about 1.9. With the foot at 500 mm it would be 0.40 (margin 1.5), and with the concept's foot at 650 mm, 0.65. Amish decided on 2026-10-02 to build the first prototype with the foot at 400 mm and to run a 50 N push test at the trial window (BBX-DEC-001); the foot goes back to 500 mm only where a radiator or skirting blocks the lower foot and the push test passes on that sill. The struts are now 595 mm between end holes (cut 621 mm), rising at 55°.
+- **Bracket joints.** Each strut's top joint carries about 6.6 N·m: 18 MPa of bending in the 20 x 1.5 mm tube (6063 yields at about 110 MPa) and about 329 N of shear on each of its two M6 bolts. Both are small. The lower foot pushes less on the wall, but the longer struts carry that push over a longer arm, so the joint figures are almost unchanged.
 
 *Table 7. Mass from the modelled components (BBX-DDR-003).*
 
@@ -175,17 +179,18 @@ A preheater that kept the flows balanced at -10 °C would need about 130 W, more
 | 8 Tray, pads and drain | 0.24 kg |
 | 9 Insert panel and seals | 0.70 kg |
 | 10 Collars, hoods and back plates | 2.08 kg |
-| 11 Sill bracket: rails, cleats, struts, foot and pad | 1.23 kg |
+| 11 Sill bracket: rails, cleats, struts, foot and pad | 1.27 kg |
 | 12 Adapter | 0.25 kg |
 | 13 Modelled bolts and cable gland | 0.19 kg |
+| 14 Sash jammer (bought; estimate) | 0.30 kg |
 | Sundries (wiring, gasket, glue, small screws) | 0.30 kg |
-| **Total** | **11.7 kg (11.4 kg installed, without the adapter)** |
+| **Total** | **12.0 kg (11.8 kg installed, without the adapter)** |
 
-The mass part of R9 is met on paper (11.4 kg against 12 kg; it was 10.5 kg before the design was made constructable). The 30 min install time cannot be verified until someone fits the unit, so **R9 is not verifiable at TRL 3**.
+The mass part of R9 is met on paper, with a small margin: 11.8 kg against 12 kg (11.5 kg without the sash jammer). It was 11.4 kg before the 2026-10-02 follow-ups (longer struts and the sash jammer) and 10.5 kg before the design was made constructable. The 30 min install time cannot be verified until someone fits the unit, so **R9 is not verifiable at TRL 3**.
 
 ## 9. Cost (R15)
 
-The priced BOM totals **$283.00** over 13 lines, against the $255 value-engineering target (`budget_usd`, set on 2026-09-26, BBX-DDR-002; it was $250, and $220 before 2026-09-25). **R15 is over the target by $28.** The concept's BOM was $255; the rise comes from parts the concept needed but did not list, added when the design was made constructable (BBX-DDR-003): partitions, filter seats, grilles and latches (+$18), hood back plates and collar flanges (+$2), the bracket's rails, cleats and foot (+$4), and bolts, gland and anti-slip tape (+$4). The savings worth trying are in the design decisions register (BBX-DEC-001). Earlier, the increase from $243 to $255 came from the larger fans (+$8), the collars through the panel (+$2) and the input fuse and holder (+$2).
+Value-engineering target: USD 255. Estimated cost of the constructable design: USD 294 (USD 39 over the target). The priced BOM totals **$294.00** over 14 lines; the target is `budget_usd`, set on 2026-09-26 (BBX-DDR-002; it was $250, and $220 before 2026-09-25), and is unchanged. **R15 is over the value-engineering target by $39.** The concept's BOM was $255; the rise comes from parts the concept needed but did not list, added when the design was made constructable (BBX-DDR-003): partitions, filter seats, grilles and latches (+$18), hood back plates and collar flanges (+$2), the bracket's rails, cleats and foot (+$4), and bolts, gland and anti-slip tape (+$4). The 2026-10-02 decisions added the sash jammer (line 14, +$10) and longer struts for the 400 mm foot (line 11, +$1). The savings worth trying are in the design decisions register (BBX-DEC-001). Earlier, the increase from $243 to $255 came from the larger fans (+$8), the collars through the panel (+$2) and the input fuse and holder (+$2).
 
 ## 10. Results
 
@@ -201,13 +206,13 @@ The priced BOM totals **$283.00** over 13 lines, against the $255 value-engineer
 | R6 | 39 dB(A) at 50 m³/h; night mode at 32 m³/h 30 dB(A) clean, 32 dB(A) loaded | 30 dB(A) or less at 50 m³/h | **Not met** |
 | R7 | Worst condensate 0.21 L/h drains; frost onset -2.2 °C; supply at 33 % of exhaust at -10 °C | Drain all condensate; no blockage to -10 °C | Met on paper |
 | R8 | Hoods need 686 mm clear width; panel 700 to 1,000 mm | Sash 700 to 1,000 mm; slider adapter | Met on paper (sash) |
-| R9 | 11.4 kg; no drilling; install time not calculable | 12 kg or less; 30 min or less | Not verifiable at TRL 3 (mass met on paper) |
+| R9 | 11.8 kg (sash jammer included); no drilling; install time not calculable | 12 kg or less; 30 min or less | Not verifiable at TRL 3 (mass met on paper) |
 | R10 | 36 W SELV adapter; 14.8 W at 70 m³/h loaded; 35.4 W worst case; 2 A fuse | 24 V SELV only | Met by design |
 | R11 | 420 mm between mouths; 1 mm mesh; mouths face down | 400 mm or more; mesh 1.5 mm or finer | Met on paper |
-| R12 | Largest opening 2.35 mm; sash held by a sash jammer (decided 2026-10-02, not yet in the BOM) | No opening over 100 mm | Met by design, unverified |
+| R12 | Largest opening 2.35 mm; raised sash held down on the panel by a bought no-drill sash jammer (BOM line 14) | Sash lockable onto the panel; no opening over 100 mm | Met by design, unverified |
 | R13 | Lift-off lid; filters and core slide out | Tool-free filter change in 2 min or less | Not verifiable at TRL 3 |
 | R14 | No firmware yet; checked at firmware review | Local data only | Not verifiable at TRL 3 |
-| R15 | $283.00 | $255 value-engineering target | **Over the target by $28** |
+| R15 | $294.00 | $255 value-engineering target | **Over the value-engineering target by $39** |
 
 Summary: met 10, not met 1 (R6), over the value-engineering target 1 (R15), not verifiable at TRL 3 3 (R9, R13, R14).
 
@@ -216,4 +221,4 @@ Summary: met 10, not met 1 (R6), over the value-engineering target 1 (R15), not 
 - The fan curve, fan noise and filter resistance are class values, not datasheet values. R1, R3, R6 and R10 should be rechecked when parts are chosen; the night mode noise figure carries the same uncertainty.
 - Laminar, fully developed flow and equal film coefficients are idealizations; real cores with headers usually recover a few points less than this model predicts.
 - Leakage between streams in the core, air leakage around the insert panel and the latent heat released by condensation are not modeled. The last makes the frost onset slightly conservative.
-- In the chosen layout both fans sit in the room-end plenum, so the exhaust side of the core runs at a higher pressure than the supply side. Any core leakage would carry stale air into the supply. This is noted for review and remains open (BBX-DDR-002); it is not changed here.
+- In the chosen layout both fans sit in the room-end plenum, so the exhaust side of the core runs at a higher pressure than the supply side. Any core leakage would carry stale air into the supply. Amish decided on 2026-10-02 to keep both fans at the room end for the prototype; a cross-leakage check (CO2 tracer in the exhaust stream, measured in the supply) is part of the TRL 4 checks, and the exhaust fan moves to the outdoor end only if the transfer exceeds about 3 % (BBX-DEC-001).

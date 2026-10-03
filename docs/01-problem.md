@@ -3,7 +3,7 @@ doc_id: BBX-PRB-001
 title: BreatheBox problem statement
 project: BreatheBox
 doc_type: Problem statement
-version: "0.8"
+version: "0.9"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -41,6 +41,10 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "Sash lock and first co-design partner decided by Amish on 2026-10-02; ACORN Canada named as the first candidate to approach (BBX-DEC-001)"
+- version: "0.9"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Cost constraint restated against the value-engineering target with the sash jammer and longer struts (USD 294)"
 ---
 
 # BreatheBox problem statement
@@ -69,7 +73,7 @@ Outdoor air is not always clean either. The World Health Organization reports th
 
 ## Constraints
 
-- Garage-buildable prototype, $255 USD in parts (`project.yaml`; raised from $220 to $250 by Amish on 2026-09-25 and to $255 on 2026-09-26, BBX-DDR-002). The priced BOM of the constructable design is $283 (BBX-CAL-001 v0.4, BBX-DDR-003); a $283 budget is proposed, awaiting Amish.
+- Garage-buildable prototype, $255 USD in parts (`project.yaml`; raised from $220 to $250 by Amish on 2026-09-25 and to $255 on 2026-09-26, BBX-DDR-002). The $255 is a value-engineering target, not a spending limit. Value-engineering target: USD 255. Estimated cost of the constructable design: USD 294 (USD 39 over the target), including the sash jammer decided on 2026-10-02 (BBX-CAL-001 v0.7, BBX-DDR-003).
 - No drilling of the window frame or wall; installs and removes without damage, so renters can use it.
 - Low voltage only inside the unit (24 V SELV from a certified plug-in adapter); no mains wiring by the builder.
 - Common, replaceable parts: standard fans, filter media cut to size, a spare-part HRV core.

@@ -10,8 +10,10 @@ screwed into 10 mm corner battens, lined with 10 mm closed-cell foam, with two c
 dividers and a fan bulkhead that separate the four air paths; filters sit in strip seats; the
 window insert is a panel with a flanged collar and a hood bolted through it on each side; the sill
 bracket is two aluminium rails bolted under the housing, with two flattened-end tube struts bolted
-(two bolts at each end, so the bracket is rigid) to angle cleats on the rails and on a padded wall foot. build_components() returns them all;
-build_parts() groups them by BOM line for the concept media and the drawing.
+(two bolts at each end, so the bracket is rigid) to angle cleats on the rails and on a padded wall
+foot 400 mm above the floor (decided 2026-10-02); a bought no-drill sash jammer in the inner track
+holds the raised sash down on the insert panel (decided 2026-10-02). build_components() returns them
+all; build_parts() groups them by BOM line for the concept media and the drawing.
 
 Axes: X is depth through the wall (outdoors negative, room positive; the inner wall face is X = 0),
 Y runs along the window width (supply side +Y, exhaust side -Y), Z is up with the room floor at
@@ -62,26 +64,29 @@ PARAMS = {
     # Condensate drain (item 8)
     "drain_y": -40.0, "drain_z": 922.0, "tube_od": 12.0, "tube_id": 8.0,
     # Sill bracket (item 11)
-    "bracket_t": 4.0, "bracket_w": 400.0, "bracket_x1": 390.0, "foot_z": 500.0,
+    "bracket_t": 4.0, "bracket_w": 400.0, "bracket_x1": 390.0, "foot_z": 400.0,   # foot 400 mm up (BBX-DEC-001, 2026-10-02)
     "rail_y": (150.0, 200.0),   # two 50 x 4 mm aluminium rails under the housing, each side
     "strut_r": 10.0, "strut_wall": 1.5, "strut_y": 158.0,
     "tab": 40.0, "tab_r": 13.0, "hole_pitch": 20.0,   # flattened end: length, end radius, two holes
     "angle": (40.0, 3.0), "cleat_len": 50.0,          # equal angle leg and thickness for the cleats
     "foot_bar": (60.0, 6.0), "pad_t": 2.0,
     "plate_bolts": ((30.0, 175.0), (330.0, 175.0)),
+    # Sash jammer (item 14): bought adjustable security bar in the inner track above the raised sash
+    "jam_y": -370.0, "jam_w": 22.0, "jam_inner": 18.0, "jam_pad": 4.0,
 }
 
 Comp = namedtuple("Comp", "name shape bom material group")
 
 COLOURS = {1: "#E7F0EE", 2: "#D4A017", 3: "#0F766E", 4: "#C2410C", 5: "#2563EB", 6: "#94A3B8",
-           7: "#7C3AED", 8: "#0EA5E9", 9: "#A7C4BC", 10: "#475569", 11: "#6B7280", 12: "#111827"}
+           7: "#7C3AED", 8: "#0EA5E9", 9: "#A7C4BC", 10: "#475569", 11: "#6B7280", 12: "#111827",
+           14: "#B91C1C"}
 NAMES = {1: "Insulated housing", 2: "Counterflow core", 3: "Supply fan, EC", 4: "Exhaust fan, EC",
          5: "Supply filter, ePM1", 6: "Exhaust filter, coarse", 7: "Controller, CO2 and RH",
          8: "Condensate tray and drain", 9: "Window insert panel", 10: "Outdoor hoods and collars",
-         11: "Sill bracket", 12: "24 V power supply"}
+         11: "Sill bracket", 12: "24 V power supply", 14: "Sash jammer"}
 EXPLODE = {1: (250, 0, 720), 2: (0, 0, 300), 3: (180, 300, 330), 4: (180, -300, 330), 5: (-60, -200, 520),
            6: (320, -140, 140), 7: (200, 0, 480), 8: (0, 0, -240), 9: (-300, 0, -60), 10: (-560, 0, -520),
-           11: (200, 0, -320), 12: (250, 250, -150)}
+           11: (200, 0, -320), 12: (250, 250, -150), 14: (-250, -420, -720)}
 
 
 # ------------------------------------------------------------------ primitives
@@ -491,7 +496,26 @@ def build_components(p=PARAMS):
     add("psu", "24 V adapter and cable", psu + cable, 12, "psu", "power")
     gland = _ycyl(hy, hy + 8, 350.0, 1100.0, 8.0) + _ycyl(hy - st - lt, hy, 350.0, 1100.0, 5.5)
     add("gland", "Cable gland, power entry", gland, 13, "nylon", None)
+
+    # ---- 14 sash jammer: bought no-drill adjustable bar, wedged in the inner (lower sash) track
+    # between the top of the raised lower sash and the window head; rubber pads at both ends
+    add("jammer", "Sash jammer", sash_jammer(p), 14, "jammer", "jammer")
     return C
+
+
+def sash_jammer(p=PARAMS):
+    """Telescopic bar from the raised lower sash's top rail to the underside of the window head."""
+    S, H = p["sill_z"], p["open_h"]
+    z0 = S + p["panel_h"] + 560.0          # top of the raised lower sash (context_parts)
+    z1 = S + H - 40.0                      # underside of the window head (context_parts)
+    xc, yc = -132.5, p["jam_y"]            # centred on the lower sash's 35 mm thickness
+    w, wi, pd = p["jam_w"] / 2, p["jam_inner"] / 2, p["jam_pad"]
+    zm = (z0 + z1) / 2
+    outer = _box(xc - w, xc + w, yc - w, yc + w, z0 + pd, zm + 20) - _box(xc - wi, xc + wi, yc - wi, yc + wi, z0 + pd + 2, zm + 21)
+    inner = _box(xc - wi, xc + wi, yc - wi, yc + wi, zm - 30, z1 - pd)
+    pads = _box(xc - 12, xc + 12, yc - 12, yc + 12, z0, z0 + pd) + _box(xc - 12, xc + 12, yc - 12, yc + 12, z1 - pd, z1)
+    knob = _ycyl(yc + w, yc + w + 12, xc, zm, 6.0)          # locking screw that sets the length
+    return outer + inner + pads + knob
 
 
 def build_parts(p=PARAMS):
@@ -528,7 +552,7 @@ def assemblies(parts=None):
     from build123d import Compound
     parts = parts or build_parts()
     by = {bom: s for _, s, _, bom, _ in parts}
-    unit = [s for _, s, _, bom, _ in parts if bom != 12]
+    unit = [s for _, s, _, bom, _ in parts if bom not in (12, 14)]
     return {
         "breathebox-assembly": Compound(unit),
         "breathebox-housing": by[1],
@@ -649,6 +673,13 @@ def checks(p=PARAMS):
     chk("Pad against the wall", S_("pad"), ctx["wall"], T)
     chk("Struts clear of the wall", S_("struts"), ctx["wall"], 5.0)
     chk("Adapter cable clear of the bracket", S_("psu"), S_("bplate") + S_("struts"), 10.0)
+    chk("Adapter clear of the wall foot", S_("psu"), S_("foot") + S_("pad"), 20.0)
+    chk("Wall foot above the floor (skirting space)", S_("foot") + S_("pad"), ctx["floor"], 300.0)
+    # sash jammer (decided 2026-10-02)
+    chk("Sash jammer on the raised lower sash", S_("jammer"), ctx["lower_sash"], T)
+    chk("Sash jammer against the window head", S_("jammer"), ctx["frame"], T)
+    chk("Sash jammer clear of the upper sash", S_("jammer"), ctx["upper_sash"], 5.0)
+    chk("Sash jammer clear of the lower sash glass", S_("jammer"), ctx["lower_glass"], 5.0)
     # every pair of components: no overlap
     keys = list(C)
     bbs = {k: C[k].shape.bounding_box() for k in keys}
@@ -665,7 +696,7 @@ def checks(p=PARAMS):
                 if v > 1e-2:
                     worst.append((a, b_, v))
     for k in keys:
-        for cname in ("wall", "frame", "lower_sash"):
+        for cname in ("wall", "frame", "lower_sash", "upper_sash"):
             v = _vol(C[k].shape, ctx[cname])
             if v > 1e-2:
                 worst.append((k, cname, v))

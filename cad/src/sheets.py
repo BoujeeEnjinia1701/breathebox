@@ -1,4 +1,4 @@
-"""BreatheBox general arrangement drawing BBX-DWG-001 (Rev P3).
+"""BreatheBox general arrangement drawing BBX-DWG-001 (Rev P4).
 
 Run from the repo root:  python cad/src/sheets.py
 Builds cad/drawings/BBX-DWG-001.svg, .pdf and .png from the parametric model.
@@ -20,11 +20,12 @@ work = ROOT / "cad/drawings/_views"
 views = project_views(asm, work)
 
 s = Sheet(project="BreatheBox", title="General arrangement, window HRV", dwg_no="BBX-DWG-001",
-          rev="P3", author="Amish Chadha", date="2026-09-30", concept=True,
+          rev="P4", author="Amish Chadha", date="2026-10-02", concept=True,
           material="Housing 6 mm PVC foam board, battens, foam lining; panel PVC/XPS; hoods PVC; bracket Al. See bom/bom.csv",
           revisions=[("P1", "Preliminary GA for TRL 3 (BBX-CAL-001)", "2026-09-25", "AC"),
                      ("P2", "Night mode note (BBX-DDR-002)", "2026-09-25", "AC"),
-                     ("P3", "Constructable design (BBX-DDR-003)", "2026-09-30", "AC")])
+                     ("P3", "Constructable design (BBX-DDR-003)", "2026-09-30", "AC"),
+                     ("P4", "Wall foot at 400; sash jammer (BBX-DEC-001)", "2026-10-02", "AC")])
 s.add_ortho(views, ["front", "top", "right"])
 s.add_svg(views["iso"], 276, 38, 140, 78, label="Isometric view", sublabel="Not to scale; adapter not shown")
 s.add_notes("Key dimensions and interfaces (mm)", [
@@ -39,8 +40,9 @@ s.add_notes("Key dimensions and interfaces (mm)", [
     "Flow 30 to 70 m3/h per stream, 50 nominal, 32 night mode",
     "Core frames, dividers and fan bulkhead seal the four air paths",
     "Tray drain at floor level, 12 x 8 tube through panel",
-    "Rails, struts and padded foot prop on the wall; no drilling",
-    "Mass about 11.4 kg installed; build plan BBX-BLD-001",
+    f"Rails, struts and padded foot prop on the wall; foot {P['foot_z']:.0f} above floor",
+    "Sash jammer (item 14) above the raised sash; not shown",
+    "Mass about 11.8 kg installed; build plan BBX-BLD-001",
     "PRELIMINARY, NOT FOR FABRICATION",
 ], x=276, y=128, width=140)
 s.save(ROOT / "cad/drawings/BBX-DWG-001")

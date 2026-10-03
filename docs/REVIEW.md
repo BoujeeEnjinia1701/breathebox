@@ -333,3 +333,51 @@ Eight, all moved to "Decisions made" in BBX-DEC-001 (open items 1 to 8): design 
 - R12 is shown as "Met by design, unverified", but no part locks the sash (item 3). It should read "Not met" until the sash jammer is in the bill of materials.
 - The value-engineering estimate of $283 leaves out the sash jammer (about $10), so the real figure is about $293, $38 over the $255 target.
 - Wall clearance item 4 under "To confirm" assumes no radiator 470 to 530 mm above the floor; radiators under sash windows are common in the UK and Canada, so the bracket foot may clash at either height.
+
+## Session 2026-10-02: approved follow-ups carried out
+
+Amish approved on 2026-10-02 that every follow-up action from the open-decision sign-off be carried out ("APPROVED CHANGES, COMPLETE THESE"), and that the render scenes be prepared for new photoreal renders on his Mac.
+
+### Approved follow-ups carried out
+
+1. Decision 2 (model): done. The wall foot's centre line is 400 mm above the floor (`foot_z` 500 to 400 in `cad/src/model.py`); the struts are 595.3 mm between end holes (cut 621 mm) and rise at 55° (were 516.6 mm, 543 mm and 49°). New checks: adapter clear of the wall foot, foot clear of the floor, and four for the sash jammer (item 7). The upper sash is added to the all-pairs overlap check. `python cad/src/model.py --check`: 90 of 90 pass (was 84), 41 components. STEP and STL regenerated.
+2. Decision 2 (drawings): done. BBX-DWG-001 Rev P4 (wall foot at 400 mm, sash jammer note, mass 11.8 kg). Making sketches BBX-DWG-111 (rail and top cleat: strut holes now 27 and 15.5 from the cleat end, 16 and 32.4 down), BBX-DWG-112 (strut 621 mm, 595.3 mm between holes, 55°) and BBX-DWG-113 (foot at 400 mm; cleat holes 16 and 27.5 out, 17 and 33.4 up) at Rev P2; the hole positions are now computed from the model.
+3. Decision 2 (pictures and text): done. Regenerated `docs/05-build-plan/overview.png`, `joint-07.png`, `joint-08.png` (window now follows the foot height), `step-02.png`, `step-13.png` and `step-16.png`. BBX-BLD-001 v0.2: sections 3.2, 3.12 and 3.13, Table 1, step 13, the overview paragraph and the references updated; the wall must be clear about 370 to 430 mm above the floor.
+4. Decision 2 (calculations): done. `docs/04-calcs/sizing.py` rerun; BBX-CAL-001 v0.7: sill friction needed 0.32 (margin about 1.9 on anti-slip tape; 0.40 at 500 mm, 0.65 at the concept's 650 mm), foot push 27 N, strut top joint 6.6 N·m, 18 MPa, 329 N per M6 bolt; bracket 1.27 kg (was 1.23 kg).
+5. Decision 2 (BOM): done. Row 11 re-specified (struts 621 mm cut, 595 mm between holes, foot 400 mm up) and repriced from $16.00 to $17.00 (about 0.16 m more 20 x 1.5 mm tube at about $6 per metre).
+6. Decision 3 (BOM): done. Row 14, sash jammer, $10.00 (typical retail about $8 to $12). Total carried into BBX-CAL-001, BBX-DEC-001 Value engineering, `bom/bom-notes.md`, BBX-REQ-001, BBX-PRC-001, BBX-PRB-001 and the README. Value-engineering target: USD 255. Estimated cost of the constructable design: USD 294 (USD 39 over the target). `budget_usd` unchanged.
+7. Decision 3 (model, pictures): done. The jammer is component 14 in the model (a telescopic bar with rubber pads in the inner track, from the top of the raised lower sash to the window head; it touches both and clears the upper sash by 5.5 mm and the glass by 40 mm). It is in the exploded view (item 14), the build plan overview (21), step 15 (`step-15.png`, text, and safety stop S4), section 3.17 and a new first check (sash held down, R12). It is left out of the unit assembly STEP and the GA views, which say so.
+8. Decision 3 (calculations): done. The R12 row in `sizing.py` names the sash jammer (BOM line 14); `results.csv` matches BBX-CAL-001 Table 8.
+9. Decision 4 (docs): done in this repo as far as the TRL cap allows. No TRL 4 test plan exists, and writing one is TRL 4 work, so the CO2 tracer cross-leakage check is added to the build plan's First checks (BBX-BLD-001 Table 2, R4, pass under about 3 % transfer), which the TRL 4 test plan takes its checks from; BBX-CAL-001 section 11 now records the decision. Carry it into the test plan when TRL 4 starts.
+10. Decisions 7 and 8 (appearance model): done here, render pending. `cad/src/product_model.py` rebuilt on the components of `model.py`: top-board lid with two toggle latches on the side walls (parting line at the wall tops), fan bulkhead with the supply fan on its room side and the exhaust fan on its core side, the 70 x 220 mm lid grille and the slotted exhaust grille, status light and button on the room face, controller on the room-side divider, flanged collars, hood back plates and M5 bolts, rails, cleats, flattened-end struts and the 400 mm wall foot, the cable gland and the sash jammer. The clear lid window stays, in the renders only. The wall section now reaches down to 300 mm so the foot rests on visible wall. `RENDER_VIEWS` keeps hero, exploded and detail. Scenes exported to `/home/claude/renders/breathebox/` (three `.npz` and `.json` files and `breathebox__jobs.json`). Photoreal renders, `media/card.png` and `media/social-preview.png` are to be made on Amish's Mac.
+
+Concept media regenerated with the new model (`media/hero.png`, `concept-blueprint.*`, `cutaway.png`, `exploded.png`, `flow.png`, `model.glb`, `viewer.html`); the key figures now say $294 against the $255 value-engineering target.
+
+### Documents changed and new versions
+
+BBX-BLD-001 v0.2; BBX-CAL-001 v0.7; BBX-REQ-001 v0.9; BBX-PRC-001 v0.10; BBX-PRB-001 v0.9; BBX-DEC-001 v0.5; BBX-DDR-003 v0.4; BBX-DWG-001 Rev P4; BBX-DWG-111, 112 and 113 Rev P2; `bom/bom.csv`, `bom/bom-notes.md`, `README.md`; `cad/src/model.py`, `sheets.py`, `concept_media.py`, `build_plan_media.py`, `product_model.py`; `docs/04-calcs/sizing.py` and `results.csv`; PDFs rebuilt.
+
+### Requirement status changes
+
+No status category changed. Figures changed: R9 mass 11.4 to 11.8 kg (sash jammer 0.30 kg estimated and longer struts; still met on paper, margin now 0.2 kg; 12.0 kg with the adapter); R12 still "Met by design, unverified", now with the sash jammer in the bill of materials, which settles the review point that it should read "Not met" until the jammer was listed; R15 over the value-engineering target by $39 (was $28). Met 10, not met 1 (R6), over the value-engineering target 1 (R15), not verifiable at TRL 3 3.
+
+### Cross-repo actions
+
+None. The follow-ups for BreatheBox all live in this repo.
+
+### Proposed, awaiting Amish
+
+- Appearance-model departures from `model.py`, for the renders only: the clear lid window and the matching opening in the lid's foam lining (decided as renders only on 2026-10-02), 4 mm rounds on the housing's vertical edges and 2 mm on the lid, a name plate and a rating label on the room face. Recommendation: accept.
+- The mass margin on R9 is now 0.2 kg. If the bought jammer or the adapter lead is heavier than estimated, R9's mass part could be missed; weighing the jammer when it is bought is listed as part of the mass check.
+
+### Safety concerns
+
+Unchanged in kind. The prototype stays supervised only until the 50 N push test passes at the trial window; the lower foot (margin about 1.9) needs a clear wall about 370 to 430 mm above the floor, and radiators under sash windows are common, so the trial window must be checked for that. The jammer must be fitted before the unit is left in the window.
+
+### Recommended next step
+
+Render `breathebox__hero`, `__exploded` and `__detail` on the Mac with `.kit/photoreal.py`, caption them, and regenerate the card and social preview. TRL 4 stays on hold.
+
+## 2026-10-02: photoreal renders redone on the constructable design
+
+Rendered with Blender Cycles on Amish's Mac from the updated appearance model (`cad/src/product_model.py`); captioned with `.kit/photo_caption.py`; `media/card.png` and `media/social-preview.png` regenerated with `.kit/cards.py`. Views: hero, exploded, detail. image_qc passes. Appearance deviations are those logged above as proposed, awaiting Amish.

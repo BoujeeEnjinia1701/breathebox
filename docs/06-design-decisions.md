@@ -3,7 +3,7 @@ doc_id: BBX-DEC-001
 title: BreatheBox design decisions register
 project: BreatheBox
 doc_type: Design decisions register
-version: "0.4"
+version: "0.5"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -25,6 +25,10 @@ revisions:
     date: '2026-10-02'
     author: Amish Chadha
     change: "Amish approved the recommendations for all eight open decisions (BBX-DDR-003 accepted); moved to decisions made; To confirm items 4 and 5 and the value engineering note updated for the 400 mm foot and the sash jammer"
+  - version: "0.5"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: "Approved follow-ups carried out: value engineering estimate USD 294 with the sash jammer (BOM line 14) and longer struts; To confirm item 5 restated with the 400 mm foot figures"
 ---
 
 # BreatheBox design decisions register
@@ -45,16 +49,17 @@ None. All open decisions were decided on 2026-10-02.
 | 2 | The blowers' inlet ring is 80 mm across or less, their mounting holes, and that the supply fan's outlet can face up toward the lid grille | Sets the bulkhead holes and fan mounting; the calculations use class values for the fan curve and noise | BBX-DDR-003, P3; BBX-CAL-001 section 11 |
 | 3 | The supply filter is 150 x 170 x 25 mm with a frame at least 5 mm wide; the exhaust pad is 220 x 190 x 12 mm | The lining lips seal on the filter frame and the pad edge | BBX-DDR-003, P5 |
 | 4 | The trial window's sill is at least 110 mm deep, its stop bead fits the 17 mm gap between the housing and the collar flange, and the wall below is clear for the foot about 370 to 430 mm above the floor (no radiator or skirting); the foot goes back to 500 mm only where the lower foot is blocked and the push test passes on that sill | Sets the collar length and whether the bracket fits; the first prototype has its foot at 400 mm (decided 2026-10-02) | BBX-DDR-003, P8, P9 and A2 |
-| 5 | The anti-slip tape grips the trial sill's finish with friction of about 0.6 or more | The unit needs 0.40 with the foot at 500 mm, less with the foot at 400 mm (margin about 1.9 on anti-slip tape); the 50 N push test at the trial window decides | BBX-DDR-003, A2 |
+| 5 | The anti-slip tape grips the trial sill's finish with friction of about 0.6 or more | The unit needs 0.32 with the foot at 400 mm (margin about 1.9 on anti-slip tape) and 0.40 if the foot goes back to 500 mm (margin about 1.5); the 50 N push test at the trial window decides | BBX-DDR-003, A2 |
 | 6 | The toggle latches fit 6 mm board, and the latch screws can be backed by nuts inside | Lid fixing | BBX-DDR-003, P1 |
 
 ## Value engineering
 
-Value-engineering target: USD 255 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 283 (USD 28 over the target). Main cost drivers and savings worth trying:
+Value-engineering target: USD 255 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 294 (USD 39 over the target). Main cost drivers and savings worth trying:
 
 - The largest lines are the counterflow core (USD 48), the insulated housing (USD 42), the controller with CO2 and humidity sensing (USD 42), the outdoor hoods and collars (USD 26), the window insert panel (USD 20) and the two fans (USD 19 each).
 - The concept's bill of materials was USD 255. The rise came from parts the concept needed but did not list (BBX-DDR-003): partitions, filter seats, grilles and latches (USD 18), hood back plates and collar flanges (USD 2), the bracket's rails, cleats and foot (USD 4), and bolts, gland and anti-slip tape (USD 4).
-- Savings worth trying: printed grilles and a cheaper core, at some cost in performance. A bought sash jammer (about USD 10, decided on 2026-10-02) is not yet in the estimate; with it the estimate is about USD 293, USD 38 over the target.
+- The 2026-10-02 decisions added USD 11: the bought sash jammer (line 14, USD 10) and longer struts for the 400 mm foot (line 11, USD 1).
+- Savings worth trying: printed grilles and a cheaper core, at some cost in performance.
 
 ## Decisions made
 

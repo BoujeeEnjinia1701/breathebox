@@ -47,14 +47,14 @@ if __name__ == "__main__":
 
     render_all(
         parts, project="BreatheBox", title="Window heat recovery ventilator concept", dwg_no="BBX-DWG-010",
-        date="2026-09-30",
+        date="2026-10-02",
         key_figures=["Balanced 30 to 70 m3/h, 50 m3/h nominal (BBX-CAL-001)",
                      "Counterflow core, about 80 % sensible recovery at 50 m3/h (est.)",
                      "About 267 W recovered at 0 °C out, 20 °C in (est.)",
                      "About 5.7 W fans and controls at 50 m3/h, 24 V SELV (est.)",
                      "About 39 dB(A) at 1 m at 50 m3/h, 30 in night mode: R6 not met (est.)",
-                     "Parts $283 against $255 budget: R15 not met (est.)"],
-        cut_exclude=CONTEXT + ["Sill bracket", "24 V power supply"],
+                     "Parts $294 against the $255 value-engineering target (est.)"],
+        cut_exclude=CONTEXT + ["Sill bracket", "24 V power supply", "Sash jammer"],
         context=[FLOOR],
         flow={"title": "heat flow at 0 °C outdoor, 20 °C indoor, 50 m³/h (estimates, BBX-CAL-001)", "unit": "W",
               "stages": [("Stale room air out", 335), ("Recovered in core", 267),

@@ -3,7 +3,7 @@ doc_id: BBX-REQ-001
 title: BreatheBox requirements
 project: BreatheBox
 doc_type: Requirements
-version: "0.8"
+version: "0.9"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -41,11 +41,15 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "R12: sash held by a bought no-drill sash jammer, decided by Amish on 2026-10-02 (BBX-DEC-001)"
+- version: "0.9"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Approved follow-ups carried out (BBX-CAL-001 v0.7): sash jammer now BOM line 14 (R12); R9 mass 11.8 kg with the longer struts and the sash jammer; R15 USD 294, USD 39 over the value-engineering target; no status category and no target changed"
 ---
 
 # BreatheBox requirements
 
-These requirements are proposals for review, not yet validated with users, and will be revised after co-design (see BBX-PRB-001). Status is judged against the TRL 3 calculations in BBX-CAL-001 and the parametric model in `cad/src/model.py`; nothing has been built or measured. No target was relaxed at TRL 3. On 2026-09-25 Amish accepted the review recommendations (BBX-DDR-002): R15 read against a $250 value-engineering target (it was $220), and R4 and R6 show the quiet night mode; R6 itself is unchanged until a real fan datasheet has been checked. The R7 condensate figure was corrected from 0.15 to 0.21 L/h because the calculation showed a higher worst case. The value-engineering target was set at $255 on 2026-09-26, and the concept's priced BOM was within it. On 2026-09-30 the design was made constructable (BBX-DDR-003): the parts it needed bring the BOM to $283, $28 over the target; BBX-DEC-001 lists the savings worth trying. No target changed.
+These requirements are proposals for review, not yet validated with users, and will be revised after co-design (see BBX-PRB-001). Status is judged against the TRL 3 calculations in BBX-CAL-001 and the parametric model in `cad/src/model.py`; nothing has been built or measured. No target was relaxed at TRL 3. On 2026-09-25 Amish accepted the review recommendations (BBX-DDR-002): R15 read against a $250 value-engineering target (it was $220), and R4 and R6 show the quiet night mode; R6 itself is unchanged until a real fan datasheet has been checked. The R7 condensate figure was corrected from 0.15 to 0.21 L/h because the calculation showed a higher worst case. The value-engineering target was set at $255 on 2026-09-26, and the concept's priced BOM was within it. On 2026-09-30 the design was made constructable (BBX-DDR-003): the parts it needed brought the BOM to $283. On 2026-10-02 Amish's decisions added a bought sash jammer and a lower wall foot with longer struts. Value-engineering target: USD 255. Estimated cost of the constructable design: USD 294 (USD 39 over the target); BBX-DEC-001 lists the savings worth trying. No target changed.
 
 The **design case** is a 30 m³ bedroom with two sleeping adults, 20 °C and 50 % relative humidity indoors, 0 °C outdoors, and a vertical sliding sash window with a 900 mm clear width.
 
@@ -61,18 +65,18 @@ Table 1. Requirements and status at TRL 3.
 | R6 | Quiet at night | 30 dB(A) or less at 1 m from the room face at 50 m³/h | **Not met** at 50 m³/h: about 39 dB(A) (estimate). Night mode at 32 m³/h (BBX-DDR-002): about 30 dB(A) clean, 32 dB(A) with loaded filters | Sound meter |
 | R7 | Handle condensate and frost | All condensate drains outdoors (up to about 0.21 L/h); runs without core blockage down to -10 °C outdoor, using a frost mode that may reduce supply flow | Met on paper: frost onset about -2.2 °C; at -10 °C the supply runs at 33 % of the exhaust | Cold-chamber or winter test |
 | R8 | Fit common windows | Vertical sliding sash windows with 700 to 1,000 mm clear width and sill 150 mm or deeper; adapter panel for horizontal sliders | Met on paper for sash: the hoods need 686 mm. Casement and tilt-and-turn windows are a later variant (BBX-DDR-001 item A2, decided by Amish in BBX-DDR-002) | Fit check against a window survey |
-| R9 | Renter-friendly installation | No drilling of frame or wall; one person installs or removes in 30 min or less; unit mass 12 kg or less | Not verifiable at TRL 3: mass 11.4 kg met on paper; install time needs a trial | Timed trials |
+| R9 | Renter-friendly installation | No drilling of frame or wall; one person installs or removes in 30 min or less; unit mass 12 kg or less | Not verifiable at TRL 3: mass 11.8 kg met on paper (sash jammer included; margin 0.2 kg); install time needs a trial | Timed trials |
 | R10 | Electrical safety | Only 24 V SELV inside the unit, from a certified plug-in adapter; fused low-voltage input; no user-accessible mains | Met by design: 36 W adapter, 2 A fuse; worst case 35.4 W | Design review |
 | R11 | Weather and outdoor air | Rain-proof downward-facing hoods; insect mesh 1.5 mm or finer; 400 mm or more between supply intake and exhaust outlet | Met on paper: 420 mm; 1 mm mesh | Spray test |
-| R12 | Security and child safety | Raised sash lockable onto the insert panel; no opening wider than 100 mm through the installed unit | Met by design, unverified: largest opening 2.35 mm; the raised sash is held by a bought no-drill sash jammer (decided 2026-10-02), which is still to be added to the bill of materials | Design review with the sash jammer fitted |
+| R12 | Security and child safety | Raised sash lockable onto the insert panel; no opening wider than 100 mm through the installed unit | Met by design, unverified: largest opening 2.35 mm; the raised sash is held down on the panel by a bought no-drill sash jammer in the inner track (decided 2026-10-02; bill of materials line 14) | Design review with the sash jammer fitted |
 | R13 | Serviceable | Filters changed without tools in 2 min or less; core removable for washing; all parts replaceable with a screwdriver | Not verifiable at TRL 3: lift-off lid and slide-out filters and core in the model | Timed trials |
 | R14 | Local data only | CO2, humidity and temperature shown on the unit; works with no network or cloud account; optional local logging | Not verifiable at TRL 3: no firmware yet | Firmware review |
-| R15 | Affordable | Prototype parts at or under the $255 value-engineering target (a hypothetical control target; was $250, and $220 before that; BBX-DDR-002) | **Over the value-engineering target by $28:** $283 (priced BOM of the constructable design, BBX-DDR-003) | Priced BOM (`bom/bom.csv`) |
+| R15 | Affordable | Prototype parts at or under the $255 value-engineering target (a hypothetical control target; was $250, and $220 before that; BBX-DDR-002) | **Over the value-engineering target by $39:** $294 (priced BOM of the constructable design, BBX-DDR-003, with the sash jammer) | Priced BOM (`bom/bom.csv`) |
 
 ## Requirements not met
 
 - **R6 (noise) not met:** about 39 dB(A) at 1 m at 50 m³/h against 30 dB(A). The accepted night mode (32 m³/h) gives about 30 dB(A) with clean filters and 32 dB(A) with loaded filters; larger, slower fans or a silencer are to be checked against a real fan datasheet (on hold with TRL 4) before any change to R6.
-- **R15 (cost) over the value-engineering target by $28:** $283 against the $255 target (`budget_usd` in `project.yaml`, set on 2026-09-26, BBX-DDR-002). The constructable design added partitions, filter seats, grilles, latches, flanges, bracket parts and bolts that the concept needed but did not list (BBX-DDR-003). The savings worth trying are in the design decisions register (BBX-DEC-001).
+- **R15 (cost) over the value-engineering target by $39:** Value-engineering target: USD 255. Estimated cost of the constructable design: USD 294 (USD 39 over the target). The target is `budget_usd` in `project.yaml`, set on 2026-09-26 (BBX-DDR-002). The constructable design added partitions, filter seats, grilles, latches, flanges, bracket parts and bolts that the concept needed but did not list (BBX-DDR-003); the 2026-10-02 decisions added the sash jammer ($10) and longer struts ($1). The savings worth trying are in the design decisions register (BBX-DEC-001).
 - **Not verifiable at TRL 3:** R9 (install time), R13 (filter change time) and R14 (firmware).
 
 ## Assumptions

@@ -26,6 +26,8 @@ from model import PARAMS as P, build_components, derived, context_parts, _box  #
 OUT = ROOT / "docs" / "05-build-plan"
 DWG = ROOT / "cad" / "drawings"
 DATE = "2026-09-30"
+P2 = dict(rev="P2", date="2026-10-02", revisions=[("P1", "Making sketch for the prototype build plan", "2026-09-30", "AC"),
+                                              ("P2", "Wall foot at 400 mm, longer struts (BBX-DEC-001)", "2026-10-02", "AC")])
 D = derived(P)
 C = build_components(P)
 CTX = context_parts(P)
@@ -75,6 +77,7 @@ def made():
         "collars": part("Collars (2)", S("collars"), COL["collars"]),
         "hoods": part("Hoods with back plates (2)", S("hoods", "hood_plates"), COL["hoods"]),
         "psu": part("24 V adapter and cable", S("psu"), COL["psu"]),
+        "jammer": part("Sash jammer (bought)", S("jammer"), "#B91C1C"),
     }
 
 
@@ -102,7 +105,8 @@ def overview():
            "dividers": (0, 820, -430), "bulkhead": (0, 820, 380), "seats": (0, -820, -150), "fans": (0, 820, 640),
            "controls": (0, -820, 80), "tray": (0, -820, 300), "core": (0, -820, 520), "filters": (0, -820, 800),
            "grilles": (0, 0, 1020), "lid": (0, 0, 740), "struts": (0, 0, -330), "foot": (0, 0, -380),
-           "panel": (0, 0, -1400), "collars": (300, 0, -1400), "hoods": (-330, 0, -1400), "psu": (250, 500, -350)}
+           "panel": (0, 0, -1400), "collars": (300, 0, -1400), "hoods": (-330, 0, -1400), "psu": (250, 500, -350),
+           "jammer": (0, -450, -1500)}
     parts = []
     for k, p in M.items():
         p.explode = off[k]
@@ -137,9 +141,12 @@ def sheet(n):
 BASE = dict(project="BreatheBox", date=DATE)
 
 
-def _sheet(key, shape, neighbours, n, title, material, notes, view_shape=None, inset=(24, 35)):
+def _sheet(key, shape, neighbours, n, title, material, notes, view_shape=None, inset=(24, 35), rev=None):
+    kw = dict(BASE)
+    if rev:
+        kw.update(rev)
     return bv.component_sheet(Part(key, shape, "#0F766E"), neighbours, dwg_no=f"BBX-DWG-{n}", title=f"BreatheBox {title}: making sketch",
-                              material=material, notes=notes, view_shape=view_shape, inset_view=inset, out_dir=str(DWG), **BASE)
+                              material=material, notes=notes, view_shape=view_shape, inset_view=inset, out_dir=str(DWG), **kw)
 
 
 def _grey(*keys):
@@ -348,6 +355,24 @@ def s110():
                   view_shape=_rot(_centre(hd), 0, 0, 90), inset=(15, 210))
 
 
+def _top_hole_text():
+    """Top cleat strut holes from the cleat's wall-side end and down from the rail's underside."""
+    cx0 = D["strut_top"][0] - 27.0
+    zr = P["sill_z"] - P["bracket_t"]
+    (a, b), (c, d) = D["top_holes"]
+    return (f"{a - cx0:.0f} and {c - cx0:.1f} from the cleat's",
+            f"wall-side end, {zr - b:.0f} and {zr - d:.1f} down from the rail's underside")
+
+
+def _foot_hole_text():
+    """Foot cleat strut holes out from the bar's room face and up from the cleat's lower end."""
+    xf = P["pad_t"] + P["foot_bar"][1]
+    zl = P["foot_z"] - P["cleat_len"] / 2
+    (a, b), (c, d) = D["foot_holes"]
+    return (f"{a - xf:.0f} and {c - xf:.1f} out from the bar",
+            f"face, {b - zl:.0f} and {d - zl:.1f} up from the cleat's lower end")
+
+
 @sheet(111)
 def s111():
     from build123d import Compound
@@ -364,13 +389,13 @@ def s111():
                    "  from the wall end, 31 in from the inner edge.",
                    "Cleat: 40 x 40 x 3 angle, 50 long. Flat leg under the rail, 338 to",
                    "  388 from the wall end, holes matching the rail. Upright leg on the",
-                   "  rail's inner side: two 6.6 holes, 27 and 13.8 from the cleat's",
-                   "  wall-side end, 16 and 31 down from the rail's underside.",
+                   "  rail's inner side: two 6.6 holes, " + _top_hole_text()[0],
+                   "  " + _top_hole_text()[1] + ".",
                    "Drill the strut holes with the strut clamped in place (sketch 112).",
                    "Fit: the rail bolts under the housing base with two M5 bolts, nuts",
                    "  inside under the floor lining; its wall end is flush with the",
                    "  housing's line on the wall face."],
-                  view_shape=one, inset=(-25, 40))
+                  view_shape=one, inset=(-25, 40), rev=P2)
 
 
 @sheet(112)
@@ -395,7 +420,7 @@ def s112():
                    "  four holes line up.",
                    "Fit: M6 bolts, heads on the strut side, nyloc nuts on the cleats.",
                    "Check: end holes within 0.5 of the length; flats not twisted."],
-                  view_shape=flat, inset=(15, 60))
+                  view_shape=flat, inset=(15, 60), rev=P2)
 
 
 @sheet(113)
@@ -412,12 +437,12 @@ def s113():
                    "  relief holes over the screw heads.",
                    "Cleats: 40 x 40 x 3 angle, 50 long. One leg on the bar's room face,",
                    "  holes matching the bar; the other leg points into the room, on",
-                   "  the inner side, with two 6.6 holes 16 and 29.2 out from the bar",
-                   "  face, 17 and 32 up from the cleat's lower end.",
-                   "Fit: the foot's centre line is 500 above the floor; the pad presses",
+                   "  the inner side, with two 6.6 holes " + _foot_hole_text()[0],
+                   "  " + _foot_hole_text()[1] + ".",
+                   f"Fit: the foot's centre line is {P['foot_z']:.0f} above the floor; the pad presses",
                    "  on the wall; nothing is fixed to the wall.",
                    "Check: the pad lies flat on the wall over its whole length."],
-                  view_shape=_rot(_centre(one), 0, 0, 90), inset=(20, 60))
+                  view_shape=_rot(_centre(one), 0, 0, 90), inset=(20, 60), rev=P2)
 
 
 @sheet(114)
@@ -541,8 +566,9 @@ def j7():
 
 @joint(8)
 def j8():
-    b = (0, 60, 135, 210, 465, 540)
-    return _j(8, [("Wall face (behind the pad)", CTX["wall"] & _box(-6, 0, 120, 220, 450, 550), COL["wall"]),
+    zf = P["foot_z"]
+    b = (0, 60, 135, 210, zf - 35, zf + 40)
+    return _j(8, [("Wall face (behind the pad)", CTX["wall"] & _box(-6, 0, 120, 220, zf - 50, zf + 50), COL["wall"]),
                   ("Rubber pad", S("pad"), COL["pad"]), ("Foot bar", S("foot"), "#9CA3AF"),
                   ("Foot cleat", S("cleats"), "#1D4ED8"), ("Strut (flattened end)", S("struts"), COL["struts"]),
                   ("M5 and M6 bolts", S("cleat_bolts"), "#111827")],
@@ -745,10 +771,11 @@ def st14():
 def st15():
     M = _M()
     insert = part("Window insert (panel, collars, hoods)", S("panel", "seals", "collars", "hoods", "hood_plates", "hood_bolts"), COL["panel"])
-    ctx = [part("Wall", CTX["wall"] & _box(-260, 10, -700, 700, 500, 2000), COL["wall"]),
+    ctx = [part("Wall", CTX["wall"] & _box(-260, 10, -700, 700, 500, 2150), COL["wall"]),
            part("Frame and sashes", CTX["frame"] + CTX["lower_sash"] + CTX["upper_sash"], COL["wall"])]
-    return _st(15, [], [_mv(insert, (0, 0, 220))], "insert into the window",
-               "Raise the lower sash, set the insert in its track, hoods outside; close the sash down onto it",
+    jam = part("Sash jammer (in the inner track)", S("jammer"), "#B91C1C")
+    return _st(15, [], [_mv(insert, (0, 0, 220)), _mv(jam, (160, 0, 0))], "insert into the window, sash jammer fitted",
+               "Raise the lower sash, set the insert in its track, hoods outside; close the sash onto it, then wedge the jammer above it",
                context=ctx, elev=18, azim=30, label_done=False)
 
 
